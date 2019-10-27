@@ -559,7 +559,7 @@ namespace Client
             {
                 if (Settings.RemainingErrorLogs-- > 0)
                 {
-                    File.AppendAllText(@".\Error.txt",
+                    File.AppendAllText(Path.Combine(".", "Error.txt"),
                                        string.Format("[{0}] {1}{2}", Now, ex, Environment.NewLine));
                 }
             }

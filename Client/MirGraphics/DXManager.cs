@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -102,9 +103,9 @@ namespace Client.MirGraphics
 
         private static unsafe void LoadPixelsShaders()
         {
-            var shaderNormalPath = Settings.ShadersPath + "normal.ps";
-            var shaderGrayScalePath = Settings.ShadersPath + "grayscale.ps";
-            var shaderMagicPath = Settings.ShadersPath + "magic.ps";
+            var shaderNormalPath = Path.Combine(Settings.ShadersPath, "normal.ps");
+            var shaderGrayScalePath = Path.Combine(Settings.ShadersPath, "grayscale.ps");
+            var shaderMagicPath = Path.Combine(Settings.ShadersPath, "magic.ps");
 
             if (System.IO.File.Exists(shaderNormalPath))
             {

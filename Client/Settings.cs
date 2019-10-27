@@ -9,7 +9,7 @@ namespace Client
     {
         public const long CleanDelay = 600000;
         public static int ScreenWidth = 800, ScreenHeight = 600;
-        private static InIReader Reader = new InIReader(@".\Mir2Config.ini");
+        private static InIReader Reader = new InIReader(Path.Combine(".", "Mir2Config.ini"));
 
         private static bool _useTestConfig;
         public static bool UseTestConfig
@@ -22,41 +22,41 @@ namespace Client
             {
                 if (value == true)
                 {
-                    Reader = new InIReader(@".\Mir2Test.ini");
+                    Reader = new InIReader(Path.Combine(".", "Mir2Test.ini"));
                 }
                 _useTestConfig = value;
             }
         }
 
-        public const string DataPath = @".\Data\",
-                            MapPath = @".\Map\",
-                            SoundPath = @".\Sound\",
-                            ExtraDataPath = @".\Data\Extra\",
-                            ShadersPath = @".\Data\Shaders\",
-                            MonsterPath = @".\Data\Monster\",
-                            GatePath = @".\Data\Gate\",
-                            FlagPath = @".\Data\Flag\",
-                            NPCPath = @".\Data\NPC\",
-                            CArmourPath = @".\Data\CArmour\",
-                            CWeaponPath = @".\Data\CWeapon\",
-							CWeaponEffectPath = @".\Data\CWeaponEffect\",
-							CHairPath = @".\Data\CHair\",
-                            AArmourPath = @".\Data\AArmour\",
-                            AWeaponPath = @".\Data\AWeapon\",
-                            AHairPath = @".\Data\AHair\",
-                            ARArmourPath = @".\Data\ARArmour\",
-                            ARWeaponPath = @".\Data\ARWeapon\",
-                            ARHairPath = @".\Data\ARHair\",
-                            CHumEffectPath = @".\Data\CHumEffect\",
-                            AHumEffectPath = @".\Data\AHumEffect\",
-                            ARHumEffectPath = @".\Data\ARHumEffect\",
-                            MountPath = @".\Data\Mount\",
-                            FishingPath = @".\Data\Fishing\",
-                            PetsPath = @".\Data\Pet\",
-                            TransformPath = @".\Data\Transform\",
-                            TransformMountsPath = @".\Data\TransformRide2\",
-                            TransformEffectPath = @".\Data\TransformEffect\",
-                            TransformWeaponEffectPath = @".\Data\TransformWeaponEffect\";
+        public static readonly string DataPath = Path.Combine(".", "Data"),
+            MapPath = Path.Combine(".", "Map"),
+            SoundPath = Path.Combine(".", "Sound"),
+            ExtraDataPath = Path.Combine(DataPath, "Extra"),
+            ShadersPath = Path.Combine(DataPath, "Shaders"),
+            MonsterPath = Path.Combine(DataPath, "Monster"),
+            GatePath = Path.Combine(DataPath, "Gate"),
+            FlagPath = Path.Combine(DataPath, "Flag"),
+            NPCPath = Path.Combine(DataPath, "NPC"),
+            CArmourPath = Path.Combine(DataPath, "CArmour"),
+            CWeaponPath = Path.Combine(DataPath, "CWeapon"),
+            CWeaponEffectPath = Path.Combine(DataPath, "CWeaponEffect"),
+            CHairPath = Path.Combine(DataPath, "CHair"),
+            AArmourPath = Path.Combine(DataPath, "AArmour"),
+            AWeaponPath = Path.Combine(DataPath, "AWeapon"),
+            AHairPath = Path.Combine(DataPath, "AHair"),
+            ARArmourPath = Path.Combine(DataPath, "ARArmour"),
+            ARWeaponPath = Path.Combine(DataPath, "ARWeapon"),
+            ARHairPath = Path.Combine(DataPath, "ARHair"),
+            CHumEffectPath = Path.Combine(DataPath, "CHumEffect"),
+            AHumEffectPath = Path.Combine(DataPath, "AHumEffect"),
+            ARHumEffectPath = Path.Combine(DataPath, "ARHumEffect"),
+            MountPath = Path.Combine(DataPath, "Mount"),
+            FishingPath = Path.Combine(DataPath, "Fishing"),
+            PetsPath = Path.Combine(DataPath, "Pet"),
+            TransformPath = Path.Combine(DataPath, "Transform"),
+            TransformMountsPath = Path.Combine(DataPath, "TransformRide2"),
+            TransformEffectPath = Path.Combine(DataPath, "TransformEffect"),
+            TransformWeaponEffectPath = Path.Combine(DataPath, "TransformWeaponEffect");
 
         //Logs
         public static bool LogErrors = true;
@@ -168,13 +168,13 @@ namespace Client
         public static string P_Password = string.Empty;
         public static string P_ServerName = string.Empty;
         public static string P_BrowserAddress = "https://launcher.mironline.co.uk/web/";
-        public static string P_Client = Application.StartupPath + "\\";
+        public static string P_Client = Application.StartupPath;
         public static bool P_AutoStart = false;
 
         public static void Load()
         {
             //Languahe
-            GameLanguage.LoadClientLanguage(@".\Language.ini");
+            GameLanguage.LoadClientLanguage(Path.Combine(".", "Language.ini"));
 
             if (!Directory.Exists(DataPath)) Directory.CreateDirectory(DataPath);
             if (!Directory.Exists(MapPath)) Directory.CreateDirectory(MapPath);

@@ -52,7 +52,7 @@ namespace Launcher
             {
                 if (Settings.RemainingErrorLogs-- > 0)
                 {
-                    File.AppendAllText(@".\Error.txt",
+                    File.AppendAllText(Path.Combine(".", "Error.txt"),
                                        string.Format("[{0}] {1}{2}", DateTime.Now, ex, Environment.NewLine));
                 }
             }
@@ -133,6 +133,7 @@ namespace Launcher
         {
             if (!CleanFiles) return;
 
+            // FIXME: Paths not portable
             string[] fileNames = Directory.GetFiles(@".\", "*.*", SearchOption.AllDirectories);
             string fileName;
             for (int i = 0; i < fileNames.Length; i++)
@@ -173,14 +174,15 @@ namespace Launcher
 
         public void CheckFile(FileInformation old)
         {
-            FileInformation info = GetFileInformation(Settings.P_Client + old.FileName);
+            FileInformation info = GetFileInformation(Path.Combine(Settings.P_Client, old.FileName));
             _currentCount++;
 
             if (info == null || old.Length != info.Length || old.Creation != info.Creation)
             {
                 if ((old.FileName.EndsWith(System.AppDomain.CurrentDomain.FriendlyName)))
                 {
-                    File.Move(Settings.P_Client + System.AppDomain.CurrentDomain.FriendlyName, Settings.P_Client + oldClientName);
+                    File.Move(Path.Combine(Settings.P_Client, System.AppDomain.CurrentDomain.FriendlyName),
+                              Path.Combine(Settings.P_Client, oldClientName));
                     Restart = true;
                 }
 
@@ -208,7 +210,7 @@ namespace Launcher
                         {
                             if (e.Error != null)
                             {
-                                File.AppendAllText(@".\Error.txt",
+                                File.AppendAllText(Path.Combine(".", "Error.txt"),
                                        string.Format("[{0}] {1}{2}", DateTime.Now, info.FileName + " could not be downloaded. (" + e.Error.Message + ")", Environment.NewLine));
                                 ErrorFound = true;
                             }
@@ -219,11 +221,11 @@ namespace Launcher
                                 _currentBytes = 0;
                                 _stopwatch.Stop();
 
-                            if (!Directory.Exists(Settings.P_Client + Path.GetDirectoryName(info.FileName)))
-                                Directory.CreateDirectory(Settings.P_Client + Path.GetDirectoryName(info.FileName));
+                                if (!Directory.Exists(Path.Combine(Settings.P_Client, Path.GetDirectoryName(info.FileName))))
+                                    Directory.CreateDirectory(Path.Combine(Settings.P_Client, Path.GetDirectoryName(info.FileName)));
 
-                            File.WriteAllBytes(Settings.P_Client + info.FileName, e.Result);
-                            File.SetLastWriteTime(Settings.P_Client + info.FileName, info.Creation);
+                                File.WriteAllBytes(Path.Combine(Settings.P_Client, info.FileName), e.Result);
+                                File.SetLastWriteTime(Path.Combine(Settings.P_Client, info.FileName), info.Creation);
                             }
                             BeginDownload();
                         };
@@ -303,7 +305,7 @@ namespace Launcher
             FileInfo info = new FileInfo(fileName);
             return new FileInformation
             {
-                FileName = fileName.Remove(0, Settings.P_Client.Length),
+                FileName = Path.GetFileName(fileName),
                 Length = (int)info.Length,
                 Creation = info.LastWriteTime
             };
@@ -313,7 +315,7 @@ namespace Launcher
         {
             if (Settings.P_BrowserAddress != "") Main_browser.Navigate(new Uri(Settings.P_BrowserAddress));
 
-            if (File.Exists(Settings.P_Client + oldClientName)) File.Delete(Settings.P_Client + oldClientName);
+            if (File.Exists(Path.Combine(Settings.P_Client, oldClientName))) File.Delete(Path.Combine(Settings.P_Client, oldClientName));
 
             Launch_pb.Enabled = false;
             ProgressCurrent_pb.Width = 5;
@@ -554,8 +556,8 @@ namespace Launcher
 
         private void MoveOldClientToCurrent()
         {
-            string oldClient = Settings.P_Client + oldClientName;
-            string currentClient = Settings.P_Client + System.AppDomain.CurrentDomain.FriendlyName;
+            string oldClient = Path.Combine(Settings.P_Client, oldClientName);
+            string currentClient = Path.Combine(Settings.P_Client, System.AppDomain.CurrentDomain.FriendlyName);
 
             if (!File.Exists(currentClient) && File.Exists(oldClient))
                 File.Move(oldClient, currentClient);

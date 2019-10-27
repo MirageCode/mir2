@@ -14,43 +14,43 @@ namespace Client.MirGraphics
         public static int Count, Progress;
 
         public static readonly MLibrary
-            ChrSel = new MLibrary(Settings.DataPath + "ChrSel"),
-            Prguse = new MLibrary(Settings.DataPath + "Prguse"),
-            Prguse2 = new MLibrary(Settings.DataPath + "Prguse2"),
-            Prguse3 = new MLibrary(Settings.DataPath + "Prguse3"),
-            BuffIcon = new MLibrary(Settings.DataPath + "BuffIcon"),
-            Help = new MLibrary(Settings.DataPath + "Help"),
-            MiniMap = new MLibrary(Settings.DataPath + "MMap"),
-            Title = new MLibrary(Settings.DataPath + "Title"),
-            MagIcon = new MLibrary(Settings.DataPath + "MagIcon"),
-            MagIcon2 = new MLibrary(Settings.DataPath + "MagIcon2"),
-            Magic = new MLibrary(Settings.DataPath + "Magic"),
-            Magic2 = new MLibrary(Settings.DataPath + "Magic2"),
-            Magic3 = new MLibrary(Settings.DataPath + "Magic3"),
-            Effect = new MLibrary(Settings.DataPath + "Effect"),
-            MagicC = new MLibrary(Settings.DataPath + "MagicC"),
-            GuildSkill = new MLibrary(Settings.DataPath + "GuildSkill");
+            ChrSel = new MLibrary(Path.Combine(Settings.DataPath, "ChrSel")),
+            Prguse = new MLibrary(Path.Combine(Settings.DataPath, "Prguse")),
+            Prguse2 = new MLibrary(Path.Combine(Settings.DataPath, "Prguse2")),
+            Prguse3 = new MLibrary(Path.Combine(Settings.DataPath, "Prguse3")),
+            BuffIcon = new MLibrary(Path.Combine(Settings.DataPath, "BuffIcon")),
+            Help = new MLibrary(Path.Combine(Settings.DataPath, "Help")),
+            MiniMap = new MLibrary(Path.Combine(Settings.DataPath, "MMap")),
+            Title = new MLibrary(Path.Combine(Settings.DataPath, "Title")),
+            MagIcon = new MLibrary(Path.Combine(Settings.DataPath, "MagIcon")),
+            MagIcon2 = new MLibrary(Path.Combine(Settings.DataPath, "MagIcon2")),
+            Magic = new MLibrary(Path.Combine(Settings.DataPath, "Magic")),
+            Magic2 = new MLibrary(Path.Combine(Settings.DataPath, "Magic2")),
+            Magic3 = new MLibrary(Path.Combine(Settings.DataPath, "Magic3")),
+            Effect = new MLibrary(Path.Combine(Settings.DataPath, "Effect")),
+            MagicC = new MLibrary(Path.Combine(Settings.DataPath, "MagicC")),
+            GuildSkill = new MLibrary(Path.Combine(Settings.DataPath, "GuildSkill"));
 
         public static readonly MLibrary
-            Background = new MLibrary(Settings.DataPath + "Background");
+            Background = new MLibrary(Path.Combine(Settings.DataPath, "Background"));
 
 
 
         public static readonly MLibrary
-            Dragon = new MLibrary(Settings.DataPath + "Dragon");
+            Dragon = new MLibrary(Path.Combine(Settings.DataPath, "Dragon"));
 
         //Map
         public static readonly MLibrary[] MapLibs = new MLibrary[400];
 
         //Items
         public static readonly MLibrary
-            Items = new MLibrary(Settings.DataPath + "Items"),
-            StateItems = new MLibrary(Settings.DataPath + "StateItem"),
-            FloorItems = new MLibrary(Settings.DataPath + "DNItems");
+            Items = new MLibrary(Path.Combine(Settings.DataPath, "Items")),
+            StateItems = new MLibrary(Path.Combine(Settings.DataPath, "StateItem")),
+            FloorItems = new MLibrary(Path.Combine(Settings.DataPath, "DNItems"));
 
         //Deco
         public static readonly MLibrary
-            Deco = new MLibrary(Settings.DataPath + "Deco");
+            Deco = new MLibrary(Path.Combine(Settings.DataPath, "Deco"));
 
         public static readonly MLibrary[] CArmours = new MLibrary[42],
                                           CWeapons = new MLibrary[55],
@@ -83,149 +83,149 @@ namespace Client.MirGraphics
         {
             //Wiz/War/Tao
             for (int i = 0; i < CArmours.Length; i++)
-                CArmours[i] = new MLibrary(Settings.CArmourPath + i.ToString("00"));
+                CArmours[i] = new MLibrary(Path.Combine(Settings.CArmourPath, i.ToString("00")));
 
             for (int i = 0; i < CHair.Length; i++)
-                CHair[i] = new MLibrary(Settings.CHairPath + i.ToString("00"));
+                CHair[i] = new MLibrary(Path.Combine(Settings.CHairPath, i.ToString("00")));
 
             for (int i = 0; i < CWeapons.Length; i++)
-                CWeapons[i] = new MLibrary(Settings.CWeaponPath + i.ToString("00"));
+                CWeapons[i] = new MLibrary(Path.Combine(Settings.CWeaponPath, i.ToString("00")));
 
 			for (int i = 0; i < CWeaponEffect.Length; i++)
-				CWeaponEffect[i] = new MLibrary(Settings.CWeaponEffectPath + i.ToString("00"));
+				CWeaponEffect[i] = new MLibrary(Path.Combine(Settings.CWeaponEffectPath, i.ToString("00")));
 
 			for (int i = 0; i < CHumEffect.Length; i++)
-                CHumEffect[i] = new MLibrary(Settings.CHumEffectPath + i.ToString("00"));
+                CHumEffect[i] = new MLibrary(Path.Combine(Settings.CHumEffectPath, i.ToString("00")));
 
             //Assassin
             for (int i = 0; i < AArmours.Length; i++)
-                AArmours[i] = new MLibrary(Settings.AArmourPath + i.ToString("00"));
+                AArmours[i] = new MLibrary(Path.Combine(Settings.AArmourPath, i.ToString("00")));
 
             for (int i = 0; i < AHair.Length; i++)
-                AHair[i] = new MLibrary(Settings.AHairPath + i.ToString("00"));
+                AHair[i] = new MLibrary(Path.Combine(Settings.AHairPath, i.ToString("00")));
 
             for (int i = 0; i < AWeaponsL.Length; i++)
-                AWeaponsL[i] = new MLibrary(Settings.AWeaponPath + i.ToString("00") + " L");
+                AWeaponsL[i] = new MLibrary(Path.Combine(Settings.AWeaponPath, i.ToString("00") + " L"));
 
             for (int i = 0; i < AWeaponsR.Length; i++)
-                AWeaponsR[i] = new MLibrary(Settings.AWeaponPath + i.ToString("00") + " R");
+                AWeaponsR[i] = new MLibrary(Path.Combine(Settings.AWeaponPath, i.ToString("00") + " R"));
 
             for (int i = 0; i < AHumEffect.Length; i++)
-                AHumEffect[i] = new MLibrary(Settings.AHumEffectPath + i.ToString("00"));
+                AHumEffect[i] = new MLibrary(Path.Combine(Settings.AHumEffectPath, i.ToString("00")));
 
             //Archer
             for (int i = 0; i < ARArmours.Length; i++)
-                ARArmours[i] = new MLibrary(Settings.ARArmourPath + i.ToString("00"));
+                ARArmours[i] = new MLibrary(Path.Combine(Settings.ARArmourPath, i.ToString("00")));
 
             for (int i = 0; i < ARHair.Length; i++)
-                ARHair[i] = new MLibrary(Settings.ARHairPath + i.ToString("00"));
+                ARHair[i] = new MLibrary(Path.Combine(Settings.ARHairPath, i.ToString("00")));
 
             for (int i = 0; i < ARWeapons.Length; i++)
-                ARWeapons[i] = new MLibrary(Settings.ARWeaponPath + i.ToString("00"));
+                ARWeapons[i] = new MLibrary(Path.Combine(Settings.ARWeaponPath, i.ToString("00")));
 
             for (int i = 0; i < ARWeaponsS.Length; i++)
-                ARWeaponsS[i] = new MLibrary(Settings.ARWeaponPath + i.ToString("00") + " S");
+                ARWeaponsS[i] = new MLibrary(Path.Combine(Settings.ARWeaponPath, i.ToString("00") + " S"));
 
             for (int i = 0; i < ARHumEffect.Length; i++)
-                ARHumEffect[i] = new MLibrary(Settings.ARHumEffectPath + i.ToString("00"));
+                ARHumEffect[i] = new MLibrary(Path.Combine(Settings.ARHumEffectPath, i.ToString("00")));
 
             //Other
             for (int i = 0; i < Monsters.Length; i++)
-                Monsters[i] = new MLibrary(Settings.MonsterPath + i.ToString("000"));
+                Monsters[i] = new MLibrary(Path.Combine(Settings.MonsterPath, i.ToString("000")));
 
             for (int i = 0; i < Gates.Length; i++)
-                Gates[i] = new MLibrary(Settings.GatePath + i.ToString("00"));
+                Gates[i] = new MLibrary(Path.Combine(Settings.GatePath, i.ToString("00")));
 
             for (int i = 0; i < Flags.Length; i++)
-                Flags[i] = new MLibrary(Settings.FlagPath + i.ToString("00"));
+                Flags[i] = new MLibrary(Path.Combine(Settings.FlagPath, i.ToString("00")));
 
             for (int i = 0; i < NPCs.Length; i++)
-                NPCs[i] = new MLibrary(Settings.NPCPath + i.ToString("00"));
+                NPCs[i] = new MLibrary(Path.Combine(Settings.NPCPath, i.ToString("00")));
 
             for (int i = 0; i < Mounts.Length; i++)
-                Mounts[i] = new MLibrary(Settings.MountPath + i.ToString("00"));
+                Mounts[i] = new MLibrary(Path.Combine(Settings.MountPath, i.ToString("00")));
 
             for (int i = 0; i < Fishing.Length; i++)
-                Fishing[i] = new MLibrary(Settings.FishingPath + i.ToString("00"));
+                Fishing[i] = new MLibrary(Path.Combine(Settings.FishingPath, i.ToString("00")));
 
             for (int i = 0; i < Pets.Length; i++)
-                Pets[i] = new MLibrary(Settings.PetsPath + i.ToString("00"));
+                Pets[i] = new MLibrary(Path.Combine(Settings.PetsPath, i.ToString("00")));
 
             for (int i = 0; i < Transform.Length; i++)
-                Transform[i] = new MLibrary(Settings.TransformPath + i.ToString("00"));
+                Transform[i] = new MLibrary(Path.Combine(Settings.TransformPath, i.ToString("00")));
 
             for (int i = 0; i < TransformMounts.Length; i++)
-                TransformMounts[i] = new MLibrary(Settings.TransformMountsPath + i.ToString("00"));
+                TransformMounts[i] = new MLibrary(Path.Combine(Settings.TransformMountsPath, i.ToString("00")));
 
             for (int i = 0; i < TransformEffect.Length; i++)
-                TransformEffect[i] = new MLibrary(Settings.TransformEffectPath + i.ToString("00"));
+                TransformEffect[i] = new MLibrary(Path.Combine(Settings.TransformEffectPath, i.ToString("00")));
 
             for (int i = 0; i < TransformWeaponEffect.Length; i++)
-                TransformWeaponEffect[i] = new MLibrary(Settings.TransformWeaponEffectPath + i.ToString("00"));
+                TransformWeaponEffect[i] = new MLibrary(Path.Combine(Settings.TransformWeaponEffectPath, i.ToString("00")));
 
             #region Maplibs
             //wemade mir2 (allowed from 0-99)
-            MapLibs[0] = new MLibrary(Settings.DataPath + "Map\\WemadeMir2\\Tiles");
-            MapLibs[1] = new MLibrary(Settings.DataPath + "Map\\WemadeMir2\\Smtiles");
-            MapLibs[2] = new MLibrary(Settings.DataPath + "Map\\WemadeMir2\\Objects");
+            MapLibs[0] = new MLibrary(Path.Combine(Settings.MapPath, "WemadeMir2", "Tiles"));
+            MapLibs[1] = new MLibrary(Path.Combine(Settings.MapPath, "WemadeMir2", "Smtiles"));
+            MapLibs[2] = new MLibrary(Path.Combine(Settings.MapPath, "WemadeMir2", "Objects"));
             for (int i = 2; i < 24; i++)
             {
-                MapLibs[i + 1] = new MLibrary(Settings.DataPath + "Map\\WemadeMir2\\Objects" + i.ToString());
+                MapLibs[i + 1] = new MLibrary(Path.Combine(Settings.MapPath, "WemadeMir2", "Objects" + i.ToString()));
             }
             //shanda mir2 (allowed from 100-199)
-            MapLibs[100] = new MLibrary(Settings.DataPath + "Map\\ShandaMir2\\Tiles");
+            MapLibs[100] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir2", "Tiles"));
             for (int i = 1; i < 10; i++)
             {
-                MapLibs[100 + i] = new MLibrary(Settings.DataPath + "Map\\ShandaMir2\\Tiles" + (i + 1));
+                MapLibs[100 + i] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir2", "Tiles" + (i + 1)));
             }
-            MapLibs[110] = new MLibrary(Settings.DataPath + "Map\\ShandaMir2\\SmTiles");
+            MapLibs[110] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir2", "SmTiles"));
             for (int i = 1; i < 10; i++)
             {
-                MapLibs[110 + i] = new MLibrary(Settings.DataPath + "Map\\ShandaMir2\\SmTiles" + (i + 1));
+                MapLibs[110 + i] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir2", "SmTiles" + (i + 1)));
             }
-            MapLibs[120] = new MLibrary(Settings.DataPath + "Map\\ShandaMir2\\Objects");
+            MapLibs[120] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir2", "Objects"));
             for (int i = 1; i < 31; i++)
             {
-                MapLibs[120 + i] = new MLibrary(Settings.DataPath + "Map\\ShandaMir2\\Objects" + (i + 1));
+                MapLibs[120 + i] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir2", "Objects" + (i + 1)));
             }
-            MapLibs[190] = new MLibrary(Settings.DataPath + "Map\\ShandaMir2\\AniTiles1");
+            MapLibs[190] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir2", "AniTiles1"));
             //wemade mir3 (allowed from 200-299)
-            string[] Mapstate = { "", "wood\\", "sand\\", "snow\\", "forest\\"};
+            string[] Mapstate = { "", "wood", "", "sand", "", "snow", "", "forest", ""};
             for (int i = 0; i < Mapstate.Length; i++)
             {
-                MapLibs[200 +(i*15)] = new MLibrary(Settings.DataPath + "Map\\WemadeMir3\\" + Mapstate[i] + "Tilesc");
-                MapLibs[201 +(i*15)] = new MLibrary(Settings.DataPath + "Map\\WemadeMir3\\" + Mapstate[i] + "Tiles30c");
-                MapLibs[202 +(i*15)] = new MLibrary(Settings.DataPath + "Map\\WemadeMir3\\" + Mapstate[i] + "Tiles5c");
-                MapLibs[203 +(i*15)] = new MLibrary(Settings.DataPath + "Map\\WemadeMir3\\" + Mapstate[i] + "Smtilesc");
-                MapLibs[204 +(i*15)] = new MLibrary(Settings.DataPath + "Map\\WemadeMir3\\" + Mapstate[i] + "Housesc");
-                MapLibs[205 +(i*15)] = new MLibrary(Settings.DataPath + "Map\\WemadeMir3\\" + Mapstate[i] + "Cliffsc");
-                MapLibs[206 +(i*15)] = new MLibrary(Settings.DataPath + "Map\\WemadeMir3\\" + Mapstate[i] + "Dungeonsc");
-                MapLibs[207 +(i*15)] = new MLibrary(Settings.DataPath + "Map\\WemadeMir3\\" + Mapstate[i] + "Innersc");
-                MapLibs[208 +(i*15)] = new MLibrary(Settings.DataPath + "Map\\WemadeMir3\\" + Mapstate[i] + "Furnituresc");
-                MapLibs[209 +(i*15)] = new MLibrary(Settings.DataPath + "Map\\WemadeMir3\\" + Mapstate[i] + "Wallsc");
-                MapLibs[210 +(i*15)] = new MLibrary(Settings.DataPath + "Map\\WemadeMir3\\" + Mapstate[i] + "smObjectsc");
-                MapLibs[211 +(i*15)] = new MLibrary(Settings.DataPath + "Map\\WemadeMir3\\" + Mapstate[i] + "Animationsc");
-                MapLibs[212 +(i*15)] = new MLibrary(Settings.DataPath + "Map\\WemadeMir3\\" + Mapstate[i] + "Object1c");
-                MapLibs[213 + (i * 15)] = new MLibrary(Settings.DataPath + "Map\\WemadeMir3\\" + Mapstate[i] + "Object2c");
+                MapLibs[200 +(i*15)] = new MLibrary(Path.Combine(Settings.MapPath, "WemadeMir3", Mapstate[i] + "Tilesc"));
+                MapLibs[201 +(i*15)] = new MLibrary(Path.Combine(Settings.MapPath, "WemadeMir3", Mapstate[i] + "Tiles30c"));
+                MapLibs[202 +(i*15)] = new MLibrary(Path.Combine(Settings.MapPath, "WemadeMir3", Mapstate[i] + "Tiles5c"));
+                MapLibs[203 +(i*15)] = new MLibrary(Path.Combine(Settings.MapPath, "WemadeMir3", Mapstate[i] + "Smtilesc"));
+                MapLibs[204 +(i*15)] = new MLibrary(Path.Combine(Settings.MapPath, "WemadeMir3", Mapstate[i] + "Housesc"));
+                MapLibs[205 +(i*15)] = new MLibrary(Path.Combine(Settings.MapPath, "WemadeMir3", Mapstate[i] + "Cliffsc"));
+                MapLibs[206 +(i*15)] = new MLibrary(Path.Combine(Settings.MapPath, "WemadeMir3", Mapstate[i] + "Dungeonsc"));
+                MapLibs[207 +(i*15)] = new MLibrary(Path.Combine(Settings.MapPath, "WemadeMir3", Mapstate[i] + "Innersc"));
+                MapLibs[208 +(i*15)] = new MLibrary(Path.Combine(Settings.MapPath, "WemadeMir3", Mapstate[i] + "Furnituresc"));
+                MapLibs[209 +(i*15)] = new MLibrary(Path.Combine(Settings.MapPath, "WemadeMir3", Mapstate[i] + "Wallsc"));
+                MapLibs[210 +(i*15)] = new MLibrary(Path.Combine(Settings.MapPath, "WemadeMir3", Mapstate[i] + "smObjectsc"));
+                MapLibs[211 +(i*15)] = new MLibrary(Path.Combine(Settings.MapPath, "WemadeMir3", Mapstate[i] + "Animationsc"));
+                MapLibs[212 +(i*15)] = new MLibrary(Path.Combine(Settings.MapPath, "WemadeMir3", Mapstate[i] + "Object1c"));
+                MapLibs[213 + (i * 15)] = new MLibrary(Path.Combine(Settings.MapPath, "WemadeMir3", Mapstate[i] + "Object2c"));
             }
             Mapstate = new string[] { "", "wood", "sand", "snow", "forest"};
             //shanda mir3 (allowed from 300-399)
             for (int i = 0; i < Mapstate.Length; i++)
             {
-                MapLibs[300 + (i * 15)] = new MLibrary(Settings.DataPath + "Map\\ShandaMir3\\" + "Tilesc" + Mapstate[i]);
-                MapLibs[301 + (i * 15)] = new MLibrary(Settings.DataPath + "Map\\ShandaMir3\\" + "Tiles30c" + Mapstate[i]);
-                MapLibs[302 + (i * 15)] = new MLibrary(Settings.DataPath + "Map\\ShandaMir3\\" + "Tiles5c" + Mapstate[i]);
-                MapLibs[303 + (i * 15)] = new MLibrary(Settings.DataPath + "Map\\ShandaMir3\\" + "Smtilesc" + Mapstate[i]);
-                MapLibs[304 + (i * 15)] = new MLibrary(Settings.DataPath + "Map\\ShandaMir3\\" + "Housesc" + Mapstate[i]);
-                MapLibs[305 + (i * 15)] = new MLibrary(Settings.DataPath + "Map\\ShandaMir3\\" + "Cliffsc" + Mapstate[i]);
-                MapLibs[306 + (i * 15)] = new MLibrary(Settings.DataPath + "Map\\ShandaMir3\\" + "Dungeonsc" + Mapstate[i]);
-                MapLibs[307 + (i * 15)] = new MLibrary(Settings.DataPath + "Map\\ShandaMir3\\" + "Innersc" + Mapstate[i]);
-                MapLibs[308 + (i * 15)] = new MLibrary(Settings.DataPath + "Map\\ShandaMir3\\" + "Furnituresc" + Mapstate[i]);
-                MapLibs[309 + (i * 15)] = new MLibrary(Settings.DataPath + "Map\\ShandaMir3\\" + "Wallsc" + Mapstate[i]);
-                MapLibs[310 + (i * 15)] = new MLibrary(Settings.DataPath + "Map\\ShandaMir3\\" + "smObjectsc" + Mapstate[i]);
-                MapLibs[311 + (i * 15)] = new MLibrary(Settings.DataPath + "Map\\ShandaMir3\\" + "Animationsc" + Mapstate[i]);
-                MapLibs[312 + (i * 15)] = new MLibrary(Settings.DataPath + "Map\\ShandaMir3\\" + "Object1c" + Mapstate[i]);
-                MapLibs[313 + (i * 15)] = new MLibrary(Settings.DataPath + "Map\\ShandaMir3\\" + "Object2c" + Mapstate[i]);
+                MapLibs[300 + (i * 15)] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir3", "Tilesc" + Mapstate[i]));
+                MapLibs[301 + (i * 15)] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir3", "Tiles30c" + Mapstate[i]));
+                MapLibs[302 + (i * 15)] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir3", "Tiles5c" + Mapstate[i]));
+                MapLibs[303 + (i * 15)] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir3", "Smtilesc" + Mapstate[i]));
+                MapLibs[304 + (i * 15)] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir3", "Housesc" + Mapstate[i]));
+                MapLibs[305 + (i * 15)] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir3", "Cliffsc" + Mapstate[i]));
+                MapLibs[306 + (i * 15)] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir3", "Dungeonsc" + Mapstate[i]));
+                MapLibs[307 + (i * 15)] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir3", "Innersc" + Mapstate[i]));
+                MapLibs[308 + (i * 15)] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir3", "Furnituresc" + Mapstate[i]));
+                MapLibs[309 + (i * 15)] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir3", "Wallsc" + Mapstate[i]));
+                MapLibs[310 + (i * 15)] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir3", "smObjectsc" + Mapstate[i]));
+                MapLibs[311 + (i * 15)] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir3", "Animationsc" + Mapstate[i]));
+                MapLibs[312 + (i * 15)] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir3", "Object1c" + Mapstate[i]));
+                MapLibs[313 + (i * 15)] = new MLibrary(Path.Combine(Settings.MapPath, "ShandaMir3", "Object2c" + Mapstate[i]));
             }
             #endregion
 
