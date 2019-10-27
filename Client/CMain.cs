@@ -45,6 +45,12 @@ namespace Client
         {
             InitializeComponent();
 
+            LoginScene LoginScene = new LoginScene();
+            MirScene.ActiveScene = LoginScene;
+
+            LoginScene.OnCancel += (o, e) => Close();
+            LoginScene.OnClose += (o, e) => Close();
+
             Application.Idle += Application_Idle;
 
             MouseClick += CMain_MouseClick;

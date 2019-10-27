@@ -31,6 +31,18 @@ namespace Client.MirScenes
 
         public MirImageControl TestLabel, ViolenceLabel, MinorLabel, YouthLabel; 
 
+        public event EventHandler OnCancel
+        {
+            add => _connectBox.CancelButton.Click += value;
+            remove => _connectBox.CancelButton.Click -= value;
+        }
+
+        public event EventHandler OnClose
+        {
+            add => _login.CloseButton.Click += value;
+            remove => _login.CloseButton.Click -= value;
+        }
+
         public LoginScene()
         {
 
@@ -116,7 +128,6 @@ namespace Client.MirScenes
             //};
 
             _connectBox = new MirMessageBox("Attempting to connect to the server.", MirMessageBoxButtons.Cancel);
-            _connectBox.CancelButton.Click += (o, e) => Program.Form.Close();
             Shown += (sender, args) =>
                 {
                     Network.Connect();
@@ -430,7 +441,6 @@ namespace Client.MirScenes
                         Parent = this,
                         PressedIndex = 331,
                     };
-                CloseButton.Click += (o, e) => Program.Form.Close();
 
                 AccountIDTextBox = new MirTextBox
                     {
