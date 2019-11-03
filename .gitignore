@@ -54,6 +54,7 @@ Client/Client.csproj
 /LibraryViewer/bin
 /LibraryEditor/obj
 /Client/obj
+/SDL/obj
 /AutoPatcherAdmin/obj
 
 /Build
