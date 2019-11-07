@@ -82,14 +82,17 @@ namespace SDL
             }
         }
 
+        // TODO: These values are actually BGRA. Figure out if it's
+        // dependent on LittleEndian.
+
         public Color Color
         {
             get {
                 byte[] argb = new byte[4];
 
-                EnsureSafe(SDL_GetTextureAlphaMod(handle, out argb[0]));
+                EnsureSafe(SDL_GetTextureAlphaMod(handle, out argb[3]));
                 EnsureSafe(SDL_GetTextureColorMod(
-                               handle, out argb[1], out argb[2], out argb[3]));
+                               handle, out argb[2], out argb[1], out argb[0]));
 
                 return Color.FromArgb(BitConverter.ToInt32(argb, 0));
             }
@@ -97,9 +100,9 @@ namespace SDL
             set {
                 byte[] argb = BitConverter.GetBytes(value.ToArgb());
 
-                EnsureSafe(SDL_SetTextureAlphaMod(handle, argb[0]));
+                EnsureSafe(SDL_SetTextureAlphaMod(handle, argb[3]));
                 EnsureSafe(SDL_SetTextureColorMod(
-                               handle, argb[1], argb[2], argb[3]));
+                               handle, argb[2], argb[1], argb[0]));
             }
         }
 
