@@ -87,13 +87,60 @@ namespace Client.MirGraphics
                 return new Texture(Renderer, surface);
         }
 
-        public static void Draw2D(Texture texture, Point point) =>
+        public static void Draw2D(
+            Texture texture, Point point, float opacity = 1.0F)
+        {
+            var oldOpacity = texture.Opacity;
+            texture.Opacity = opacity;
+
             Renderer.RenderCopy(
                 texture, Rectangle.Empty, new Rectangle(point, texture.Size));
 
+            texture.Opacity = oldOpacity;
+        }
+
         public static void Draw2D(
-            Texture texture, Rectangle section, Point point) =>
+            Texture texture, Point point, Color color, float opacity = 1.0F)
+        {
+            var oldColor = texture.Color;
+            var oldOpacity = texture.Opacity;
+            texture.Color = color;
+            texture.Opacity = opacity;
+
+            Renderer.RenderCopy(
+                texture, Rectangle.Empty, new Rectangle(point, texture.Size));
+
+            texture.Color = oldColor;
+            texture.Opacity = oldOpacity;
+        }
+
+        public static void Draw2D(
+            Texture texture, Rectangle section, Point point,
+            float opacity = 1.0F)
+        {
+            var oldOpacity = texture.Opacity;
+            texture.Opacity = opacity;
+
             Renderer.RenderCopy(
                 texture, section, new Rectangle(point, texture.Size));
+
+            texture.Opacity = oldOpacity;
+        }
+
+        public static void Draw2D(
+            Texture texture, Rectangle section, Point point,
+            Color color, float opacity = 1.0F)
+        {
+            var oldColor = texture.Color;
+            var oldOpacity = texture.Opacity;
+            texture.Color = color;
+            texture.Opacity = opacity;
+
+            Renderer.RenderCopy(
+                texture, section, new Rectangle(point, texture.Size));
+
+            texture.Color = oldColor;
+            texture.Opacity = oldOpacity;
+        }
     }
 }
