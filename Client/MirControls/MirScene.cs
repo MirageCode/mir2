@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using Client.MirGraphics;
 using Client.MirNetwork;
 using Client.MirScenes;
-using Microsoft.DirectX.Direct3D;
+using SDL;
 using S = ServerPackets;
 using C = ClientPackets;
 
@@ -58,29 +58,19 @@ namespace Client.MirControls
 
             if (ControlTexture == null || ControlTexture.Disposed)
             {
-                DXManager.ControlList.Add(this);
-                ControlTexture = new Texture(DXManager.Device, Size.Width, Size.Height, 1, Usage.RenderTarget, Format.A8R8G8B8, Pool.Default);
+                SDLManager.ControlList.Add(this);
+                ControlTexture = SDLManager.CreateTexture(Size.Width, Size.Height);
                 ControlTexture.Disposing += ControlTexture_Disposing;
                 TextureSize = Size;
             }
-            Surface oldSurface = DXManager.CurrentSurface;
-            Surface surface = ControlTexture.GetSurfaceLevel(0);
-            DXManager.SetSurface(surface);
 
+            SDLManager.DrawToTexture(ControlTexture, BackColour, () => {
+                BeforeDrawControl();
+                DrawChildControls();
+                AfterDrawControl();
+            });
 
-            DXManager.Device.Clear(ClearFlags.Target, BackColour, 0, 0);
-
-            BeforeDrawControl();
-            DrawChildControls();
-            AfterDrawControl();
-
-            DXManager.Sprite.Flush();
-
-
-            DXManager.SetSurface(oldSurface);
             TextureValid = true;
-            surface.Dispose();
-
         }
 
         public override void OnMouseDown(MouseEventArgs e)

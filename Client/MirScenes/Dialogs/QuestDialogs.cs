@@ -13,6 +13,7 @@ using Client.MirObjects;
 using Client.MirSounds;
 using S = ServerPackets;
 using C = ClientPackets;
+using Font = SDL.Font;
 
 namespace Client.MirScenes.Dialogs
 {
@@ -207,7 +208,7 @@ namespace Client.MirScenes.Dialogs
 
             Message = new QuestMessage(upButton, downButton, positionBar, 10)
             {
-                Font = new Font(Settings.FontName, 9F),
+                Font = new Font(Settings.FontName, 9),
                 Parent = this,
                 Size = new Size(280, 160),
                 Location = new Point(10, 135),
@@ -231,7 +232,7 @@ namespace Client.MirScenes.Dialogs
 
             _availableQuestLabel = new MirLabel
             {
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 Parent = this,
                 AutoSize = true,
                 Location = new Point(210, 8)
@@ -531,7 +532,7 @@ namespace Client.MirScenes.Dialogs
 
             Message = new QuestMessage(upButton, downButton, positionBar, 16, true)
             {
-                Font = new Font(Settings.FontName, 9F),
+                Font = new Font(Settings.FontName, 9),
                 Parent = this,
                 Size = new Size(280, 320),
                 Location = new Point(10, 35),
@@ -682,7 +683,7 @@ namespace Client.MirScenes.Dialogs
 
             _takenQuestsLabel = new MirLabel
             {
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 Parent = this,
                 AutoSize = true,
                 Location = new Point(210, 7)
@@ -817,7 +818,7 @@ namespace Client.MirScenes.Dialogs
         public List<int> TrackedQuestsIds = new List<int>();
         public List<MirLabel> TaskLines = new List<MirLabel>();
 
-        public Font QuestFont = new Font(Settings.FontName, 8F);
+        public Font QuestFont = new Font(Settings.FontName, 8);
 
         private MirLabel _questNameLabel, _questTaskLabel;
 
@@ -1046,7 +1047,7 @@ namespace Client.MirScenes.Dialogs
 
         public int PosX, PosMinY, PosMaxY;
 
-        public Font Font = new Font(Settings.FontName, 8F);
+        public Font Font = new Font(Settings.FontName, 8);
         public List<string> CurrentLines = new List<string>();
 
         private const string TaskTitle = "Tasks", ProgressTitle = "Progress";
@@ -1252,7 +1253,8 @@ namespace Client.MirScenes.Dialogs
 
                 if (i == 0 || lines[i] == TaskTitle || lines[i] == ProgressTitle)
                 {
-                    font = new Font(Settings.FontName, 10F, FontStyle.Bold);
+                    // TODO: Bold
+                    font = new Font(Settings.FontName, 10);
                     title = true;
 
                     if (i == 0)
@@ -1298,7 +1300,7 @@ namespace Client.MirScenes.Dialogs
                     string[] values = capture.Value.Split('/');
                     currentLine = currentLine.Remove(capture.Index - 1 - offSet, capture.Length + 2).Insert(capture.Index - 1 - offSet, values[0]);
                     string text = currentLine.Substring(0, capture.Index - 1 - offSet) + " ";
-                    Size size = TextRenderer.MeasureText(CMain.Graphics, text, _textLabel[i - TopLine].Font, _textLabel[i - TopLine].Size, TextFormatFlags.TextBoxControl);
+                    Size size = _textLabel[i - TopLine].Font.GetSize(text);
 
                     if (C.Match(match.Value).Success)
                         NewColour(values[0], values[1], _textLabel[i - TopLine].Location.Add(new Point(size.Width - 10, 0)));
@@ -1735,7 +1737,7 @@ namespace Client.MirScenes.Dialogs
                 Text = Group,
                 AutoSize = true,
                 Parent = this,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 ForeColour = Color.LimeGreen,
                 Location = new Point(18, 0),
                 Visible = true,
@@ -1862,7 +1864,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Text = string.Format("{0,-4} {1}", level, name),
                 AutoSize = true,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 ForeColour = lowLevelQuest ? Color.Gray : quest.New ? Color.Yellow : Color.White,
                 Parent = this,
                 Location = new Point(0, 0),
@@ -1905,7 +1907,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Text = string.Format("{0}", state),
                 AutoSize = true,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 ForeColour = lowLevelQuest ? Color.Gray : quest.New ? Color.Yellow : Color.White,
                 Parent = this,
                 Location = new Point(185, 0),

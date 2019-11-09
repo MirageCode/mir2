@@ -5,6 +5,7 @@ using Client.MirGraphics;
 using Client.MirSounds;
 using System.Drawing;
 using System.Windows.Forms;
+using Font = SDL.Font;
 
 namespace Client.MirScenes.Dialogs
 {
@@ -62,7 +63,8 @@ namespace Client.MirScenes.Dialogs
                 Parent = this,
                 AutoSize = true,
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
-                Font = new Font(Settings.FontName, 10F, FontStyle.Bold),
+                // TODO: Bold
+                Font = new Font(Settings.FontName, 10),
                 NotControl = true,
                 Sort = true,
                 Visible = false,

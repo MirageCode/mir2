@@ -11,8 +11,7 @@ using Client.MirGraphics;
 using Client.MirNetwork;
 using Client.MirObjects;
 using Client.MirSounds;
-using Microsoft.DirectX.Direct3D;
-using Font = System.Drawing.Font;
+using Font = SDL.Font;
 using S = ServerPackets;
 using C = ClientPackets;
 using Effect = Client.MirObjects.Effect;
@@ -33,7 +32,7 @@ namespace Client.MirScenes.Dialogs
 
         public MirLabel NameLabel;
 
-        Font font = new Font(Settings.FontName, 9F);
+        Font font = new Font(Settings.FontName, 9);
 
         public List<string> CurrentLines = new List<string>();
         private int _index = 0;
@@ -55,7 +54,8 @@ namespace Client.MirScenes.Dialogs
             {
                 Text = "",
                 Parent = this,
-                Font = new Font(Settings.FontName, 10F, FontStyle.Bold),
+                // TODO: Bold
+                Font = new Font(Settings.FontName, 10),
                 ForeColour = Color.BurlyWood,
                 Location = new Point(30, 6),
                 AutoSize = true
@@ -288,7 +288,7 @@ namespace Client.MirScenes.Dialogs
                     string[] values = capture.Value.Split('/');
                     currentLine = currentLine.Remove(capture.Index - 1 - offSet, capture.Length + 2).Insert(capture.Index - 1 - offSet, values[0]);
                     string text = currentLine.Substring(0, capture.Index - 1 - offSet) + " ";
-                    Size size = TextRenderer.MeasureText(CMain.Graphics, text, TextLabel[i].Font, TextLabel[i].Size, TextFormatFlags.TextBoxControl);
+                    Size size = TextLabel[i].Font.GetSize(text);
 
                     if (R.Match(match.Value).Success)
                         NewButton(values[0], values[1], TextLabel[i].Location.Add(new Point(size.Width - 10, 0)));

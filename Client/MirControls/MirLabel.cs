@@ -5,9 +5,8 @@ using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.Windows.Forms;
 using Client.MirGraphics;
-using Microsoft.DirectX;
-using Microsoft.DirectX.Direct3D;
-using Font = System.Drawing.Font;
+using SDL;
+using Font = SDL.Font;
 
 namespace Client.MirControls
 {
@@ -138,7 +137,7 @@ namespace Client.MirControls
                 Size = Size.Empty;
             else
             {
-                Size = TextRenderer.MeasureText(CMain.Graphics, Text, Font);
+                Size = Font.GetSize(Text);
                 //Size = new Size(Size.Width, Size.Height + 5);
 
                 if (OutLine && Size != Size.Empty)
@@ -180,13 +179,13 @@ namespace Client.MirControls
             DrawControlTexture = true;
             _drawFormat = TextFormatFlags.WordBreak;
 
-            _font = new Font(Settings.FontName, 8F);
+            _font = new Font(Settings.FontName, 8);
             _outLine = true;
             _outLineColour = Color.Black; 
             _text = string.Empty;
 
         }
-        
+
         protected override unsafe void CreateTexture()
         {
             if (string.IsNullOrEmpty(Text))
@@ -200,45 +199,27 @@ namespace Client.MirControls
 
             if (ControlTexture == null || ControlTexture.Disposed)
             {
-                DXManager.ControlList.Add(this);
+                SDLManager.ControlList.Add(this);
 
-                ControlTexture = new Texture(DXManager.Device, Size.Width, Size.Height, 1, Usage.None, Format.A8R8G8B8, Pool.Managed);
+                ControlTexture = SDLManager.CreateTexture(Size.Width, Size.Height);
                 ControlTexture.Disposing += ControlTexture_Disposing;
                 TextureSize = Size;
             }
-            
-            using (GraphicsStream stream = ControlTexture.LockRectangle(0, LockFlags.Discard))
-            using (Bitmap image = new Bitmap(Size.Width, Size.Height, Size.Width * 4, PixelFormat.Format32bppArgb, (IntPtr) stream.InternalDataPointer))
-            {
-                using (Graphics graphics = Graphics.FromImage(image))
+
+            // TODO: DrawFormat
+            SDLManager.DrawToTexture(ControlTexture, BackColour, () => {
+                if (OutLine)
                 {
-                    graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                    graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-                    graphics.CompositingQuality = CompositingQuality.HighQuality;
-                    graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
-                    graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
-                    graphics.TextContrast = 0;
-                    graphics.Clear(BackColour);
-
-
-                    if (OutLine)
-                    {
-                        TextRenderer.DrawText(graphics, Text, Font, new Rectangle(1, 0, Size.Width, Size.Height), OutLineColour, DrawFormat);
-                        TextRenderer.DrawText(graphics, Text, Font, new Rectangle(0, 1, Size.Width, Size.Height), OutLineColour, DrawFormat);
-                        TextRenderer.DrawText(graphics, Text, Font, new Rectangle(2, 1, Size.Width, Size.Height), OutLineColour, DrawFormat);
-                        TextRenderer.DrawText(graphics, Text, Font, new Rectangle(1, 2, Size.Width, Size.Height), OutLineColour, DrawFormat);
-                        TextRenderer.DrawText(graphics, Text, Font, new Rectangle(1, 1, Size.Width, Size.Height), ForeColour, DrawFormat);
-
-                        //LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, this.Size.Width, this.Size.Height), Color.FromArgb(239, 243, 239), Color.White, LinearGradientMode.Vertical);
-                        ////graphics.DrawString(Text, Font, brush, 37, 9);
-                        ////graphics.DrawString(this.Text, this.Font, new SolidBrush(Color.Black), 39, 9, StringFormat.GenericDefault);
-                    }
-                    else
-                        TextRenderer.DrawText(graphics, Text, Font, new Rectangle(1, 0, Size.Width, Size.Height), ForeColour, DrawFormat);
+                    SDLManager.DrawText(Text, Font, new Rectangle(1, 0, Size.Width, Size.Height), OutLineColour);
+                    SDLManager.DrawText(Text, Font, new Rectangle(0, 1, Size.Width, Size.Height), OutLineColour);
+                    SDLManager.DrawText(Text, Font, new Rectangle(2, 1, Size.Width, Size.Height), OutLineColour);
+                    SDLManager.DrawText(Text, Font, new Rectangle(1, 2, Size.Width, Size.Height), OutLineColour);
+                    SDLManager.DrawText(Text, Font, new Rectangle(1, 1, Size.Width, Size.Height), ForeColour);
                 }
-            }
-            ControlTexture.UnlockRectangle(0);
-            DXManager.Sprite.Flush();
+                else
+                    SDLManager.DrawText(Text, Font, new Rectangle(1, 0, Size.Width, Size.Height), ForeColour);
+            });
+
             TextureValid = true;
         }
 

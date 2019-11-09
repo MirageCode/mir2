@@ -9,6 +9,7 @@ using Client.MirSounds;
 using Client.MirNetwork;
 using C = ClientPackets;
 using System.Windows.Forms;
+using Font = SDL.Font;
 
 namespace Client.MirScenes.Dialogs
 {
@@ -587,7 +588,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Text = "",
                 Parent = this,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 ForeColour = Color.White,
                 Location = new Point(70, 35),
                 Size = new Size(150, 15),
@@ -598,7 +599,8 @@ namespace Client.MirScenes.Dialogs
             {
                 ForeColour = Color.White,
                 Parent = this,
-                Font = new Font(Settings.FontName, 8F),
+                // FIXME:
+                // Font = new Font(Settings.FontName, 8),
                 Location = new Point(15, 92),
                 Size = new Size(202, 165),
             };
@@ -698,7 +700,7 @@ namespace Client.MirScenes.Dialogs
             {
                 Text = "",
                 Parent = this,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 ForeColour = Color.White,
                 Location = new Point(70, 35),
                 Size = new Size(150, 15),
@@ -709,7 +711,8 @@ namespace Client.MirScenes.Dialogs
             {
                 ForeColour = Color.White,
                 Parent = this,
-                Font = new Font(Settings.FontName, 8F),
+                // FIXME:
+                // Font = new Font(Settings.FontName, 8),
                 Location = new Point(15, 98),
                 Size = new Size(202, 165),
             };
@@ -758,7 +761,7 @@ namespace Client.MirScenes.Dialogs
             ParcelCostLabel = new MirLabel
             {
                 DrawFormat = TextFormatFlags.VerticalCenter,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 Location = new Point(63, 269),
                 Parent = this,
                 Size = new Size(143, 15),
@@ -767,7 +770,7 @@ namespace Client.MirScenes.Dialogs
             GoldSendLabel = new MirLabel
             {
                 DrawFormat = TextFormatFlags.VerticalCenter,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 Location = new Point(63, 290),
                 Parent = this,
                 Size = new Size(143, 15),
@@ -976,7 +979,7 @@ namespace Client.MirScenes.Dialogs
             SenderNameLabel = new MirLabel
             {
                 Parent = this,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 ForeColour = Color.White,
                 Location = new Point(70, 35),
                 Size = new Size(150, 15),
@@ -986,7 +989,7 @@ namespace Client.MirScenes.Dialogs
             DateSentLabel = new MirLabel
             {
                 Parent = this,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 ForeColour = Color.White,
                 Location = new Point(70, 56),
                 Size = new Size(150, 15),
@@ -997,7 +1000,7 @@ namespace Client.MirScenes.Dialogs
             {
                 ForeColour = Color.White,
                 Parent = this,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 Location = new Point(15, 92),
                 Size = new Size(202, 165),
             };
@@ -1113,7 +1116,7 @@ namespace Client.MirScenes.Dialogs
             SenderNameLabel = new MirLabel
             {
                 Parent = this,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 ForeColour = Color.White,
                 Location = new Point(70, 35),
                 Size = new Size(150, 15),
@@ -1123,7 +1126,7 @@ namespace Client.MirScenes.Dialogs
             DateSentLabel = new MirLabel
             {
                 Parent = this,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 ForeColour = Color.White,
                 Location = new Point(70, 56),
                 Size = new Size(150, 15),
@@ -1134,7 +1137,7 @@ namespace Client.MirScenes.Dialogs
             {
                 ForeColour = Color.White,
                 Parent = this,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 Location = new Point(15, 98),
                 Size = new Size(202, 165),
             };
@@ -1142,7 +1145,7 @@ namespace Client.MirScenes.Dialogs
             GoldSendLabel = new MirLabel
             {
                 DrawFormat = TextFormatFlags.VerticalCenter,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 Location = new Point(63, 290),
                 Parent = this,
                 Size = new Size(143, 15),

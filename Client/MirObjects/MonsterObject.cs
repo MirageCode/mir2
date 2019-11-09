@@ -2987,17 +2987,17 @@ namespace Client.MirObjects
         {
             DrawBehindEffects(Settings.Effect);
 
-            float oldOpacity = DXManager.Opacity;
-            if (Hidden && !DXManager.Blending) DXManager.SetOpacity(0.5F);
+            float oldOpacity = SDLManager.Opacity;
+            if (Hidden && !SDLManager.Blending) SDLManager.Opacity = 0.5F;
 
             if (BodyLibrary == null || Frame == null) return;
 
-            if (!DXManager.Blending && Frame.Blend)
+            if (!SDLManager.Blending && Frame.Blend)
                 BodyLibrary.DrawBlend(DrawFrame, DrawLocation, DrawColour, true);
             else
                 BodyLibrary.Draw(DrawFrame, DrawLocation, DrawColour, true);
 
-            DXManager.SetOpacity(oldOpacity);
+            SDLManager.Opacity = oldOpacity;
         }
 
 

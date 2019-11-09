@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Font = SDL.Font;
 
 namespace Client.MirObjects
 {
@@ -42,7 +43,8 @@ namespace Client.MirObjects
                     OutLine = true,
                     OutLineColour = Color.Black,
                     Text = Text,
-                    Font = new Font(Settings.FontName, 8F, FontStyle.Bold)
+                    // TODO: Bold
+                    Font = new Font(Settings.FontName, 8)
                 };
                 DamageLabel.Disposing += label_Disposing;
 

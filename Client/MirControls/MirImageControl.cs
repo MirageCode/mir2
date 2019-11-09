@@ -155,19 +155,12 @@ namespace Client.MirControls
 
             if (DrawImage && Library != null)
             {
-                bool oldGray = DXManager.GrayScale;
-
-                if (GrayScale)
-                {
-                    DXManager.SetGrayscale(true);
-                }
+                // TODO: if (GrayScale) render in grayscale
 
                 if (Blending)
                     Library.DrawBlend(Index, DisplayLocation, ForeColour, false, BlendingRate);
                 else
                     Library.Draw(Index, DisplayLocation, ForeColour, false, Opacity);
-
-                if (GrayScale) DXManager.SetGrayscale(oldGray);
             }
         }
 

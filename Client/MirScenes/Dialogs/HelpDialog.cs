@@ -13,6 +13,7 @@ using Client.MirObjects;
 using Client.MirSounds;
 using S = ServerPackets;
 using C = ClientPackets;
+using Font = SDL.Font;
 
 namespace Client.MirScenes.Dialogs
 {
@@ -86,7 +87,7 @@ namespace Client.MirScenes.Dialogs
             PageLabel = new MirLabel
             {
                 Text = "",
-                Font = new Font(Settings.FontName, 9F),
+                Font = new Font(Settings.FontName, 9),
                 DrawFormat = TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter,
                 Parent = this,
                 NotControl = true,
@@ -313,7 +314,7 @@ namespace Client.MirScenes.Dialogs
                 Text = "Shortcuts",
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                 ForeColour = Color.White,
-                Font = new Font(Settings.FontName, 10F),
+                Font = new Font(Settings.FontName, 10),
                 Parent = this,
                 AutoSize = true,
                 Location = new Point(13, 75),
@@ -325,7 +326,7 @@ namespace Client.MirScenes.Dialogs
                 Text = "Information",
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                 ForeColour = Color.White,
-                Font = new Font(Settings.FontName, 10F),
+                Font = new Font(Settings.FontName, 10),
                 Parent = this,
                 AutoSize = true,
                 Location = new Point(114, 75),
@@ -344,7 +345,7 @@ namespace Client.MirScenes.Dialogs
                     Text = Shortcuts[i].Shortcut,
                     ForeColour = Color.Yellow,
                     DrawFormat = TextFormatFlags.VerticalCenter,
-                    Font = new Font(Settings.FontName, 9F),
+                    Font = new Font(Settings.FontName, 9),
                     Parent = this,
                     AutoSize = true,
                     Location = new Point(18, 107 + (20 * i)),
@@ -356,7 +357,7 @@ namespace Client.MirScenes.Dialogs
                     Text = Shortcuts[i].Information,
                     DrawFormat = TextFormatFlags.VerticalCenter,
                     ForeColour = Color.White,
-                    Font = new Font(Settings.FontName, 9F),
+                    Font = new Font(Settings.FontName, 9),
                     Parent = this,
                     AutoSize = true,
                     Location = new Point(119, 107 + (20 * i)),
@@ -388,7 +389,8 @@ namespace Client.MirScenes.Dialogs
             PageTitleLabel = new MirLabel
             {
                 Text = Title,
-                Font = new Font(Settings.FontName, 10F, FontStyle.Bold),
+                // TODO: Bold
+                Font = new Font(Settings.FontName, 10),
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                 Parent = this,
                 Size = new System.Drawing.Size(242, 30),

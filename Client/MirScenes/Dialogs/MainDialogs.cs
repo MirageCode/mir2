@@ -11,8 +11,7 @@ using Client.MirGraphics;
 using Client.MirNetwork;
 using Client.MirObjects;
 using Client.MirSounds;
-using Microsoft.DirectX.Direct3D;
-using Font = System.Drawing.Font;
+using Font = SDL.Font;
 using S = ServerPackets;
 using C = ClientPackets;
 using Effect = Client.MirObjects.Effect;
@@ -291,7 +290,7 @@ namespace Client.MirScenes.Dialogs
             GoldLabel = new MirLabel
             {
                 DrawFormat = TextFormatFlags.VerticalCenter,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 Location = new Point(this.Size.Width - 105, 119),
                 Parent = this,
                 Size = new Size(99, 13),
@@ -552,7 +551,7 @@ namespace Client.MirScenes.Dialogs
         public MirButton HomeButton, UpButton, EndButton, DownButton, PositionBar;
         public MirImageControl CountBar;
         public MirTextBox ChatTextBox;
-        public Font ChatFont = new Font(Settings.FontName, 8F);
+        public Font ChatFont = new Font(Settings.FontName, 8);
         public string LastPM = string.Empty;
 
         public int StartIndex, LineCount = 4, WindowSize;
@@ -580,7 +579,8 @@ namespace Client.MirScenes.Dialogs
                 Location = new Point(1, 54),
                 MaxLength = Globals.MaxChatLength,
                 Visible = false,
-                Font = ChatFont,
+                // FIXME:
+                // Font = ChatFont,
             };
             ChatTextBox.TextBox.KeyPress += ChatTextBox_KeyPress;
             ChatTextBox.TextBox.KeyDown += ChatTextBox_KeyDown;
@@ -826,7 +826,7 @@ namespace Client.MirScenes.Dialogs
 
             int index = 0;
             for (int i = 1; i < text.Length; i++)
-                if (TextRenderer.MeasureText(CMain.Graphics, text.Substring(index, i - index), ChatFont).Width > chatWidth)
+                if (ChatFont.GetSize(text.Substring(index, i - index)).Width > chatWidth)
                 {
                     chat.Add(text.Substring(index, i - index - 1));
                     index = i - 1;
@@ -1983,7 +1983,7 @@ namespace Client.MirScenes.Dialogs
             BindNumberLabel = new MirLabel
             {
                 Text = "1",
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 ForeColour = Color.White,
                 Parent = this,
                 Location = new Point(0, 1),
@@ -1996,7 +1996,7 @@ namespace Client.MirScenes.Dialogs
                 KeyNameLabels[i] = new MirLabel
                 {
                     Text = "F" + (i + 1),
-                    Font = new Font(Settings.FontName, 8F),
+                    Font = new Font(Settings.FontName, 8),
                     ForeColour = Color.White,
                     Parent = this,
                     Location = new Point(i * 25 + 13, 0),
@@ -3078,7 +3078,7 @@ namespace Client.MirScenes.Dialogs
                 else
                     colour = Color.FromArgb(255, 0, 0);
 
-                DXManager.Sprite.Draw2D(DXManager.RadarTexture, Point.Empty, 0, new PointF((int)(x - 0.5F), (int)(y - 0.5F)), colour);
+                SDLManager.Draw2D(SDLManager.RadarTexture, new Point((int)(x - 0.5F), (int)(y - 0.5F)), colour);
 
                 #region NPC Quest Icons
 
@@ -3124,7 +3124,8 @@ namespace Client.MirScenes.Dialogs
                     {
                         AutoSize = true,
                         Parent = GameScene.Scene.MiniMapDialog,
-                        Font = new Font(Settings.FontName, 9f, FontStyle.Bold),
+                        // TODO: Bold
+                        Font = new Font(Settings.FontName, 9),
                         DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
                         Text = text,
                         ForeColour = color,
@@ -4872,7 +4873,7 @@ namespace Client.MirScenes.Dialogs
                 else
                     colour = Color.FromArgb(255, 0, 0);
 
-                DXManager.Sprite.Draw2D(DXManager.RadarTexture, Point.Empty, 0, new PointF((int)(x - 0.5F), (int)(y - 0.5F)), colour);
+                SDLManager.Draw2D(SDLManager.RadarTexture, new Point((int)(x - 0.5F), (int)(y - 0.5F)), colour);
             }
         }
 

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Font = SDL.Font;
 
 namespace Client.MirScenes.Dialogs
 {
@@ -30,7 +31,7 @@ namespace Client.MirScenes.Dialogs
             TextLabel1 = new MirLabel
             {
                 Text = "",
-                Font = new Font(Settings.FontName, 10F),
+                Font = new Font(Settings.FontName, 10),
                 DrawFormat = TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter,
                 Parent = this,
                 NotControl = true,
@@ -43,7 +44,7 @@ namespace Client.MirScenes.Dialogs
             TextLabel2 = new MirLabel
             {
                 Text = "",
-                Font = new Font(Settings.FontName, 15F),
+                Font = new Font(Settings.FontName, 15),
                 DrawFormat = TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter,
                 Parent = this,
                 NotControl = true,

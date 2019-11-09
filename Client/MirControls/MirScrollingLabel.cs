@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Font = SDL.Font;
 
 namespace Client.MirControls
 {
@@ -16,7 +17,7 @@ namespace Client.MirControls
 
         public int Index;
 
-        public Font Font = new Font(Settings.FontName, 8F);
+        public Font Font = new Font(Settings.FontName, 8);
         public List<string> CurrentLines = new List<string>();
         public int VisibleLines = 8;
 
@@ -78,7 +79,7 @@ namespace Client.MirControls
                     string[] values = capture.Value.Split('/');
                     currentLine = currentLine.Remove(capture.Index - 1 - offSet, capture.Length + 2).Insert(capture.Index - 1 - offSet, values[0]);
                     string text = currentLine.Substring(0, capture.Index - 1 - offSet) + " ";
-                    Size size = TextRenderer.MeasureText(CMain.Graphics, text, _textLabel[i - Index].Font, _textLabel[i - Index].Size, TextFormatFlags.TextBoxControl);
+                    Size size = _textLabel[i - Index].Font.GetSize(text);
 
                     //if (R.Match(match.Value).Success)
                     //    NewButton(values[0], values[1], TextLabel[i].Location.Add(new Point(size.Width - 10, 0)));

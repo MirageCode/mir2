@@ -2,7 +2,6 @@
 using System.Drawing;
 using Client.MirGraphics;
 using Client.MirScenes;
-using Microsoft.DirectX;
 using System.Text.RegularExpressions;
 
 namespace Client.MirControls
@@ -76,36 +75,23 @@ namespace Client.MirControls
             }
         }
 
-        protected override Vector2[] BorderInfo
+        protected override Rectangle[] BorderRectangles
         {
             get
             {
-                if (Size == Size.Empty) return null;
-
-                if (BorderRectangle != DisplayRectangle)
-                {
-
-                    _borderInfo = new[]
-                        {
-                            new Vector2(DisplayRectangle.Left - 1, DisplayRectangle.Top - 1),
-                            new Vector2(DisplayRectangle.Right, DisplayRectangle.Top - 1),
-
-                            new Vector2(DisplayRectangle.Left - 1, DisplayRectangle.Top - 1),
-                            new Vector2(DisplayRectangle.Left - 1, DisplayRectangle.Bottom),
-
-                            new Vector2(DisplayRectangle.Left - 1, DisplayRectangle.Bottom),
-                            new Vector2(DisplayRectangle.Right, DisplayRectangle.Bottom),
-
-                            new Vector2(DisplayRectangle.Right, DisplayRectangle.Top - 1),
-                            new Vector2(DisplayRectangle.Right, DisplayRectangle.Bottom),
-
-                            new Vector2(DisplayRectangle.Left + 40, DisplayRectangle.Bottom),
-                            new Vector2(DisplayRectangle.Left + 40, DisplayRectangle.Top - 1)
-                        };
-
-                    BorderRectangle = DisplayRectangle;
-                }
-                return _borderInfo;
+                if (Size == Size.Empty) return new Rectangle[0];
+                return new Rectangle[] {
+                    new Rectangle(
+                        DisplayRectangle.Left - 1,
+                        DisplayRectangle.Top - 1,
+                        DisplayRectangle.Width + 1,
+                        DisplayRectangle.Height + 1),
+                    new Rectangle(
+                        DisplayRectangle.Left + 40,
+                        DisplayRectangle.Top - 1,
+                        DisplayRectangle.Width - 39,
+                        DisplayRectangle.Height + 1)
+                };
             }
         }
 

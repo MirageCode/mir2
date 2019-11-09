@@ -7,6 +7,7 @@ using System.Text;
 using System.Drawing;
 using Client.MirSounds;
 using System.Windows.Forms;
+using Font = SDL.Font;
 
 namespace Client.MirScenes.Dialogs
 {
@@ -149,7 +150,8 @@ namespace Client.MirScenes.Dialogs
             {
                 Text = "",
                 Parent = this,
-                Font = new Font(Settings.FontName, 10F, FontStyle.Bold),
+                // TODO: Bold
+                Font = new Font(Settings.FontName, 10),
                 ForeColour = Color.BurlyWood,
                 Location = new Point(229, 36),
                 Size = new Size(82,22),

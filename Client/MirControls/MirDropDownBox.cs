@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using Client.MirGraphics;
 using System.Collections.Generic;
+using Font = SDL.Font;
 
 namespace Client.MirControls
 {
@@ -113,7 +114,7 @@ namespace Client.MirControls
                 Location = new Point(0, 0),
                 ForeColour = ForeColour,
                 BackColour = BackColour,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 Visible = true,
             };
             _label.Click += (o, e) =>
@@ -143,7 +144,7 @@ namespace Client.MirControls
                     Location = new Point(0, 15 + (i * 13)),
                     ForeColour = ForeColour,
                     BackColour = Color.FromArgb(255,20,20,20),
-                    Font = new Font(Settings.FontName, 8F)
+                    Font = new Font(Settings.FontName, 8)
                 };
                 int index = i;
                 _Option[index].MouseEnter += (o, e) => _Option[index].BackColour = Color.FromArgb(255,140,70,0);

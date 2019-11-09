@@ -4,8 +4,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using Client.MirGraphics;
 using Client.MirSounds;
-using Microsoft.DirectX;
-using Microsoft.DirectX.Direct3D;
+using SDL;
+using Point = System.Drawing.Point;
 
 namespace Client.MirControls
 {
@@ -45,35 +45,22 @@ namespace Client.MirControls
         #endregion
 
         #region Border
-        protected Rectangle BorderRectangle;
-        private bool _border;
-        protected Vector2[] _borderInfo;
-        protected virtual Vector2[] BorderInfo
+        protected virtual Rectangle[] BorderRectangles
         {
             get
             {
-                if (Size == Size.Empty)
-                    return null;
-
-                if (BorderRectangle != DisplayRectangle)
-                {
-                    _borderInfo = new[]
-                        {
-                            new Vector2(DisplayRectangle.Left - 1, DisplayRectangle.Top - 1),
-                            new Vector2(DisplayRectangle.Right, DisplayRectangle.Top - 1),
-                            new Vector2(DisplayRectangle.Left - 1, DisplayRectangle.Top - 1),
-                            new Vector2(DisplayRectangle.Left - 1, DisplayRectangle.Bottom),
-                            new Vector2(DisplayRectangle.Left - 1, DisplayRectangle.Bottom),
-                            new Vector2(DisplayRectangle.Right, DisplayRectangle.Bottom),
-                            new Vector2(DisplayRectangle.Right, DisplayRectangle.Top - 1),
-                            new Vector2(DisplayRectangle.Right, DisplayRectangle.Bottom)
-                        };
-
-                    BorderRectangle = DisplayRectangle;
-                }
-                return _borderInfo;
+                if (Size == Size.Empty) return new Rectangle[0];
+                return new Rectangle[] {
+                    new Rectangle(
+                        DisplayRectangle.Left - 1,
+                        DisplayRectangle.Top - 1,
+                        DisplayRectangle.Width + 1,
+                        DisplayRectangle.Height + 1)
+                };
             }
         }
+
+        private bool _border;
         public virtual bool Border
         {
             get { return _border; }
@@ -140,20 +127,15 @@ namespace Client.MirControls
 
             if (ControlTexture == null || ControlTexture.Disposed)
             {
-                DXManager.ControlList.Add(this);
-                ControlTexture = new Texture(DXManager.Device, Size.Width, Size.Height, 1, Usage.RenderTarget, Format.A8R8G8B8, Pool.Default);
+                SDLManager.ControlList.Add(this);
+                ControlTexture = SDLManager.CreateTexture(Size.Width, Size.Height);
                 ControlTexture.Disposing += ControlTexture_Disposing;
                 TextureSize = Size;
             }
 
-            Surface oldSurface = DXManager.CurrentSurface;
-            Surface surface = ControlTexture.GetSurfaceLevel(0);
-            DXManager.SetSurface(surface);
-            DXManager.Device.Clear(ClearFlags.Target, BackColour, 0, 0);
-            DXManager.SetSurface(oldSurface);
+            SDLManager.Clear(ControlTexture, BackColour);
 
             TextureValid = true;
-            surface.Dispose();
         }
         protected void ControlTexture_Disposing(object sender, EventArgs e)
         {
@@ -161,7 +143,7 @@ namespace Client.MirControls
             TextureValid = false;
             TextureSize = Size.Empty;
 
-            DXManager.ControlList.Remove(this);
+            SDLManager.ControlList.Remove(this);
         }
         internal void DisposeTexture()
         {
@@ -721,12 +703,7 @@ namespace Client.MirControls
             if (ControlTexture == null || ControlTexture.Disposed)
                 return;
 
-            float oldOpacity = DXManager.Opacity;
-
-            DXManager.SetOpacity(Opacity);
-            DXManager.Sprite.Draw2D(ControlTexture, Point.Empty, 0F, DisplayLocation, Color.White);
-            DXManager.SetOpacity(oldOpacity);
-
+            SDLManager.Draw2D(ControlTexture, DisplayLocation, Opacity);
             CleanTime = CMain.Time + Settings.CleanDelay;
         }
         protected void DrawChildControls()
@@ -738,10 +715,9 @@ namespace Client.MirControls
         }
         protected virtual void DrawBorder()
         {
-            if (!Border || BorderInfo == null)
-                return;
-            DXManager.Sprite.Flush();
-            DXManager.Line.Draw(BorderInfo, _borderColour);
+            if (Border)
+                foreach (var rectangle in BorderRectangles)
+                    SDLManager.DrawRectangle(rectangle, BorderColour);
         }
         protected void AfterDrawControl()
         {
@@ -1022,8 +998,6 @@ namespace Client.MirControls
 
                 BorderChanged = null;
                 _border = false;
-                BorderRectangle = Rectangle.Empty;
-                _borderInfo = null;
 
                 BorderColourChanged = null;
                 _borderColour = Color.Empty;

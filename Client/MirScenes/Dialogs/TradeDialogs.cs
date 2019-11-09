@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using C = ClientPackets;
+using Font = SDL.Font;
 
 namespace Client.MirScenes.Dialogs
 {
@@ -78,7 +79,7 @@ namespace Client.MirScenes.Dialogs
             GoldLabel = new MirLabel
             {
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 Location = new Point(35, 123),
                 Parent = this,
                 Size = new Size(90, 15),
@@ -241,7 +242,7 @@ namespace Client.MirScenes.Dialogs
             GuestGoldLabel = new MirLabel
             {
                 DrawFormat = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 Location = new Point(35, 123),
                 Parent = this,
                 Size = new Size(90, 15),

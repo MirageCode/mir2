@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using C = ClientPackets;
+using Font = SDL.Font;
 
 namespace Client.MirScenes.Dialogs
 {
@@ -155,7 +156,7 @@ namespace Client.MirScenes.Dialogs
                 DrawFormat = TextFormatFlags.VerticalCenter,
                 Parent = this,
                 NotControl = true,
-                Font = new Font(Settings.FontName, 10F),
+                Font = new Font(Settings.FontName, 10),
             };
 
             MentorLevelLabel = new MirLabel
@@ -167,7 +168,7 @@ namespace Client.MirScenes.Dialogs
                 DrawFormat = TextFormatFlags.VerticalCenter,
                 Parent = this,
                 NotControl = true,
-                Font = new Font(Settings.FontName, 10F),
+                Font = new Font(Settings.FontName, 10),
             };
 
             MentorOnlineLabel = new MirLabel
@@ -179,7 +180,7 @@ namespace Client.MirScenes.Dialogs
                 DrawFormat = TextFormatFlags.VerticalCenter,
                 Parent = this,
                 NotControl = true,
-                Font = new Font(Settings.FontName, 7F),
+                Font = new Font(Settings.FontName, 7),
                 Visible = false,
                 Text = "ONLINE",
             };
@@ -193,7 +194,7 @@ namespace Client.MirScenes.Dialogs
                 DrawFormat = TextFormatFlags.VerticalCenter,
                 Parent = this,
                 NotControl = true,
-                Font = new Font(Settings.FontName, 10F),
+                Font = new Font(Settings.FontName, 10),
             };
 
             StudentLevelLabel = new MirLabel
@@ -205,7 +206,7 @@ namespace Client.MirScenes.Dialogs
                 DrawFormat = TextFormatFlags.VerticalCenter,
                 Parent = this,
                 NotControl = true,
-                Font = new Font(Settings.FontName, 10F),
+                Font = new Font(Settings.FontName, 10),
             };
 
             StudentOnlineLabel = new MirLabel
@@ -217,7 +218,7 @@ namespace Client.MirScenes.Dialogs
                 DrawFormat = TextFormatFlags.VerticalCenter,
                 Parent = this,
                 NotControl = true,
-                Font = new Font(Settings.FontName, 7F),
+                Font = new Font(Settings.FontName, 7),
                 Visible = false,
                 Text = "ONLINE",
             };
@@ -231,7 +232,7 @@ namespace Client.MirScenes.Dialogs
                 DrawFormat = TextFormatFlags.VerticalCenter,
                 Parent = this,
                 NotControl = true,
-                Font = new Font(Settings.FontName, 7F),
+                Font = new Font(Settings.FontName, 7),
                 Text = "MENTOR",
             };
 
@@ -244,7 +245,7 @@ namespace Client.MirScenes.Dialogs
                 DrawFormat = TextFormatFlags.VerticalCenter,
                 Parent = this,
                 NotControl = true,
-                Font = new Font(Settings.FontName, 7F),
+                Font = new Font(Settings.FontName, 7),
                 Text = "MENTEE",
             };
 
@@ -257,7 +258,7 @@ namespace Client.MirScenes.Dialogs
                 DrawFormat = TextFormatFlags.VerticalCenter,
                 Parent = this,
                 NotControl = true,
-                Font = new Font(Settings.FontName, 7F),
+                Font = new Font(Settings.FontName, 7),
             };
 
 
