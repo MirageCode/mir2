@@ -40,6 +40,8 @@ namespace Client
 
         public CMain()
         {
+            SDLManager.Create();
+
             InitializeComponent();
 
             LoginScene LoginScene = new LoginScene();
@@ -72,8 +74,6 @@ namespace Client
             try
             {
                 ClientSize = new Size(Settings.ScreenWidth, Settings.ScreenHeight);
-
-                SDLManager.Create();
 
                 // TODO: Sound
                 // SoundManager.Create();
