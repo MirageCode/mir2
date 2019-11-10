@@ -65,7 +65,7 @@ namespace Client
 
         //Graphics
         public static bool FullScreen = true, TopMost = true;
-        public static string FontName = "Tahoma"; //"MS Sans Serif"
+        public static string FontName = "/usr/share/fonts/truetype/unifont/unifont.ttf"; //"MS Sans Serif"
         public static bool FPSCap = true;
         public static int MaxFPS = 100;
         public static int Resolution = 1024;

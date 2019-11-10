@@ -202,9 +202,9 @@ namespace Client.MirControls
                 if (Program.Form.ActiveControl == null || Program.Form.ActiveControl == Program.Form)
                     Program.Form.ActiveControl = TextBox;
 
-            if (!TextBox.Visible)
-                if (Program.Form.ActiveControl == TextBox)
-                    Program.Form.Focus();
+            // if (!TextBox.Visible)
+            //     if (Program.Form.ActiveControl == TextBox)
+            //         Program.Form.Focus();
         }
         private void SetFocus(object sender, EventArgs e)
         {

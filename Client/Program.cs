@@ -33,9 +33,9 @@ namespace Client
 
             try
             {
-                if (UpdatePatcher()) return;
+                // if (UpdatePatcher()) return;
 
-                if (RuntimePolicyHelper.LegacyV2RuntimeEnabledSuccessfully == true) { }
+                // if (RuntimePolicyHelper.LegacyV2RuntimeEnabledSuccessfully == true) { }
 
                 Packet.IsServer = false;
                 Settings.Load();
@@ -43,8 +43,9 @@ namespace Client
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                if (Settings.P_Patcher) Application.Run(PForm = new Launcher.AMain());
-                else Application.Run(Form = new CMain());
+                // if (Settings.P_Patcher) Application.Run(PForm = new Launcher.AMain());
+                // else
+                Application.Run(Form = new CMain());
 
                 Settings.Save();
                 CMain.InputKeys.Save();
