@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using Point = System.Drawing.Point;
 
 namespace SDL
 {
@@ -46,6 +47,25 @@ namespace SDL
 
         public static void Delay(UInt32 ms) => SDL_Delay(ms);
 
+        public static void StartTextInput() => SDL_StartTextInput();
+        public static void StopTextInput() => SDL_StopTextInput();
+
+        public static Point MousePoint
+        {
+            get
+            {
+                int x, y;
+                SDL_GetMouseState(out x, out y);
+                return new Point(x, y);
+            }
+        }
+
+        public static Keymod Modifier
+        {
+            get => SDL_GetModState();
+            set => SDL_SetModState(value);
+        }
+
         [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
         private static extern int SDL_Init(SubSystem flags);
 
@@ -66,5 +86,20 @@ namespace SDL
 
 		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
 		private static extern void SDL_Delay(UInt32 ms);
+
+		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void SDL_StartTextInput();
+
+		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void SDL_StopTextInput();
+
+		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+		private static extern UInt32 SDL_GetMouseState(out int x, out int y);
+
+		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+		private static extern Keymod SDL_GetModState();
+
+		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void SDL_SetModState(Keymod modstate);
     }
 }
