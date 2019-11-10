@@ -10,9 +10,28 @@ namespace Client.MirGraphics
 {
     static class SDLManager
     {
-        // FIXME: Don't do this here
-        public static Window Window = new Window("Test", 512, 512, 0);
-        public static Renderer Renderer = Window.CreateRenderer(-1, 0);
+        public static Window Window;
+        public static Renderer Renderer;
+
+        public static void Create()
+        {
+            SDLContext.Init(SubSystem.Video);
+            SDLContext.InitTTF();
+
+            Window = new Window("Mir", Settings.ScreenWidth, Settings.ScreenHeight, 0);
+            Renderer = Window.CreateRenderer(-1, 0);
+        }
+
+        public static void Destroy()
+        {
+            Clean();
+
+            Renderer.Dispose();
+            Window.Dispose();
+
+            SDLContext.QuitTTF();
+            SDLContext.Quit();
+        }
 
         public static float Opacity = 1.0F;
         // TODO: Blending
