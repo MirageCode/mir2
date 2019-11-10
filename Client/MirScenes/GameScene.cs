@@ -8580,7 +8580,7 @@ namespace Client.MirScenes
             {
                 if (SetMusic != Music)
                 {
-                    SoundManager.Device.Dispose();
+                    // SoundManager.Device.Dispose();
                     SoundManager.Create();
                     SoundManager.PlayMusic(Music, true);
                 }

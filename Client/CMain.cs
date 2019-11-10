@@ -13,8 +13,6 @@ using Client.MirControls;
 using Client.MirGraphics;
 using Client.MirNetwork;
 using Client.MirScenes;
-using Client.MirSounds;
-using Microsoft.DirectX.Direct3D;
 using Font = System.Drawing.Font;
 
 namespace Client
@@ -23,7 +21,6 @@ namespace Client
     {
         public static MirControl DebugBaseLabel, HintBaseLabel;
         public static MirLabel DebugTextLabel, HintTextLabel, ScreenshotTextLabel;
-        public static Graphics Graphics;
         public static Point MPoint;
 
         public readonly static Stopwatch Timer = Stopwatch.StartNew();
@@ -67,14 +64,6 @@ namespace Client
 
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.Selectable, true);
             FormBorderStyle = Settings.FullScreen ? FormBorderStyle.None : FormBorderStyle.FixedDialog;
-
-            Graphics = CreateGraphics();
-            Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-            Graphics.CompositingQuality = CompositingQuality.HighQuality;
-            Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
-            Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
-            Graphics.TextContrast = 0;
         }
 
         private void CMain_Load(object sender, EventArgs e)
@@ -83,9 +72,11 @@ namespace Client
             try
             {
                 ClientSize = new Size(Settings.ScreenWidth, Settings.ScreenHeight);
-                
-                DXManager.Create();
-                SoundManager.Create();
+
+                SDLManager.Create();
+
+                // TODO: Sound
+                // SoundManager.Create();
             }
             catch (Exception ex)
             {
@@ -312,7 +303,7 @@ namespace Client
                 _fpsTime = Time + 1000;
                 FPS = _fps;
                 _fps = 0;
-                DXManager.Clean(); // Clean once a second.
+                SDLManager.Clean(); // Clean once a second.
             }
             else
                 _fps++;
@@ -334,38 +325,11 @@ namespace Client
         }
         private static void RenderEnvironment()
         {
-            try
-            {
-                if (DXManager.DeviceLost)
-                {
-                    DXManager.AttemptReset();
-                    Thread.Sleep(1);
-                    return;
-                }
-                else
-                {
-                    DXManager.Device.Clear(ClearFlags.Target, Color.CornflowerBlue, 0, 0);
-                    DXManager.Device.BeginScene();
-                    DXManager.Sprite.Begin(SpriteFlags.AlphaBlend);
-                    DXManager.SetSurface(DXManager.MainSurface);
+            SDLManager.Renderer.RenderClear(Color.CornflowerBlue);
+            if (MirScene.ActiveScene != null)
+                MirScene.ActiveScene.Draw();
 
-                    if (MirScene.ActiveScene != null)
-                        MirScene.ActiveScene.Draw();
-
-                    DXManager.Sprite.End();
-                    DXManager.Device.EndScene();
-                    DXManager.Device.Present();
-                }
-            }
-            catch (DeviceLostException)
-            {
-            }
-            catch (Exception ex)
-            {
-                SaveError(ex.ToString());
-
-                DXManager.AttemptRecovery();
-            }
+            SDLManager.Renderer.RenderPresent();
         }
 
         private static void CreateDebugLabel()
@@ -515,13 +479,15 @@ namespace Client
 
         private static void ToggleFullScreen()
         {
-            Settings.FullScreen = !Settings.FullScreen;
+            // TODO: Full screen
 
-            Program.Form.FormBorderStyle = Settings.FullScreen ? FormBorderStyle.None : FormBorderStyle.FixedDialog;
+            // Settings.FullScreen = !Settings.FullScreen;
 
-            DXManager.Parameters.Windowed = !Settings.FullScreen;
-            DXManager.Device.Reset(DXManager.Parameters);
-            Program.Form.ClientSize = new Size(Settings.ScreenWidth, Settings.ScreenHeight);
+            // Program.Form.FormBorderStyle = Settings.FullScreen ? FormBorderStyle.None : FormBorderStyle.FixedDialog;
+
+            // DXManager.Parameters.Windowed = !Settings.FullScreen;
+            // DXManager.Device.Reset(DXManager.Parameters);
+            // Program.Form.ClientSize = new Size(Settings.ScreenWidth, Settings.ScreenHeight);
         }//
 
         public void CreateScreenShot()
@@ -536,27 +502,29 @@ namespace Client
                 Now.ToShortDateString(), 
                 Now.TimeOfDay);
 
-            using (Bitmap image = GetImage(Handle, new Rectangle(location, ClientSize)))
-            using (Graphics graphics = Graphics.FromImage(image))
-            {
-                StringFormat sf = new StringFormat();
-                sf.LineAlignment = StringAlignment.Center;
-                sf.Alignment = StringAlignment.Center;
+            // TODO: Screenshot
 
-                graphics.DrawString(text, new Font(Settings.FontName, 9F), Brushes.Black, new Point((Settings.ScreenWidth / 2) + 3, 10), sf);
-                graphics.DrawString(text, new Font(Settings.FontName, 9F), Brushes.Black, new Point((Settings.ScreenWidth / 2) + 4, 9), sf);
-                graphics.DrawString(text, new Font(Settings.FontName, 9F), Brushes.Black, new Point((Settings.ScreenWidth / 2) + 5, 10), sf);
-                graphics.DrawString(text, new Font(Settings.FontName, 9F), Brushes.Black, new Point((Settings.ScreenWidth / 2) + 4, 11), sf);
-                graphics.DrawString(text, new Font(Settings.FontName, 9F), Brushes.White, new Point((Settings.ScreenWidth / 2) + 4, 10), sf);//SandyBrown               
+            // using (Bitmap image = GetImage(Handle, new Rectangle(location, ClientSize)))
+            // using (Graphics graphics = Graphics.FromImage(image))
+            // {
+            //     StringFormat sf = new StringFormat();
+            //     sf.LineAlignment = StringAlignment.Center;
+            //     sf.Alignment = StringAlignment.Center;
 
-                string path = Path.Combine(Application.StartupPath, @"Screenshots\");
-                if (!Directory.Exists(path))
-                    Directory.CreateDirectory(path);
+            //     graphics.DrawString(text, new Font(Settings.FontName, 9F), Brushes.Black, new Point((Settings.ScreenWidth / 2) + 3, 10), sf);
+            //     graphics.DrawString(text, new Font(Settings.FontName, 9F), Brushes.Black, new Point((Settings.ScreenWidth / 2) + 4, 9), sf);
+            //     graphics.DrawString(text, new Font(Settings.FontName, 9F), Brushes.Black, new Point((Settings.ScreenWidth / 2) + 5, 10), sf);
+            //     graphics.DrawString(text, new Font(Settings.FontName, 9F), Brushes.Black, new Point((Settings.ScreenWidth / 2) + 4, 11), sf);
+            //     graphics.DrawString(text, new Font(Settings.FontName, 9F), Brushes.White, new Point((Settings.ScreenWidth / 2) + 4, 10), sf);//SandyBrown               
 
-                int count = Directory.GetFiles(path, "*.png").Length;
+            //     string path = Path.Combine(Application.StartupPath, @"Screenshots\");
+            //     if (!Directory.Exists(path))
+            //         Directory.CreateDirectory(path);
 
-                image.Save(Path.Combine(path, string.Format("Image {0}.Png", count)), ImageFormat.Png);
-            }
+            //     int count = Directory.GetFiles(path, "*.png").Length;
+
+            //     image.Save(Path.Combine(path, string.Format("Image {0}.Png", count)), ImageFormat.Png);
+            // }
         }
 
         public static void SaveError(string ex)
@@ -578,64 +546,10 @@ namespace Client
         {
             if (Settings.ScreenWidth == width && Settings.ScreenHeight == height) return;
 
-            DXManager.Device.Clear(ClearFlags.Target, Color.Black, 0, 0);
-            DXManager.Device.Present();
-
-            DXManager.Device.Dispose();
-
             Settings.ScreenWidth = width;
             Settings.ScreenHeight = height;
             Program.Form.ClientSize = new Size(width, height);
-
-            DXManager.Create();
         }
-            
-
-        #region ScreenCapture
-
-        [DllImport("user32.dll")]
-        static extern IntPtr GetWindowDC(IntPtr handle);
-        [DllImport("gdi32.dll")]
-        public static extern IntPtr CreateCompatibleDC(IntPtr handle);
-        [DllImport("gdi32.dll")]
-        public static extern IntPtr CreateCompatibleBitmap(IntPtr handle, int width, int height);
-        [DllImport("gdi32.dll")]
-        public static extern IntPtr SelectObject(IntPtr handle, IntPtr handle2);
-        [DllImport("gdi32.dll")]
-        public static extern bool BitBlt(IntPtr handle, int destX, int desty, int width, int height,
-                                         IntPtr handle2, int sourX, int sourY, int flag);
-        [DllImport("gdi32.dll")]
-        public static extern int DeleteDC(IntPtr handle);
-        [DllImport("user32.dll")]
-        public static extern int ReleaseDC(IntPtr handle, IntPtr handle2);
-        [DllImport("gdi32.dll")]
-        public static extern int DeleteObject(IntPtr handle);
-
-        public static Bitmap GetImage(IntPtr handle, Rectangle r)
-        {
-            IntPtr sourceDc = GetWindowDC(handle);
-            IntPtr destDc = CreateCompatibleDC(sourceDc);
-
-            IntPtr hBmp = CreateCompatibleBitmap(sourceDc, r.Width, r.Height);
-            if (hBmp != IntPtr.Zero)
-            {
-                IntPtr hOldBmp = SelectObject(destDc, hBmp);
-                BitBlt(destDc, 0, 0, r.Width, r.Height, sourceDc, r.X, r.Y, 0xCC0020); //0, 0, 13369376);
-                SelectObject(destDc, hOldBmp);
-                DeleteDC(destDc);
-                ReleaseDC(handle, sourceDc);
-
-                Bitmap bmp = Image.FromHbitmap(hBmp);
-
-
-                DeleteObject(hBmp);
-
-                return bmp;
-            }
-
-            return null;
-        }
-        #endregion
 
         #region Idle Check
         private static bool AppStillIdle

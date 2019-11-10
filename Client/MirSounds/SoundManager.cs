@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Microsoft.DirectX.DirectSound;
-
 
 namespace Client.MirSounds
 {
     static class SoundManager
     {
-        public static Device Device;
+        // public static Device Device;
         private static readonly List<SoundLibrary> Sounds = new List<SoundLibrary>();
         private static readonly Dictionary<int, string> IndexList = new Dictionary<int, string>();
 
@@ -40,8 +38,8 @@ namespace Client.MirSounds
         {
             if (Program.Form == null || Program.Form.IsDisposed) return;
 
-            Device = new Device();
-            Device.SetCooperativeLevel(Program.Form, CooperativeLevel.Normal);
+            // Device = new Device();
+            // Device.SetCooperativeLevel(Program.Form, CooperativeLevel.Normal);
             LoadSoundList();
         }
         public static void LoadSoundList()
@@ -79,7 +77,7 @@ namespace Client.MirSounds
 
         public static void PlaySound(int index, bool loop = false)
         {
-            if (Device == null) return;
+            // if (Device == null) return;
             
             if (_vol <= -3000) return;
 
@@ -114,7 +112,7 @@ namespace Client.MirSounds
 
         public static void PlayMusic(int index, bool loop = false)
         {
-            if (Device == null) return;
+            // if (Device == null) return;
 
             Music = new SoundLibrary(index, index + ".wav", true);
             Music.SetVolume(MusicVol);

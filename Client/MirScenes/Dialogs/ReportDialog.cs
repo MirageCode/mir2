@@ -87,17 +87,19 @@ namespace Client.MirScenes.Dialogs
 
             location = new Point(-location.X, -location.Y);
 
-            using (Bitmap image = CMain.GetImage(Program.Form.Handle, new Rectangle(location, Program.Form.ClientSize)))
-            {
-                var chunks = Functions.SplitArray(Functions.ImageToByteArray(image), 20000);
+            // TODO: Screenshot
 
-                int i = 0;
+            // using (Bitmap image = CMain.GetImage(Program.Form.Handle, new Rectangle(location, Program.Form.ClientSize)))
+            // {
+            //     var chunks = Functions.SplitArray(Functions.ImageToByteArray(image), 20000);
 
-                foreach (var chunk in chunks)
-                {
-                    Network.Enqueue(new C.ReportIssue { Image = chunk, ImageSize = chunks.Count(), ImageChunk = ++i });
-                }
-            }
+            //     int i = 0;
+
+            //     foreach (var chunk in chunks)
+            //     {
+            //         Network.Enqueue(new C.ReportIssue { Image = chunk, ImageSize = chunks.Count(), ImageChunk = ++i });
+            //     }
+            // }
         }
 
 
