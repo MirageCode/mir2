@@ -852,9 +852,11 @@ namespace Server.MirEnvir
             for (var i = 0; i < Players.Count; i++) Players[i].HasUpdatedBaseStats = false;
         }
 
-        public void SaveDB()
+        public void SaveDB() => SaveDB(DatabasePath);
+
+        public void SaveDB(string databasePath)
         {
-            using (var stream = File.Create(DatabasePath))
+            using (var stream = File.Create(databasePath))
             using (var writer = new BinaryWriter(stream))
             {
                 writer.Write(Version);
@@ -1155,14 +1157,16 @@ namespace Server.MirEnvir
             Saving = false;
         }
 
-        public void LoadDB()
+        public void LoadDB() => LoadDB(DatabasePath);
+
+        public void LoadDB(string databasePath)
         {
             lock (LoadLock)
             {
-                if (!File.Exists(DatabasePath))
-                    SaveDB();
+                if (!File.Exists(databasePath))
+                    SaveDB(databasePath);
 
-                using (var stream = File.OpenRead(DatabasePath))
+                using (var stream = File.OpenRead(databasePath))
                 using (var reader = new BinaryReader(stream))
                 {
                     LoadVersion = reader.ReadInt32();
