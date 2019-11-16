@@ -53,6 +53,7 @@ Client/Client.csproj
 /LibraryViewer/obj
 /LibraryViewer/bin
 /LibraryEditor/obj
+/DatabaseTool/obj
 /Client/obj
 /AutoPatcherAdmin/obj
 
