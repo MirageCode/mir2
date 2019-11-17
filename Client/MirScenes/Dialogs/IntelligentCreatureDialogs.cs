@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using C = ClientPackets;
+using SDL;
 
 namespace Client.MirScenes.Dialogs
 {
@@ -794,7 +795,7 @@ namespace Client.MirScenes.Dialogs
             Network.Enqueue(new C.UpdateIntelligentCreature { Creature = GameScene.User.IntelligentCreatures[selectedCreature] });
         }
 
-        public override void OnMouseDown(MouseEventArgs e)
+        public override void OnMouseDown(MouseButtonEvent e)
         {
             base.OnMouseDown(e);
             if (GameScene.Scene.IntelligentCreatureOptionsGradeDialog.Visible) GameScene.Scene.IntelligentCreatureOptionsGradeDialog.BringToFront();

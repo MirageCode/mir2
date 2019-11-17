@@ -13,6 +13,7 @@ using Client.MirObjects;
 using Client.MirSounds;
 using S = ServerPackets;
 using C = ClientPackets;
+using SDL;
 using Font = SDL.Font;
 
 namespace Client.MirScenes.Dialogs
@@ -1108,9 +1109,9 @@ namespace Client.MirScenes.Dialogs
             }
         }
 
-        private void QuestMessage_MouseWheel(object sender, MouseEventArgs e)
+        private void QuestMessage_MouseWheel(object sender, MouseWheelEvent e)
         {
-            int count = e.Delta / SystemInformation.MouseWheelScrollDelta;
+            int count = e.Scrolled.Y / SystemInformation.MouseWheelScrollDelta;
 
             if (TopLine == 0 && count >= 0) return;
             if (TopLine == CurrentLines.Count - 1 && count <= 0) return;

@@ -11,6 +11,7 @@ using Client.MirGraphics;
 using Client.MirNetwork;
 using Client.MirObjects;
 using Client.MirSounds;
+using SDL;
 using Font = SDL.Font;
 using S = ServerPackets;
 using C = ClientPackets;
@@ -164,9 +165,9 @@ namespace Client.MirScenes.Dialogs
             helpButton.Click += (o, e) => GameScene.Scene.HelpDialog.DisplayPage("Purchasing");
         }
 
-        void NPCDialog_MouseWheel(object sender, MouseEventArgs e)
+        void NPCDialog_MouseWheel(object sender, MouseWheelEvent e)
         {
-            int count = e.Delta / SystemInformation.MouseWheelScrollDelta;
+            int count = e.Scrolled.Y / SystemInformation.MouseWheelScrollDelta;
 
             if (_index == 0 && count >= 0) return;
             if (_index == CurrentLines.Count - 1 && count <= 0) return;
@@ -618,9 +619,9 @@ namespace Client.MirScenes.Dialogs
             }
         }
 
-        private void NPCGoodsPanel_MouseWheel(object sender, MouseEventArgs e)
+        private void NPCGoodsPanel_MouseWheel(object sender, MouseWheelEvent e)
         {
-            int count = e.Delta / SystemInformation.MouseWheelScrollDelta;
+            int count = e.Scrolled.Y / SystemInformation.MouseWheelScrollDelta;
 
             if (StartIndex == 0 && count >= 0) return;
             if (StartIndex == Goods.Count - 1 && count <= 0) return;

@@ -73,7 +73,7 @@ namespace Client.MirControls
             TextureValid = true;
         }
 
-        public override void OnMouseDown(MouseEventArgs e)
+        public override void OnMouseDown(MouseButtonEvent e)
         {
             if (!Enabled)
                 return;
@@ -83,7 +83,7 @@ namespace Client.MirControls
             else
                 base.OnMouseDown(e);
         }
-        public override void OnMouseUp(MouseEventArgs e)
+        public override void OnMouseUp(MouseButtonEvent e)
         {
             if (!Enabled)
                 return;
@@ -102,7 +102,7 @@ namespace Client.MirControls
             else
                 base.OnMouseMove(e);
         }
-        public override void OnMouseWheel(MouseEventArgs e)
+        public override void OnMouseWheel(MouseWheelEvent e)
         {
             if (!Enabled)
                 return;

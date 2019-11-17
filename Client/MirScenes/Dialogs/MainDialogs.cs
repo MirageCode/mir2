@@ -11,6 +11,7 @@ using Client.MirGraphics;
 using Client.MirNetwork;
 using Client.MirObjects;
 using Client.MirSounds;
+using SDL;
 using Font = SDL.Font;
 using S = ServerPackets;
 using C = ClientPackets;
@@ -994,9 +995,9 @@ namespace Client.MirScenes.Dialogs
                     break;
             }
         }
-        private void ChatPanel_MouseWheel(object sender, MouseEventArgs e)
+        private void ChatPanel_MouseWheel(object sender, MouseWheelEvent e)
         {
-            int count = e.Delta / SystemInformation.MouseWheelScrollDelta;
+            int count = e.Scrolled.Y / SystemInformation.MouseWheelScrollDelta;
 
             if (StartIndex == 0 && count >= 0) return;
             if (StartIndex == History.Count - 1 && count <= 0) return;
@@ -3836,7 +3837,7 @@ namespace Client.MirScenes.Dialogs
                 Parent = this,
                 DrawImage = false,
             };
-            SoundBar.MouseDown += SoundBar_MouseMove;
+            SoundBar.MouseDown += SoundBar_MouseDown;
             SoundBar.MouseMove += SoundBar_MouseMove;
             SoundBar.BeforeDraw += SoundBar_BeforeDraw;
 
@@ -3857,7 +3858,7 @@ namespace Client.MirScenes.Dialogs
                 Parent = this,
                 DrawImage = false
             };
-            MusicSoundBar.MouseDown += MusicSoundBar_MouseMove;
+            MusicSoundBar.MouseDown += MusicSoundBar_MouseDown;
             MusicSoundBar.MouseMove += MusicSoundBar_MouseMove;
             MusicSoundBar.MouseUp += MusicSoundBar_MouseUp;
             MusicSoundBar.BeforeDraw += MusicSoundBar_BeforeDraw;
@@ -3891,6 +3892,22 @@ namespace Client.MirScenes.Dialogs
         private void SoundBar_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left || SoundBar != ActiveControl) return;
+
+            Point p = e.Location.Subtract(SoundBar.DisplayLocation);
+
+            byte volume = (byte)(p.X / (double)SoundBar.Size.Width * 100);
+            Settings.Volume = volume;
+
+
+            double percent = Settings.Volume / 100D;
+            if (percent > 1) percent = 1;
+
+            VolumeBar.Location = percent > 0 ? new Point(159 + (int)((SoundBar.Size.Width - 2) * percent), 218) : new Point(159, 218);
+        }
+
+        private void SoundBar_MouseDown(object sender, MouseButtonEvent e)
+        {
+            if (e.Button != MouseButton.Left || SoundBar != ActiveControl) return;
 
             Point p = e.Location.Subtract(SoundBar.DisplayLocation);
 
@@ -3944,7 +3961,7 @@ namespace Client.MirScenes.Dialogs
                 MusicVolumeBar.Location = new Point(159, 244);
         }
 
-        public void MusicSoundBar_MouseUp(object sender, MouseEventArgs e)
+        public void MusicSoundBar_MouseUp(object sender, MouseButtonEvent e)
         {
             if (SoundManager.MusicVol <= -2900)
                 SoundManager.MusicVol = -3000;
@@ -3960,6 +3977,22 @@ namespace Client.MirScenes.Dialogs
 
             SoundManager.Music.SetVolume(SoundManager.MusicVol);
 
+        }
+
+        private void MusicSoundBar_MouseDown(object sender, MouseButtonEvent e)
+        {
+            if (e.Button != MouseButton.Left || MusicSoundBar != ActiveControl) return;
+
+            Point p = e.Location.Subtract(MusicSoundBar.DisplayLocation);
+
+            byte volume = (byte)(p.X / (double)MusicSoundBar.Size.Width * 100);
+            Settings.MusicVolume = volume;
+
+
+            double percent = Settings.MusicVolume / 100D;
+            if (percent > 1) percent = 1;
+
+            MusicVolumeBar.Location = percent > 0 ? new Point(159 + (int)((MusicSoundBar.Size.Width - 2) * percent), 244) : new Point(159, 244);
         }
 
         private void MusicSoundBar_MouseMove(object sender, MouseEventArgs e)

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using C = ClientPackets;
+using SDL;
 using Font = SDL.Font;
 
 namespace Client.MirScenes.Dialogs
@@ -518,9 +519,9 @@ namespace Client.MirScenes.Dialogs
         }
 
 
-        public void FilterScrolling(object sender, MouseEventArgs e)
+        public void FilterScrolling(object sender, MouseWheelEvent e)
         {
-            int count = e.Delta / SystemInformation.MouseWheelScrollDelta;
+            int count = e.Scrolled.Y / SystemInformation.MouseWheelScrollDelta;
 
             if (CStartIndex == 0 && count >= 0) return;
             if (CStartIndex == CategoryList.Count - 1 && count <= 0) return;

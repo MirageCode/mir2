@@ -8484,7 +8484,7 @@ namespace Client.MirScenes
             get { return GameScene.User == null ? Point.Empty : new Point(MouseLocation.X / CellWidth - OffSetX, MouseLocation.Y / CellHeight - OffSetY).Add(GameScene.User.CurrentLocation); }
         }
 
-        public static MouseButtons MapButtons;
+        public static MouseButton MapButtons;
         public static Point MouseLocation;
         public static long InputDelay;
         public static long NextAction;
@@ -8539,7 +8539,7 @@ namespace Client.MirScenes
 
         public MapControl()
         {
-            MapButtons = MouseButtons.None;
+            MapButtons = MouseButton.None;
 
             OffSetX = Settings.ScreenWidth / 2 / CellWidth;
             OffSetY = Settings.ScreenHeight / 2 / CellHeight - 1;
@@ -9335,14 +9335,14 @@ namespace Client.MirScenes
             }
         }
 
-        private static void OnMouseDown(object sender, MouseEventArgs e)
+        private static void OnMouseDown(object sender, MouseButtonEvent e)
         {
             MapButtons |= e.Button;
             GameScene.CanRun = false;
 
             if (AwakeningAction == true) return;
 
-            if (e.Button != MouseButtons.Left) return;
+            if (e.Button != MouseButton.Left) return;
 
             if (GameScene.SelectedCell != null)
             {
@@ -9428,7 +9428,7 @@ namespace Client.MirScenes
         {
             if (AwakeningAction == true) return;
 
-            if ((MouseControl == this) && (MapButtons != MouseButtons.None)) AutoHit = false;//mouse actions stop mining even when frozen!
+            if ((MouseControl == this) && (MapButtons != MouseButton.None)) AutoHit = false;//mouse actions stop mining even when frozen!
             if (!CanRideAttack()) AutoHit = false;
             
             if (CMain.Time < InputDelay || User.Poison.HasFlag(PoisonType.Paralysis) || User.Poison.HasFlag(PoisonType.LRParalysis) || User.Poison.HasFlag(PoisonType.Frozen) || User.Fishing) return;
@@ -9529,7 +9529,7 @@ namespace Client.MirScenes
 
                 switch (MapButtons)
                 {
-                    case MouseButtons.Left:
+                    case MouseButton.Left:
                         if (MapObject.MouseObject is NPCObject || (MapObject.MouseObject is PlayerObject && MapObject.MouseObject != User)) break;
                         if (MapObject.MouseObject is MonsterObject && MapObject.MouseObject.AI == 70) break;
 
@@ -9640,7 +9640,7 @@ namespace Client.MirScenes
                         }
 
                         break;
-                    case MouseButtons.Right:
+                    case MouseButton.Right:
                         if (MapObject.MouseObject is PlayerObject && MapObject.MouseObject != User && CMain.Ctrl) break;
 
                         if (Functions.InRange(MapLocation, User.CurrentLocation, 2))
@@ -10110,7 +10110,7 @@ namespace Client.MirScenes
             {
                 Objects.Clear();
 
-                MapButtons = 0;
+                MapButtons = MouseButton.None;
                 MouseLocation = Point.Empty;
                 InputDelay = 0;
                 NextAction = 0;

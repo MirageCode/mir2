@@ -11,6 +11,7 @@ using Client.MirGraphics;
 using Client.MirNetwork;
 using Client.MirObjects;
 using Client.MirSounds;
+using SDL;
 using Font = SDL.Font;
 using S = ServerPackets;
 using C = ClientPackets;
@@ -1047,9 +1048,9 @@ namespace Client.MirScenes.Dialogs
             RefreshInterface();
         }
 
-        private void BuffsPanel_MouseWheel(object sender, MouseEventArgs e)
+        private void BuffsPanel_MouseWheel(object sender, MouseWheelEvent e)
         {
-            int count = e.Delta / SystemInformation.MouseWheelScrollDelta;
+            int count = e.Scrolled.Y / SystemInformation.MouseWheelScrollDelta;
 
             if (StartIndex == 0 && count >= 0) return;
             if (StartIndex == (GuildBuffInfos.Count - 8) && count <= 0) return;
@@ -1504,9 +1505,9 @@ namespace Client.MirScenes.Dialogs
 
             UpdateNoticeScrollPosition();
         }
-        private void NoticePanel_MouseWheel(object sender, MouseEventArgs e)
+        private void NoticePanel_MouseWheel(object sender, MouseWheelEvent e)
         {
-            int count = e.Delta / SystemInformation.MouseWheelScrollDelta;
+            int count = e.Scrolled.Y / SystemInformation.MouseWheelScrollDelta;
 
             if (NoticeScrollIndex == 0 && count >= 0) return;
             if (NoticeScrollIndex == Notice.MultiText.Length - 25 && count <= 0) return;
@@ -1799,9 +1800,9 @@ namespace Client.MirScenes.Dialogs
 
             MembersPositionBar.Location = new Point(x, y);
         }
-        private void MembersPanel_MouseWheel(object sender, MouseEventArgs e)
+        private void MembersPanel_MouseWheel(object sender, MouseWheelEvent e)
         {
-            int count = e.Delta / SystemInformation.MouseWheelScrollDelta;
+            int count = e.Scrolled.Y / SystemInformation.MouseWheelScrollDelta;
 
             if (MemberScrollIndex == 0 && count >= 0) return;
             if (MemberScrollIndex == MembersShowCount - MemberPageRows && count <= 0) return;
@@ -2066,9 +2067,9 @@ namespace Client.MirScenes.Dialogs
             StoragePositionBar.Location = new Point(x, y);
         }
 
-        private void StoragePanel_MouseWheel(object sender, MouseEventArgs e)
+        private void StoragePanel_MouseWheel(object sender, MouseWheelEvent e)
         {
-            int count = e.Delta / SystemInformation.MouseWheelScrollDelta;
+            int count = e.Scrolled.Y / SystemInformation.MouseWheelScrollDelta;
 
             if (StorageIndex == 0 && count >= 0) return;
             if (StorageIndex == 6 && count <= 0) return;

@@ -14,6 +14,7 @@ using Client.MirGraphics;
 using Client.MirNetwork;
 using Client.MirScenes;
 using Font = System.Drawing.Font;
+using SDL;
 
 namespace Client
 {
@@ -53,15 +54,15 @@ namespace Client
             Application.Idle += Application_Idle;
 
             MouseClick += CMain_MouseClick;
-            MouseDown += CMain_MouseDown;
-            MouseUp += CMain_MouseUp;
+            Event.OnMouseButtonDown += CMain_MouseDown;
+            Event.OnMouseButtonUp += CMain_MouseUp;
             MouseMove += CMain_MouseMove;
             MouseDoubleClick += CMain_MouseDoubleClick;
             KeyPress += CMain_KeyPress;
             KeyDown += CMain_KeyDown;
             KeyUp += CMain_KeyUp;
             Deactivate += CMain_Deactivate;
-            MouseWheel += CMain_MouseWheel;
+            Event.OnMouseWheel += CMain_MouseWheel;
 
 
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.Selectable, true);
@@ -92,6 +93,7 @@ namespace Client
                 while (AppStillIdle)
                 {
                     UpdateTime();
+                    Event.Poll();
                     UpdateEnviroment();
                     RenderEnvironment();
                 }
@@ -105,7 +107,7 @@ namespace Client
 
         private static void CMain_Deactivate(object sender, EventArgs e)
         {
-            MapControl.MapButtons = MouseButtons.None;
+            MapControl.MapButtons = MouseButton.None;
             Shift = false;
             Alt = false;
             Ctrl = false;
@@ -223,10 +225,10 @@ namespace Client
                 SaveError(ex.ToString());
             }
         }
-        public static void CMain_MouseUp(object sender, MouseEventArgs e)
+        public static void CMain_MouseUp(MouseButtonEvent e)
         {
             MapControl.MapButtons &= ~e.Button;
-            if (!MapControl.MapButtons.HasFlag(MouseButtons.Right))
+            if (!MapControl.MapButtons.HasFlag(MouseButton.Right))
                 GameScene.CanRun = false;
 
             try
@@ -239,7 +241,7 @@ namespace Client
                 SaveError(ex.ToString());
             }
         }
-        public static void CMain_MouseDown(object sender, MouseEventArgs e)
+        public static void CMain_MouseDown(MouseButtonEvent e)
         {
             if (Program.Form.ActiveControl is TextBox)
             {
@@ -249,7 +251,7 @@ namespace Client
                     Program.Form.ActiveControl = null;
             }
 
-            if (e.Button == MouseButtons.Right && (GameScene.SelectedCell != null || GameScene.PickedUpGold))
+            if (e.Button == MouseButton.Right && (GameScene.SelectedCell != null || GameScene.PickedUpGold))
             {
                 GameScene.SelectedCell = null;
                 GameScene.PickedUpGold = false;
@@ -278,7 +280,7 @@ namespace Client
                 SaveError(ex.ToString());
             }
         }
-        public static void CMain_MouseWheel(object sender, MouseEventArgs e)
+        public static void CMain_MouseWheel(MouseWheelEvent e)
         {
             try
             {
