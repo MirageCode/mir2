@@ -173,11 +173,7 @@ namespace Server.MirEnvir
 
             var path = Path.Combine(Settings.EnvirPath,  "DisabledChars.txt");
             DisabledCharNames.Clear();
-            if (!File.Exists(path))
-            {
-                File.WriteAllText(path,"");
-            }
-            else
+            if (File.Exists(path))
             {
                 var lines = File.ReadAllLines(path);
 
