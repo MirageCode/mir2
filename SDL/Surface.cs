@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using Rectangle = System.Drawing.Rectangle;
 
 namespace SDL
 {
@@ -28,6 +29,58 @@ namespace SDL
 
         protected override void Free(IntPtr handle) => SDL_FreeSurface(handle);
 
+        public Rectangle Clip
+        {
+            get
+            {
+                Rect rect;
+                SDL_GetClipRect(handle, out rect);
+                return new Rectangle(rect.X, rect.Y, rect.Width, rect.Height);
+            }
+
+            set
+            {
+                if (value == Rectangle.Empty)
+                {
+                    SDL_SetClipRect(handle, IntPtr.Zero);
+                }
+                else
+                {
+                    Rect rect = new Rect(value);
+                    SDL_SetClipRect(handle, ref rect);
+                }
+            }
+        }
+
+        public void BlitFrom(
+            Surface src, Rectangle srcRectangle, Rectangle dstRectangle)
+        {
+            if (srcRectangle == Rectangle.Empty && dstRectangle == Rectangle.Empty)
+            {
+                EnsureSafe(SDL_BlitSurface(
+                    src.handle, IntPtr.Zero, handle, IntPtr.Zero));
+            }
+            else if (srcRectangle == Rectangle.Empty)
+            {
+                Rect dstrect = new Rect(dstRectangle);
+                EnsureSafe(SDL_BlitSurface(
+                    src.handle, IntPtr.Zero, handle, ref dstrect));
+            }
+            else if (dstRectangle == Rectangle.Empty)
+            {
+                Rect srcrect = new Rect(srcRectangle);
+                EnsureSafe(SDL_BlitSurface(
+                    src.handle, ref srcrect, handle, IntPtr.Zero));
+            }
+            else
+            {
+                Rect srcrect = new Rect(srcRectangle);
+                Rect dstrect = new Rect(dstRectangle);
+                EnsureSafe(SDL_BlitSurface(
+                    src.handle, ref srcrect, handle, ref dstrect));
+            }
+        }
+
 		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr SDL_CreateRGBSurface(
 			uint flags, int width, int height, int depth,
@@ -40,5 +93,37 @@ namespace SDL
 
 		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr SDL_FreeSurface(IntPtr surface);
+
+		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void SDL_GetClipRect(
+			IntPtr surface, out Rect rect);
+
+		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+		private static extern Bool SDL_SetClipRect(
+			IntPtr surface, ref Rect rect);
+
+		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+		private static extern Bool SDL_SetClipRect(
+			IntPtr surface, IntPtr rect);
+
+		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl,
+            EntryPoint = "SDL_UpperBlit")]
+		private static extern int SDL_BlitSurface(
+			IntPtr src, ref Rect srcrect, IntPtr dst, ref Rect dstrect);
+
+		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl,
+            EntryPoint = "SDL_UpperBlit")]
+		private static extern int SDL_BlitSurface(
+			IntPtr src, IntPtr srcrect, IntPtr dst, ref Rect dstrect);
+
+		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl,
+            EntryPoint = "SDL_UpperBlit")]
+		private static extern int SDL_BlitSurface(
+			IntPtr src, ref Rect srcrect, IntPtr dst, IntPtr dstrect);
+
+		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl,
+            EntryPoint = "SDL_UpperBlit")]
+		private static extern int SDL_BlitSurface(
+			IntPtr src, IntPtr srcrect, IntPtr dst, IntPtr dstrect);
     }
 }
