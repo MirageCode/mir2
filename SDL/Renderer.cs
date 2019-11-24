@@ -160,6 +160,14 @@ namespace SDL
             set => EnsureSafe(SDL_SetRenderTarget(handle, value.handle));
         }
 
+        public void WithRenderTarget(Texture texture, Action action)
+        {
+            var oldTarget = RenderTarget;
+            RenderTarget = texture;
+            action();
+            RenderTarget = oldTarget;
+        }
+
 		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr SDL_CreateRenderer(
 			IntPtr window, int index, RendererFlags flags);
