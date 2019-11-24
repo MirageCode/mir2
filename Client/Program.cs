@@ -45,15 +45,11 @@ namespace Client
 
                 // if (Settings.P_Patcher) Application.Run(PForm = new Launcher.AMain());
                 // else
-                Application.Run(Form = new CMain());
+                Form = new CMain();
+                Form.Run();
 
                 Settings.Save();
                 CMain.InputKeys.Save();
-
-                if (Restart)
-                {
-                    Application.Restart();
-                }
             }
             catch (Exception ex)
             {

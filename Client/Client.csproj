@@ -122,12 +122,7 @@
     <Compile Include="AMain.Designer.cs">
       <DependentUpon>AMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="CMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CMain.Designer.cs">
-      <DependentUpon>CMain.cs</DependentUpon>
-    </Compile>
+    <Compile Include="CMain.cs" />
     <Compile Include="Config.cs">
       <SubType>Form</SubType>
     </Compile>

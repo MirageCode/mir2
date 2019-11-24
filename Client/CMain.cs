@@ -43,15 +43,11 @@ namespace Client
         {
             SDLManager.Create();
 
-            InitializeComponent();
-
             LoginScene LoginScene = new LoginScene();
             MirScene.ActiveScene = LoginScene;
 
             LoginScene.OnCancel += (o, e) => Close();
             LoginScene.OnClose += (o, e) => Close();
-
-            Application.Idle += Application_Idle;
 
             MouseClick += CMain_MouseClick;
             Event.OnMouseButtonDown += CMain_MouseDown;
@@ -86,11 +82,14 @@ namespace Client
         }
 
 
-        private static void Application_Idle(object sender, EventArgs e)
+        public void Run()
         {
             try
             {
-                while (AppStillIdle)
+                var done = false;
+                Event.OnQuit += e => { done = true; };
+
+                while (!done)
                 {
                     UpdateTime();
                     Event.Poll();
