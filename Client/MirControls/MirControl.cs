@@ -21,6 +21,19 @@ namespace Client.MirControls
         public float BlendingRate { get; set; }
         public BlendMode BlendMode { get; set; }
 
+        public virtual bool Focused
+        {
+            get => ActiveControl == this;
+            set
+            {
+                if (value && !Focused)
+                {
+                    if (ActiveControl != null) ActiveControl.Focused = false;
+                    ActiveControl = this;
+                }
+            }
+        }
+
         #region Back Colour
         private Color _backColour;
         public Color BackColour

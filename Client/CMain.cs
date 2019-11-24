@@ -243,12 +243,12 @@ namespace Client
         }
         public static void CMain_MouseDown(MouseButtonEvent e)
         {
-            if (Program.Form.ActiveControl is TextBox)
+            if (MirControl.ActiveControl is MirTextBox)
             {
-                MirTextBox textBox = Program.Form.ActiveControl.Tag as MirTextBox;
+                MirTextBox textBox = (MirTextBox) MirControl.ActiveControl;
 
                 if (textBox != null && textBox.CanLoseFocus)
-                    Program.Form.ActiveControl = null;
+                    textBox.Focused = false;
             }
 
             if (e.Button == MouseButton.Right && (GameScene.SelectedCell != null || GameScene.PickedUpGold))

@@ -188,10 +188,11 @@ namespace Client.MirScenes.Dialogs
                 MaxLength = 23,
                 CanLoseFocus = true,
             };
-            Search.TextBox.KeyUp += (o, e) =>
-            {
-                GetCategories();
-            };
+            // FIXME: TextBox
+            // Search.TextBox.KeyUp += (o, e) =>
+            // {
+            //     GetCategories();
+            // };
 
             allItems = new MirButton
             {

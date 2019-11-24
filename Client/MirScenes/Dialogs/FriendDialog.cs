@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using C = ClientPackets;
+using Font = SDL.Font;
 
 namespace Client.MirScenes.Dialogs
 {
@@ -254,8 +255,9 @@ namespace Client.MirScenes.Dialogs
                 GameScene.Scene.ChatDialog.ChatTextBox.SetFocus();
                 GameScene.Scene.ChatDialog.ChatTextBox.Text = "/" + SelectedFriend.Name + " ";
                 GameScene.Scene.ChatDialog.ChatTextBox.Visible = true;
-                GameScene.Scene.ChatDialog.ChatTextBox.TextBox.SelectionLength = 0;
-                GameScene.Scene.ChatDialog.ChatTextBox.TextBox.SelectionStart = GameScene.Scene.ChatDialog.ChatTextBox.Text.Length;
+                // FIXME: TextBox
+                // GameScene.Scene.ChatDialog.ChatTextBox.TextBox.SelectionLength = 0;
+                // GameScene.Scene.ChatDialog.ChatTextBox.TextBox.SelectionStart = GameScene.Scene.ChatDialog.ChatTextBox.Text.Length;
             };
             #endregion
         }
@@ -504,7 +506,7 @@ namespace Client.MirScenes.Dialogs
             {
                 ForeColour = Color.White,
                 Parent = this,
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
                 Location = new Point(15, 30),
                 Size = new Size(165, 100),
             };
@@ -574,8 +576,9 @@ namespace Client.MirScenes.Dialogs
 
             MemoTextBox.Text = Friend.Memo;
             MemoTextBox.SetFocus();
-            MemoTextBox.TextBox.SelectionLength = 0;
-            MemoTextBox.TextBox.SelectionStart = MemoTextBox.Text.Length;
+            // FIXME: TextBox
+            // MemoTextBox.TextBox.SelectionLength = 0;
+            // MemoTextBox.TextBox.SelectionStart = MemoTextBox.Text.Length;
         }
     }
 }

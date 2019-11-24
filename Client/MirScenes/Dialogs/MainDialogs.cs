@@ -583,9 +583,10 @@ namespace Client.MirScenes.Dialogs
                 // FIXME:
                 // Font = ChatFont,
             };
-            ChatTextBox.TextBox.KeyPress += ChatTextBox_KeyPress;
-            ChatTextBox.TextBox.KeyDown += ChatTextBox_KeyDown;
-            ChatTextBox.TextBox.KeyUp += ChatTextBox_KeyUp;
+            // FIXME: TextBox
+            // ChatTextBox.TextBox.KeyPress += ChatTextBox_KeyPress;
+            // ChatTextBox.TextBox.KeyDown += ChatTextBox_KeyDown;
+            // ChatTextBox.TextBox.KeyUp += ChatTextBox_KeyUp;
 
             HomeButton = new MirButton
             {
@@ -922,8 +923,9 @@ namespace Client.MirScenes.Dialogs
                     ChatTextBox.SetFocus();
                     ChatTextBox.Text = string.Format("/{0} ", name);
                     ChatTextBox.Visible = true;
-                    ChatTextBox.TextBox.SelectionLength = 0;
-                    ChatTextBox.TextBox.SelectionStart = ChatTextBox.Text.Length;
+                    // FIXME: TextBox
+                    // ChatTextBox.TextBox.SelectionLength = 0;
+                    // ChatTextBox.TextBox.SelectionStart = ChatTextBox.Text.Length;
                 };
 
 
@@ -981,16 +983,18 @@ namespace Client.MirScenes.Dialogs
                     if (ChatPrefix != "") ChatTextBox.Text = ChatPrefix;
 
                     ChatTextBox.Visible = true;
-                    ChatTextBox.TextBox.SelectionLength = 0;
-                    ChatTextBox.TextBox.SelectionStart = ChatTextBox.Text.Length;
+                    // FIXME: TextBox
+                    // ChatTextBox.TextBox.SelectionLength = 0;
+                    // ChatTextBox.TextBox.SelectionStart = ChatTextBox.Text.Length;
                     e.Handled = true;
                     break;
                 case '/':
                     ChatTextBox.SetFocus();
                     ChatTextBox.Text = LastPM + " ";
                     ChatTextBox.Visible = true;
-                    ChatTextBox.TextBox.SelectionLength = 0;
-                    ChatTextBox.TextBox.SelectionStart = ChatTextBox.Text.Length;
+                    // FIXME: TextBox
+                    // ChatTextBox.TextBox.SelectionLength = 0;
+                    // ChatTextBox.TextBox.SelectionStart = ChatTextBox.Text.Length;
                     e.Handled = true;
                     break;
             }
@@ -3442,8 +3446,9 @@ namespace Client.MirScenes.Dialogs
                 GameScene.Scene.ChatDialog.ChatTextBox.SetFocus();
                 GameScene.Scene.ChatDialog.ChatTextBox.Text = string.Format("/{0} ", Name);
                 GameScene.Scene.ChatDialog.ChatTextBox.Visible = true;
-                GameScene.Scene.ChatDialog.ChatTextBox.TextBox.SelectionLength = 0;
-                GameScene.Scene.ChatDialog.ChatTextBox.TextBox.SelectionStart = Name.Length + 2;
+                // FIXME: TextBox
+                // GameScene.Scene.ChatDialog.ChatTextBox.TextBox.SelectionLength = 0;
+                // GameScene.Scene.ChatDialog.ChatTextBox.TextBox.SelectionStart = Name.Length + 2;
 
             };
             LoverButton = new MirButton

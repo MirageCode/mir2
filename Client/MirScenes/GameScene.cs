@@ -4620,12 +4620,13 @@ namespace Client.MirScenes
         private void GuildNameRequest(S.GuildNameRequest p)
         {
             MirInputBox inputBox = new MirInputBox("Please enter a guild name, length must be 3~20 characters.");
-            inputBox.InputTextBox.TextBox.KeyPress += (o, e) =>
-            {
-                string Allowed = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                if (!Allowed.Contains(e.KeyChar) && e.KeyChar != (char)Keys.Back)
-                    e.Handled = true;
-            };
+            // FIXME: TextBox
+            // inputBox.InputTextBox.TextBox.KeyPress += (o, e) =>
+            // {
+            //     string Allowed = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            //     if (!Allowed.Contains(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            //         e.Handled = true;
+            // };
             inputBox.OKButton.Click += (o, e) =>
             {
                 if (inputBox.InputTextBox.Text.Contains('\\'))

@@ -89,11 +89,12 @@ namespace Client.MirControls
                 Size = new Size(132, 19),
             };
             InputTextBox.SetFocus();
-            InputTextBox.TextBox.KeyPress += MirInputBox_KeyPress;
-            InputTextBox.TextBox.TextChanged += TextBox_TextChanged;
+            // FIXME: TextBox
+            // InputTextBox.TextBox.KeyPress += MirInputBox_KeyPress;
+            // InputTextBox.TextBox.TextChanged += TextBox_TextChanged;
             InputTextBox.Text = (defaultAmount > 0 && defaultAmount <= MaxAmount) ? defaultAmount.ToString() : MaxAmount.ToString();
-            InputTextBox.TextBox.SelectionStart = 0;
-            InputTextBox.TextBox.SelectionLength = InputTextBox.Text.Length;
+            // InputTextBox.TextBox.SelectionStart = 0;
+            // InputTextBox.TextBox.SelectionLength = InputTextBox.Text.Length;
 
         }
         public MirAmountBox(string title, int image, string message)
@@ -183,7 +184,8 @@ namespace Client.MirControls
                 {
                     Amount = MaxAmount;
                     InputTextBox.Text = MaxAmount.ToString();
-                    InputTextBox.TextBox.SelectionStart = InputTextBox.Text.Length;
+                    // FIXME: TextBox
+                    // InputTextBox.TextBox.SelectionStart = InputTextBox.Text.Length;
                 }
 
                 if (Amount == MaxAmount)

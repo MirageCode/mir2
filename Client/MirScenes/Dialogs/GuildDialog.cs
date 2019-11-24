@@ -819,7 +819,8 @@ namespace Client.MirScenes.Dialogs
                 BorderColour = Color.FromArgb(255, 35, 35, 35),
             };
             RanksName.BeforeDraw += (o, e) => RanksName_BeforeDraw();
-            RanksName.TextBox.KeyPress += RanksName_KeyPress;
+            // FIXME: TextBox
+            // RanksName.TextBox.KeyPress += RanksName_KeyPress;
             RanksSaveName = new MirButton()
             {
                 Location = new Point(155, 290),
@@ -1452,9 +1453,10 @@ namespace Client.MirScenes.Dialogs
             if (NoticeScrollerIndex < 0) NoticeScrollerIndex = 0;
             if (Notice.MultiText.Length != 0)
             {
-                Notice.TextBox.SelectionLength = 1;
-                Notice.TextBox.SelectionStart = Notice.TextBox.GetFirstCharIndexFromLine(NoticeScrollerIndex);
-                Notice.TextBox.ScrollToCaret();
+                // FIXME: TextBox
+                // Notice.TextBox.SelectionLength = 1;
+                // Notice.TextBox.SelectionStart = Notice.TextBox.GetFirstCharIndexFromLine(NoticeScrollerIndex);
+                // Notice.TextBox.ScrollToCaret();
             }
         }
 

@@ -41,7 +41,8 @@ namespace Client.MirControls
                 MaxLength = 50,
             };
             InputTextBox.SetFocus();
-            InputTextBox.TextBox.KeyPress += MirInputBox_KeyPress;
+            // FIXME: TextBox
+            // InputTextBox.TextBox.KeyPress += MirInputBox_KeyPress;
 
             OKButton = new MirButton
             {

@@ -58,9 +58,10 @@ namespace Client.MirScenes.Dialogs
                 MaxLength = 20,
                 CanLoseFocus = true
             };
-            SearchTextBox.TextBox.KeyPress += SearchTextBox_KeyPress;
-            SearchTextBox.TextBox.KeyUp += SearchTextBox_KeyUp;
-            SearchTextBox.TextBox.KeyDown += SearchTextBox_KeyDown;
+            // FIXME: TextBox
+            // SearchTextBox.TextBox.KeyPress += SearchTextBox_KeyPress;
+            // SearchTextBox.TextBox.KeyUp += SearchTextBox_KeyUp;
+            // SearchTextBox.TextBox.KeyDown += SearchTextBox_KeyDown;
 
             FindButton = new MirButton
             {

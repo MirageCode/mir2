@@ -2,6 +2,8 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using TextBox = SDL.TextBox;
+using Font = SDL.Font;
 
 namespace Client.MirControls
 {
@@ -12,7 +14,7 @@ namespace Client.MirControls
         protected override void OnBackColourChanged()
         {
             base.OnBackColourChanged();
-            if (TextBox != null && !TextBox.IsDisposed)
+            if (TextBox != null && !TextBox.Disposed)
                 TextBox.BackColor = BackColour;
         }
 
@@ -23,8 +25,9 @@ namespace Client.MirControls
         protected override void OnEnabledChanged()
         {
             base.OnEnabledChanged();
-            if (TextBox != null && !TextBox.IsDisposed)
-                TextBox.Enabled = Enabled;
+            // TODO: TextBox Enabled
+            // if (TextBox != null && !TextBox.Disposed)
+            //     TextBox.Enabled = Enabled;
         }
 
         #endregion
@@ -34,7 +37,7 @@ namespace Client.MirControls
         protected override void OnForeColourChanged()
         {
             base.OnForeColourChanged();
-            if (TextBox != null && !TextBox.IsDisposed)
+            if (TextBox != null && !TextBox.Disposed)
                 TextBox.ForeColor = ForeColour;
         }
 
@@ -45,8 +48,7 @@ namespace Client.MirControls
         protected override void OnLocationChanged()
         {
             base.OnLocationChanged();
-            if (TextBox != null && !TextBox.IsDisposed)
-                TextBox.Location = DisplayLocation;
+            // TODO TextBox Location
         }
 
         #endregion
@@ -57,13 +59,13 @@ namespace Client.MirControls
         {
             get
             {
-                if (TextBox != null && !TextBox.IsDisposed)
+                if (TextBox != null && !TextBox.Disposed)
                     return TextBox.MaxLength;
                 return -1;
             }
             set
             {
-                if (TextBox != null && !TextBox.IsDisposed)
+                if (TextBox != null && !TextBox.Disposed)
                     TextBox.MaxLength = value;
             }
         }
@@ -75,7 +77,7 @@ namespace Client.MirControls
         protected override void OnParentChanged()
         {
             base.OnParentChanged();
-            if (TextBox != null && !TextBox.IsDisposed)
+            if (TextBox != null && !TextBox.Disposed)
                 OnVisibleChanged();
         }
 
@@ -87,14 +89,36 @@ namespace Client.MirControls
         {
             get
             {
-                if (TextBox != null && !TextBox.IsDisposed)
-                    return TextBox.UseSystemPasswordChar;
+                if (TextBox != null && !TextBox.Disposed)
+                    return TextBox.UsePasswordChar;
                 return false;
             }
             set
             {
-                if (TextBox != null && !TextBox.IsDisposed)
-                    TextBox.UseSystemPasswordChar = value;
+                if (TextBox != null && !TextBox.Disposed)
+                    TextBox.UsePasswordChar = value;
+            }
+        }
+
+        #endregion
+
+        #region Focused
+
+        public override bool Focused
+        {
+            get => ActiveControl == this &&
+                TextBox != null && !TextBox.Disposed && TextBox.Focused;
+            set
+            {
+                if (TextBox != null && !TextBox.Disposed)
+                {
+                    TextBox.Focused = value;
+                    if (value) {
+                        if (ActiveControl != null)
+                            ActiveControl.Focused = false;
+                        ActiveControl = this;
+                    }
+                }
             }
         }
 
@@ -106,13 +130,13 @@ namespace Client.MirControls
         {
             get
             {
-                if (TextBox != null && !TextBox.IsDisposed)
+                if (TextBox != null && !TextBox.Disposed)
                     return TextBox.Font;
                 return null;
             }
             set
             {
-                if (TextBox != null && !TextBox.IsDisposed)
+                if (TextBox != null && !TextBox.Disposed)
                     TextBox.Font = value;
             }
         }
@@ -123,35 +147,38 @@ namespace Client.MirControls
 
         protected override void OnSizeChanged()
         {
-            TextBox.Size = Size;
-            _size = TextBox.Size;
+            // TODO: TextBox Size
 
-            if (TextBox != null && !TextBox.IsDisposed)
+            // TextBox.Size = Size;
+            // _size = TextBox.Size;
+
+            if (TextBox != null && !TextBox.Disposed)
                 base.OnSizeChanged();
         }
 
         #endregion
-        
+
         #region TextBox
 
+        public bool CanFocus = true;
         public bool CanLoseFocus;
         public readonly TextBox TextBox;
 
         #endregion
-         
+
         #region Label
 
         public string Text
         {
             get
             {
-                if (TextBox != null && !TextBox.IsDisposed)
+                if (TextBox != null && !TextBox.Disposed)
                     return TextBox.Text;
                 return null;
             }
             set
             {
-                if (TextBox != null && !TextBox.IsDisposed)
+                if (TextBox != null && !TextBox.Disposed)
                     TextBox.Text = value;
             }
         }
@@ -159,13 +186,13 @@ namespace Client.MirControls
         {
             get
             {
-                if (TextBox != null && !TextBox.IsDisposed)
+                if (TextBox != null && !TextBox.Disposed)
                     return TextBox.Lines;
                 return null;
             }
             set
             {
-                if (TextBox != null && !TextBox.IsDisposed)
+                if (TextBox != null && !TextBox.Disposed)
                     TextBox.Lines = value;
             }
         }
@@ -190,34 +217,17 @@ namespace Client.MirControls
         protected override void OnVisibleChanged()
         {
             base.OnVisibleChanged();
-
-            if (TextBox != null && !TextBox.IsDisposed)
-                TextBox.Visible = Visible;
         }
         private void TextBox_VisibleChanged(object sender, EventArgs e)
         {
             DialogChanged();
 
-            if (TextBox.Visible && TextBox.CanFocus)
-                if (Program.Form.ActiveControl == null || Program.Form.ActiveControl == Program.Form)
-                    Program.Form.ActiveControl = TextBox;
-
-            // if (!TextBox.Visible)
-            //     if (Program.Form.ActiveControl == TextBox)
-            //         Program.Form.Focus();
+            if (Visible && CanFocus && ActiveControl == null)
+                ActiveControl = this;
         }
         private void SetFocus(object sender, EventArgs e)
         {
-            if (TextBox.Visible)
-                TextBox.VisibleChanged -= SetFocus;
-            if (TextBox.Parent != null)
-                TextBox.ParentChanged -= SetFocus;
-
-            if (TextBox.CanFocus) TextBox.Focus();
-            else if (TextBox.Visible && TextBox.Parent != null)
-                Program.Form.ActiveControl = TextBox;
-
-
+            if (Visible) ActiveControl = this;
         }
 
         #endregion
@@ -227,7 +237,6 @@ namespace Client.MirControls
         public override void MultiLine()
         {
             TextBox.Multiline = true;
-            
         }
 
         #endregion
@@ -236,25 +245,22 @@ namespace Client.MirControls
         {
             BackColour = Color.Black;
 
-            TextBox = new TextBox
+            TextBox = new TextBox(new Font(Settings.FontName, 10), Size)
             {
                 BackColor = BackColour,
-                BorderStyle = BorderStyle.None,
-                Font = new Font(Settings.FontName, 10F),
                 ForeColor = ForeColour,
-                Location = DisplayLocation,
-                Size = Size,
-                Visible = Visible,
-                Tag = this,
+                // TODO: TextBox Location
+                // Location = DisplayLocation,
             };
+            // TODO: Events
 
-            TextBox.VisibleChanged += TextBox_VisibleChanged;
-            TextBox.ParentChanged += TextBox_VisibleChanged;
-            TextBox.KeyUp += TextBoxOnKeyUp;  
-            TextBox.KeyPress += TextBox_KeyPress;
+            // TextBox.VisibleChanged += TextBox_VisibleChanged;
+            // TextBox.ParentChanged += TextBox_VisibleChanged;
+            // TextBox.KeyUp += TextBoxOnKeyUp;
+            // TextBox.KeyPress += TextBox_KeyPress;
 
-            Shown += MirTextBox_Shown;
-            TextBox.MouseMove += CMain.CMain_MouseMove;
+            // Shown += MirTextBox_Shown;
+            // TextBox.MouseMove += CMain.CMain_MouseMove;
         }
 
         private void TextBoxOnKeyUp(object sender, KeyEventArgs e)
@@ -274,7 +280,7 @@ namespace Client.MirControls
 
             if (e.KeyChar == (char)Keys.Escape)
             {
-                Program.Form.ActiveControl = null;
+                ActiveControl = null;
                 e.Handled = true;
             }
         }
@@ -282,22 +288,13 @@ namespace Client.MirControls
 
         void MirTextBox_Shown(object sender, EventArgs e)
         {
-            TextBox.Parent = Program.Form;
             CMain.Ctrl = false;
             CMain.Shift = false;
             CMain.Alt = false;
             CMain.Tilde = false;
         }
 
-        public void SetFocus()
-        {
-            if (!TextBox.Visible)
-                TextBox.VisibleChanged += SetFocus;
-            else if (TextBox.Parent == null)
-                TextBox.ParentChanged += SetFocus;
-            else
-                TextBox.Focus();
-        }
+        public void SetFocus() => Focused = true;
 
         public void DialogChanged()
         {
@@ -314,9 +311,9 @@ namespace Client.MirControls
 
 
             if ((box1 != null && box1 != Parent) || (box2 != null && box2 != Parent)  || (box3 != null && box3 != Parent))
-                TextBox.Visible = false;
+                Visible = false;
             else
-                TextBox.Visible = Visible && TextBox.Parent != null;
+                Visible = Parent != null;
         }
 
 
@@ -327,9 +324,6 @@ namespace Client.MirControls
             base.Dispose(disposing);
 
             if (!disposing) return;
-
-            if (!TextBox.IsDisposed)
-                TextBox.Dispose();
         }
 
 

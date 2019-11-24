@@ -161,8 +161,9 @@ namespace Client.MirScenes.Dialogs
                 GameScene.Scene.ChatDialog.ChatTextBox.SetFocus();
                 GameScene.Scene.ChatDialog.ChatTextBox.Text = ":)";
                 GameScene.Scene.ChatDialog.ChatTextBox.Visible = true;
-                GameScene.Scene.ChatDialog.ChatTextBox.TextBox.SelectionLength = 0;
-                GameScene.Scene.ChatDialog.ChatTextBox.TextBox.SelectionStart = GameScene.Scene.ChatDialog.ChatTextBox.Text.Length;
+                // FIXME: TextBox
+                // GameScene.Scene.ChatDialog.ChatTextBox.TextBox.SelectionLength = 0;
+                // GameScene.Scene.ChatDialog.ChatTextBox.TextBox.SelectionStart = GameScene.Scene.ChatDialog.ChatTextBox.Text.Length;
             };
 
             LoverNameLabel = new MirLabel

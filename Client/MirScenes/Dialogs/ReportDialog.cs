@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using C = ClientPackets;
+using Font = SDL.Font;
 
 namespace Client.MirScenes.Dialogs
 {
@@ -57,7 +58,7 @@ namespace Client.MirScenes.Dialogs
                 Parent = this,
                 Location = new Point(12, 57),
                 Size = new Size(330, 150),
-                Font = new Font(Settings.FontName, 8F),
+                Font = new Font(Settings.FontName, 8),
             };
 
             MessageArea.MultiLine();
