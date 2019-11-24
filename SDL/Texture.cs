@@ -76,9 +76,10 @@ namespace SDL
                 return Math.Max(Math.Min(alpha / 256, 1.0F), 0F);
             }
 
+            // FIXME: Opacity to Alpha
             set {
-                byte alpha = (byte) Math.Floor(value * 256);
-                Alpha = Math.Max(Math.Min(alpha, (byte) 255), (byte) 0);
+                // byte alpha = (byte) Math.Floor(value * 256);
+                // Alpha = Math.Max(Math.Min(alpha, (byte) 255), (byte) 0);
             }
         }
 
