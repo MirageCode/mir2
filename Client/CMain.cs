@@ -22,7 +22,7 @@ namespace Client
     {
         public static MirControl DebugBaseLabel, HintBaseLabel;
         public static MirLabel DebugTextLabel, HintTextLabel, ScreenshotTextLabel;
-        public static Point MPoint;
+        public static Point MPoint { get => SDLContext.MousePoint; }
 
         public readonly static Stopwatch Timer = Stopwatch.StartNew();
         public readonly static DateTime StartTime = DateTime.Now;
@@ -49,11 +49,10 @@ namespace Client
             LoginScene.OnCancel += (o, e) => Close();
             LoginScene.OnClose += (o, e) => Close();
 
-            MouseClick += CMain_MouseClick;
+            Event.OnMouseButtonUp += CMain_MouseClick;
             Event.OnMouseButtonDown += CMain_MouseDown;
             Event.OnMouseButtonUp += CMain_MouseUp;
             MouseMove += CMain_MouseMove;
-            MouseDoubleClick += CMain_MouseDoubleClick;
             KeyPress += CMain_KeyPress;
             KeyDown += CMain_KeyDown;
             KeyUp += CMain_KeyUp;
@@ -152,8 +151,6 @@ namespace Client
             if (Settings.FullScreen)
                 Cursor.Clip = new Rectangle(0, 0, Settings.ScreenWidth, Settings.ScreenHeight);
 
-            MPoint = Program.Form.PointToClient(Cursor.Position);
-
             try
             {
                 if (MirScene.ActiveScene != null)
@@ -212,18 +209,6 @@ namespace Client
                 SaveError(ex.ToString());
             }
         }
-        public static void CMain_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                if (MirScene.ActiveScene != null)
-                    MirScene.ActiveScene.OnMouseClick(e);
-            }
-            catch (Exception ex)
-            {
-                SaveError(ex.ToString());
-            }
-        }
         public static void CMain_MouseUp(MouseButtonEvent e)
         {
             MapControl.MapButtons &= ~e.Button;
@@ -267,7 +252,7 @@ namespace Client
                 SaveError(ex.ToString());
             }
         }
-        public static void CMain_MouseClick(object sender, MouseEventArgs e)
+        public static void CMain_MouseClick(MouseButtonEvent e)
         {
             try
             {

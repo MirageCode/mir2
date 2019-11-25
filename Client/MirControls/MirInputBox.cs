@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Client.MirGraphics;
+using SDL;
 
 namespace Client.MirControls
 {
@@ -71,17 +72,17 @@ namespace Client.MirControls
             if (e.KeyChar == (char)Keys.Enter)
             {
                 if (OKButton != null && !OKButton.IsDisposed)
-                    OKButton.InvokeMouseClick(EventArgs.Empty);
+                    OKButton.InvokeMouseClick(null);
                 e.Handled = true;
             }
             else if (e.KeyChar == (char)Keys.Escape)
             {
                 if (CancelButton != null && !CancelButton.IsDisposed)
-                    CancelButton.InvokeMouseClick(EventArgs.Empty);
+                    CancelButton.InvokeMouseClick(null);
                 e.Handled = true;
             }
         }
-        void DisposeDialog(object sender, EventArgs e)
+        void DisposeDialog(object sender, MouseButtonEvent e)
         {
             Dispose();
         }
@@ -103,12 +104,12 @@ namespace Client.MirControls
             if (e.KeyChar == (char)Keys.Escape)
             {
                 if (CancelButton != null && !CancelButton.IsDisposed)
-                    CancelButton.InvokeMouseClick(EventArgs.Empty);
+                    CancelButton.InvokeMouseClick(null);
             }
             else if (e.KeyChar == (char)Keys.Enter)
             {
                 if (OKButton != null && !OKButton.IsDisposed)
-                    OKButton.InvokeMouseClick(EventArgs.Empty);
+                    OKButton.InvokeMouseClick(null);
 
             }
             e.Handled = true;
@@ -122,11 +123,10 @@ namespace Client.MirControls
 
             Highlight();
 
-            for (int i = 0; i < Program.Form.Controls.Count; i++)
+            for (int i = 0; i < Controls.Count; i++)
             {
-                TextBox T = Program.Form.Controls[i] as TextBox;
-                if (T != null && T.Tag != null && T.Tag != null)
-                    ((MirTextBox)T.Tag).DialogChanged();
+                MirTextBox T = Controls[i] as MirTextBox;
+                if (T != null) T.DialogChanged();
             }
         }
 
@@ -139,11 +139,10 @@ namespace Client.MirControls
 
             if (!disposing) return;
 
-            for (int i = 0; i < Program.Form.Controls.Count; i++)
+            for (int i = 0; i < Controls.Count; i++)
             {
-                TextBox T = (TextBox)Program.Form.Controls[i];
-                if (T != null && T.Tag != null && T.Tag != null)
-                    ((MirTextBox)T.Tag).DialogChanged();
+                MirTextBox T = Controls[i] as MirTextBox;
+                if (T != null) T.DialogChanged();
             }
         }
 

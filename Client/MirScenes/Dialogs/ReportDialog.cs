@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using C = ClientPackets;
 using Font = SDL.Font;
+using SDL;
 
 namespace Client.MirScenes.Dialogs
 {
@@ -77,7 +78,7 @@ namespace Client.MirScenes.Dialogs
 
         }
 
-        void SendButton_Click(object sender, EventArgs e)
+        void SendButton_Click(object sender, MouseButtonEvent e)
         {
             throw new NotImplementedException();
         }

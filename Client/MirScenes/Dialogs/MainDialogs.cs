@@ -1572,7 +1572,7 @@ namespace Client.MirScenes.Dialogs
 
         }
 
-        void Button_Click(object sender, EventArgs e)
+        void Button_Click(object sender, MouseButtonEvent e)
         {
             if (GameScene.User.Inventory.Length == 46 && sender == ItemButton2)
             {

@@ -9280,15 +9280,14 @@ namespace Client.MirScenes
             SDLManager.Draw2D(_lightTexture, Point.Empty, Color.White);
         }
 
-        private static void OnMouseClick(object sender, EventArgs e)
+        private static void OnMouseClick(object sender, MouseButtonEvent e)
         {
-            MouseEventArgs me = e as MouseEventArgs;
-            if (me == null) return;
+            if (e == null) return;
 
             if (AwakeningAction == true) return;
-            switch (me.Button)
+            switch (e.Button)
             {
-                case MouseButtons.Left:
+                case MouseButton.Left:
                     {
                         AutoRun = false;
                         if (MapObject.MouseObject == null) return;
@@ -9317,7 +9316,7 @@ namespace Client.MirScenes
                         }
                     }
                     break;
-                case MouseButtons.Right:
+                case MouseButton.Right:
                     {
                         AutoRun = false;
                         if (MapObject.MouseObject == null) return;
@@ -9330,7 +9329,7 @@ namespace Client.MirScenes
                         Network.Enqueue(new C.Inspect { ObjectID = player.ObjectID });
                     }
                     break;
-                case MouseButtons.Middle:
+                case MouseButton.Middle:
                     AutoRun = !AutoRun;
                     break;
             }

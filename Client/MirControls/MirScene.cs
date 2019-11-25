@@ -13,11 +13,6 @@ namespace Client.MirControls
     {
         public static MirScene ActiveScene;
 
-        private static MouseButtons _buttons;
-        private static long _lastClickTime;
-        private static MirControl _clickedControl;
-        //private bool _redraw;
-
         protected MirScene()
         {
             DrawControlTexture = true;
@@ -113,59 +108,22 @@ namespace Client.MirControls
                 base.OnMouseWheel(e);
         }
 
-        public override void OnMouseClick(MouseEventArgs e)
+        public override void OnMouseClick(MouseButtonEvent e)
         {
             if (!Enabled)
                 return;
-            if (_buttons == e.Button)
-            {
-                if (_lastClickTime + SystemInformation.DoubleClickTime >= CMain.Time)
-                {
-                    OnMouseDoubleClick(e);
-                    return;
-                }
-            }
-            else
-                _lastClickTime = 0;
 
-            if (ActiveControl != null && ActiveControl.IsMouseOver(CMain.MPoint) && ActiveControl != this)
+            if (ActiveControl != null && ActiveControl.IsMouseOver(e.Location) && ActiveControl != this)
                 ActiveControl.OnMouseClick(e);
             else
                 base.OnMouseClick(e);
-
-            _clickedControl = ActiveControl;
-
-            _lastClickTime = CMain.Time;
-            _buttons = e.Button;
-        }
-        public override void OnMouseDoubleClick(MouseEventArgs e)
-        {
-            if (!Enabled)
-                return;
-            _lastClickTime = 0;
-            _buttons = MouseButtons.None;
-
-            if (ActiveControl != null && ActiveControl.IsMouseOver(CMain.MPoint) && ActiveControl != this)
-            {
-                if (ActiveControl == _clickedControl)
-                    ActiveControl.OnMouseDoubleClick(e);
-                else
-                    ActiveControl.OnMouseClick(e);
-            }
-            else
-            {
-                if (ActiveControl == _clickedControl)
-                    base.OnMouseDoubleClick(e);
-                else
-                    base.OnMouseClick(e);
-            }
         }
 
         public override void Redraw()
         {
             TextureValid = false;
         }
-        
+
         public virtual void ProcessPacket(Packet p)
         {
             switch (p.Index)
@@ -245,10 +203,6 @@ namespace Client.MirControls
             if (!disposing) return;
 
             if (ActiveScene == this) ActiveScene = null;
-
-            _buttons = 0;
-            _lastClickTime = 0;
-            _clickedControl = null;
         }
 
         #endregion

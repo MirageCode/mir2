@@ -7,6 +7,7 @@ using Client.MirSounds;
 using System.Drawing;
 using System.Windows.Forms;
 using C = ClientPackets;
+using SDL;
 
 namespace Client.MirScenes.Dialogs
 {
@@ -107,14 +108,11 @@ namespace Client.MirScenes.Dialogs
             };
             _rentalPriceLabel.Click += (o, e) =>
             {
-                var clickEventArgs = e as MouseEventArgs;
+                if (e == null) return;
 
-                if (clickEventArgs == null)
-                    return;
-
-                switch (clickEventArgs.Button)
+                switch (e.Button)
                 {
-                    case MouseButtons.Left:
+                    case MouseButton.Left:
                         if (GameScene.SelectedCell != null || GameScene.Gold <= 0)
                             return;
 

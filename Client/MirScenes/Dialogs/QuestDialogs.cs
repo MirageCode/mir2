@@ -1874,16 +1874,14 @@ namespace Client.MirScenes.Dialogs
 
             _questLabel.Click += (o, e) =>
             {
-                MouseEventArgs me = e as MouseEventArgs;
+                if (e == null) return;
 
-                if (me == null) return;
-
-                switch (me.Button)
+                switch (e.Button)
                 {
-                    case MouseButtons.Left:
+                    case MouseButton.Left:
                         GameScene.Scene.QuestDetailDialog.DisplayQuestDetails(Quest);
                         break;
-                    case MouseButtons.Right:
+                    case MouseButton.Right:
                         {
                             if (TrackQuest)
                             {

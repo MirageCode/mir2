@@ -209,13 +209,13 @@ namespace Client.MirControls
             if (e.KeyChar == (char)Keys.Enter)
             {
                 if (OKButton != null && !OKButton.IsDisposed)
-                    OKButton.InvokeMouseClick(EventArgs.Empty);
+                    OKButton.InvokeMouseClick(null);
                 e.Handled = true;
             }
             else if (e.KeyChar == (char)Keys.Escape)
             {
                 if (CancelButton != null && !CancelButton.IsDisposed)
-                    CancelButton.InvokeMouseClick(EventArgs.Empty);
+                    CancelButton.InvokeMouseClick(null);
                 e.Handled = true;
             }
         }
@@ -278,9 +278,9 @@ namespace Client.MirControls
             base.OnKeyPress(e);
 
             if (e.KeyChar == (char)Keys.Escape)
-                CancelButton.InvokeMouseClick(EventArgs.Empty);
+                CancelButton.InvokeMouseClick(null);
             else if (e.KeyChar == (char)Keys.Enter)
-                OKButton.InvokeMouseClick(EventArgs.Empty);
+                OKButton.InvokeMouseClick(null);
             e.Handled = true;
         }
 

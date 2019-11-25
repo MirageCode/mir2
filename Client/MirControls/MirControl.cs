@@ -245,11 +245,11 @@ namespace Client.MirControls
         public delegate void MouseWheelEventHandler(
             object sender, MouseWheelEvent Event);
 
-        public event MouseButtonEventHandler MouseDown, MouseUp;
+        public event MouseButtonEventHandler MouseDown, MouseUp, Click;
         public event MouseWheelEventHandler MouseWheel;
 
         protected bool HasShown;
-        public event EventHandler Click , DoubleClick, BeforeDraw , AfterDraw , MouseEnter , MouseLeave , Shown , BeforeShown, Disposing;
+        public event EventHandler BeforeDraw , AfterDraw , MouseEnter , MouseLeave , Shown , BeforeShown, Disposing;
         public event MouseEventHandler MouseMove;
         public event KeyEventHandler KeyDown , KeyUp;
         public event KeyPressEventHandler KeyPress;
@@ -813,7 +813,7 @@ namespace Client.MirControls
             if (MouseLeave != null)
                 MouseLeave.Invoke(this, EventArgs.Empty);
         }
-        public virtual void OnMouseClick(MouseEventArgs e)
+        public virtual void OnMouseClick(MouseButtonEvent e)
         {
             if (!Enabled)
                 return;
@@ -821,31 +821,11 @@ namespace Client.MirControls
             if (Sound != SoundList.None)
                 SoundManager.PlaySound(Sound);
 
-            if (Click != null)
-                InvokeMouseClick(e);
+            InvokeMouseClick(e);
         }
-        public virtual void OnMouseDoubleClick(MouseEventArgs e)
+        public void InvokeMouseClick(MouseButtonEvent e)
         {
-            if (!Enabled)
-                return;
-
-            if (DoubleClick != null)
-            {
-                if (Sound != SoundList.None)
-                    SoundManager.PlaySound(Sound);
-                InvokeMouseDoubleClick(e);
-            }
-            else
-                OnMouseClick(e);
-        }
-        public void InvokeMouseClick(EventArgs e)
-        {
-            if (Click != null)
-                Click.Invoke(this, e);
-        }
-        public void InvokeMouseDoubleClick(EventArgs e)
-        {
-            DoubleClick.Invoke(this, e);
+            Click?.Invoke(this, e);
         }
         public virtual void OnMouseMove(MouseEventArgs e)
         {
@@ -1053,7 +1033,6 @@ namespace Client.MirControls
                 BeforeShown = null;
 
                 Click = null;
-                DoubleClick = null;
                 MouseEnter = null;
                 MouseLeave = null;
                 MouseMove = null;

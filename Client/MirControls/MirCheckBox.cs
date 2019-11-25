@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Client.MirSounds;
+using SDL;
 
 namespace Client.MirControls
 {
@@ -93,7 +94,7 @@ namespace Client.MirControls
             };
         }
 
-        private void MirCheckBox_Click(object sender, EventArgs e)
+        private void MirCheckBox_Click(object sender, MouseButtonEvent e)
         {
             Checked = !Checked;
             if (Checked) Index = TickedIndex;

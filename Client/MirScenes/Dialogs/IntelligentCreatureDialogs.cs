@@ -442,7 +442,7 @@ namespace Client.MirScenes.Dialogs
             HoverLabelParent = null;
         }
 
-        private void ButtonClick(object sender, EventArgs e)
+        private void ButtonClick(object sender, MouseButtonEvent e)
         {
             int selectedCreature = BeforeAfterDraw();
             if (selectedCreature < 0) return;
@@ -918,7 +918,7 @@ namespace Client.MirScenes.Dialogs
             }
         }
 
-        void PetButtonClick(object sender, EventArgs e)
+        void PetButtonClick(object sender, MouseButtonEvent e)
         {
             SelectButton();
         }
@@ -1157,7 +1157,7 @@ namespace Client.MirScenes.Dialogs
             OptionsCancelButton.Click += ButtonClick;
         }
 
-        private void ButtonClick(object sender, EventArgs e)
+        private void ButtonClick(object sender, MouseButtonEvent e)
         {
             if (sender == OptionsSaveButton)
             {
@@ -1176,7 +1176,7 @@ namespace Client.MirScenes.Dialogs
                 Hide();
             }
         }
-        private void CheckBoxClick(object sender, EventArgs e)
+        private void CheckBoxClick(object sender, MouseButtonEvent e)
         {
             for (int i = 0; i < CreatureOptions.Length; i++)
             {
@@ -1301,7 +1301,7 @@ namespace Client.MirScenes.Dialogs
             };
         }
 
-        void Button_Click(object sender, EventArgs e)
+        void Button_Click(object sender, MouseButtonEvent e)
         {
             if (sender == NextButton)
             {

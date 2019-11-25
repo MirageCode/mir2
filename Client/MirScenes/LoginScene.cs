@@ -31,13 +31,13 @@ namespace Client.MirScenes
 
         public MirImageControl TestLabel, ViolenceLabel, MinorLabel, YouthLabel; 
 
-        public event EventHandler OnCancel
+        public event MouseButtonEventHandler OnCancel
         {
             add => _connectBox.CancelButton.Click += value;
             remove => _connectBox.CancelButton.Click -= value;
         }
 
-        public event EventHandler OnClose
+        public event MouseButtonEventHandler OnClose
         {
             add => _login.CloseButton.Click += value;
             remove => _login.CloseButton.Click -= value;

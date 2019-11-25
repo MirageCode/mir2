@@ -434,6 +434,12 @@ namespace Client.MirScenes.Dialogs
                 };
                 Cells[i].Click += (o, e) =>
                 {
+                    if (e.Clicks % 2 == 0)
+                    {
+                        BuyItem();
+                        return;
+                    }
+
                     SelectedItem = ((MirGoodsCell)o).Item;
                     Update();
 
@@ -448,7 +454,6 @@ namespace Client.MirScenes.Dialogs
                     }
                 };
                 Cells[i].MouseWheel += NPCGoodsPanel_MouseWheel;
-                Cells[i].DoubleClick += (o, e) => BuyItem();
             }
 
             CloseButton = new MirButton
@@ -812,13 +817,12 @@ namespace Client.MirScenes.Dialogs
                 Libraries.Title.Draw(295, 114 + DisplayLocation.X, 36 + DisplayLocation.Y);
         }
 
-        private void NPCDropPanel_Click(object sender, EventArgs e)
+        private void NPCDropPanel_Click(object sender, MouseButtonEvent e)
         {
-            MouseEventArgs me = e as MouseEventArgs;
+            if (e == null) return;
 
-            if (me == null) return;
-            int x = me.X - DisplayLocation.X;
-            int y = me.Y - DisplayLocation.Y;
+            int x = e.Location.X - DisplayLocation.X;
+            int y = e.Location.Y - DisplayLocation.Y;
 
             if (new Rectangle(20, 55, 75, 75).Contains(x, y))
                 ItemCell_Click();
@@ -1632,7 +1636,7 @@ namespace Client.MirScenes.Dialogs
         }
 
 
-        private void Grid_Click(object sender, EventArgs e)
+        private void Grid_Click(object sender, MouseButtonEvent e)
         {
             MirItemCell cell = (MirItemCell)sender;
 

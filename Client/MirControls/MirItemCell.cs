@@ -8,6 +8,7 @@ using Client.MirScenes;
 using Client.MirSounds;
 using Client.MirScenes.Dialogs;
 using C = ClientPackets;
+using SDL;
 
 namespace Client.MirControls
 {
@@ -196,8 +197,14 @@ namespace Client.MirControls
         }
 
 
-        public override void OnMouseClick(MouseEventArgs e)
+        public override void OnMouseClick(MouseButtonEvent e)
         {
+            if (e.Button == MouseButton.Left && e.Clicks % 2 == 0)
+            {
+                OnMouseDoubleClick(e);
+                return;
+            }
+
             if (Locked) return;
 
             if (GameScene.PickedUpGold || GridType == MirGridType.Inspect || GridType == MirGridType.TrustMerchant || GridType == MirGridType.QuestInventory) return;
@@ -210,10 +217,10 @@ namespace Client.MirControls
 
             switch (e.Button)
             {
-                case MouseButtons.Right:
+                case MouseButton.Right:
                     UseItem();
                     break;
-                case MouseButtons.Left:
+                case MouseButton.Left:
                     if (Item != null && GameScene.SelectedCell == null)
                         PlayItemSound();
                     if (CMain.Shift)
@@ -248,7 +255,7 @@ namespace Client.MirControls
                     break;
             }
         }
-        public override void OnMouseDoubleClick(MouseEventArgs e)
+        public void OnMouseDoubleClick(MouseButtonEvent e)
         {
             if (Locked) return;
 
