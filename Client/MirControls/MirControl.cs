@@ -910,7 +910,7 @@ namespace Client.MirControls
             if (_movable)
             {
                 Moving = true;
-                _movePoint = CMain.MPoint.Subtract(Location);
+                _movePoint = e.Location.Subtract(Location);
             }
 
             if (MouseDown != null)
