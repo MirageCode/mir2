@@ -12,6 +12,7 @@ namespace SDL
         public event EventHandler Disposing;
 
         public event EventHandler Updated;
+        public event EventHandler TextChanged, GotFocus, LostFocus;
 
         private Font _Font;
         public Font Font
@@ -64,6 +65,7 @@ namespace SDL
             set
             {
                 _Text = value;
+                TextChanged?.Invoke(this, new EventArgs());
                 Updated?.Invoke(this, new EventArgs());
             }
         }
@@ -102,9 +104,11 @@ namespace SDL
                 if (_Focused == value) return;
                 if (value) {
                     Event.OnTextInput += TextInput;
+                    GotFocus?.Invoke(this, new EventArgs());
                 }
                 else {
                     Event.OnTextInput -= TextInput;
+                    LostFocus?.Invoke(this, new EventArgs());
                 }
                 _Focused = value;
             }
@@ -126,8 +130,8 @@ namespace SDL
                     var size = fore.Size;
                     var rectangle = new Rectangle(
                         0, 0,
-                        Size.Width > size.Width ? size.Width : Size.Width,
-                        Size.Height > size.Height ? size.Height : Size.Height);
+                        Math.Min(Size.Width, size.Width),
+                        Math.Min(Size.Height, size.Height));
 
                     var back = new Texture(
                         renderer, PixelFormat.ARGB8888, TextureAccess.Target,
