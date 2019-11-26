@@ -554,7 +554,7 @@ namespace Client.MirScenes.Dialogs
             PositionBar.Location = new Point(x, y);
         }
 
-        void PositionBar_OnMoving(object sender, MouseEventArgs e)
+        void PositionBar_OnMoving(object sender, MouseMotionEvent e)
         {
             int x = 120;
             int y = PositionBar.Location.Y;

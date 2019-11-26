@@ -1034,7 +1034,7 @@ namespace Client.MirScenes.Dialogs
             PositionBar.Location = new Point(203, 39 + h);
         }
 
-        private void PositionBar_OnMoving(object sender, MouseEventArgs e)
+        private void PositionBar_OnMoving(object sender, MouseMotionEvent e)
         {
             const int x = 203;
             int y = PositionBar.Location.Y;
@@ -1473,7 +1473,7 @@ namespace Client.MirScenes.Dialogs
             NoticePositionBar.Location = new Point(x, y);
         }
 
-        void NoticePositionBar_OnMoving(object sender, MouseEventArgs e)
+        void NoticePositionBar_OnMoving(object sender, MouseMotionEvent e)
         {
             int x = 337;
             int y = NoticePositionBar.Location.Y;
@@ -1769,7 +1769,7 @@ namespace Client.MirScenes.Dialogs
             }
             UpdateMembers();
         }
-        public void MembersPositionBar_OnMoving(object sender, MouseEventArgs e)
+        public void MembersPositionBar_OnMoving(object sender, MouseMotionEvent e)
         {
             int x = 337;
             int y = MembersPositionBar.Location.Y;
@@ -2048,7 +2048,7 @@ namespace Client.MirScenes.Dialogs
 
         #region StorageCode
 
-        public void StoragePositionBar_OnMoving(object sender, MouseEventArgs e)
+        public void StoragePositionBar_OnMoving(object sender, MouseMotionEvent e)
         {
             int x = 337;
             int y = StoragePositionBar.Location.Y;

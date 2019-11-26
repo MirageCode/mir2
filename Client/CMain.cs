@@ -52,7 +52,7 @@ namespace Client
             Event.OnMouseButtonUp += CMain_MouseClick;
             Event.OnMouseButtonDown += CMain_MouseDown;
             Event.OnMouseButtonUp += CMain_MouseUp;
-            MouseMove += CMain_MouseMove;
+            Event.OnMouseMotion += CMain_MouseMove;
             KeyPress += CMain_KeyPress;
             KeyDown += CMain_KeyDown;
             KeyUp += CMain_KeyUp;
@@ -146,7 +146,7 @@ namespace Client
                 }
             }
         }
-        public static void CMain_MouseMove(object sender, MouseEventArgs e)
+        public static void CMain_MouseMove(MouseMotionEvent e)
         {
             if (Settings.FullScreen)
                 Cursor.Clip = new Rectangle(0, 0, Settings.ScreenWidth, Settings.ScreenHeight);

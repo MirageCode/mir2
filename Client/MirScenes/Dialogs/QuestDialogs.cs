@@ -1127,7 +1127,7 @@ namespace Client.MirScenes.Dialogs
             UpdatePositionBar();
         }
 
-        private void PositionBar_OnMoving(object sender, MouseEventArgs e)
+        private void PositionBar_OnMoving(object sender, MouseMotionEvent e)
         {
             int x = PosX;
             int y = PositionBar.Location.Y;

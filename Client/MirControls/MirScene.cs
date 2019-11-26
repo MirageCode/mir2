@@ -87,7 +87,7 @@ namespace Client.MirControls
             else
                 base.OnMouseUp(e);
         }
-        public override void OnMouseMove(MouseEventArgs e)
+        public override void OnMouseMove(MouseMotionEvent e)
         {
             if (!Enabled)
                 return;

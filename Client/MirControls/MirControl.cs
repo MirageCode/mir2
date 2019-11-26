@@ -21,6 +21,8 @@ namespace Client.MirControls
         public float BlendingRate { get; set; }
         public BlendMode BlendMode { get; set; }
 
+        // FIXME: Don't need Focused, use Activate
+
         public virtual bool Focused
         {
             get => ActiveControl == this;
@@ -244,13 +246,15 @@ namespace Client.MirControls
             object sender, MouseButtonEvent Event);
         public delegate void MouseWheelEventHandler(
             object sender, MouseWheelEvent Event);
+        public delegate void MouseMotionEventHandler(
+            object sender, MouseMotionEvent Event);
 
         public event MouseButtonEventHandler MouseDown, MouseUp, Click;
         public event MouseWheelEventHandler MouseWheel;
+        public event MouseMotionEventHandler MouseMove;
 
         protected bool HasShown;
         public event EventHandler BeforeDraw , AfterDraw , MouseEnter , MouseLeave , Shown , BeforeShown, Disposing;
-        public event MouseEventHandler MouseMove;
         public event KeyEventHandler KeyDown , KeyUp;
         public event KeyPressEventHandler KeyPress;
         #endregion
@@ -366,7 +370,7 @@ namespace Client.MirControls
         }
 
         public event EventHandler MovableChanged;
-        public event MouseEventHandler OnMoving;
+        public event MouseMotionEventHandler OnMoving;
 
         private void OnMovableChanged()
         {
@@ -827,7 +831,7 @@ namespace Client.MirControls
         {
             Click?.Invoke(this, e);
         }
-        public virtual void OnMouseMove(MouseEventArgs e)
+        public virtual void OnMouseMove(MouseMotionEvent e)
         {
             if (!_enabled)
                 return;
@@ -835,7 +839,7 @@ namespace Client.MirControls
 
             if (Moving)
             {
-                Point tempPoint = CMain.MPoint.Subtract(_movePoint);
+                Point tempPoint = e.Location.Subtract(_movePoint);
 
                 if (Parent == null)
                 {
@@ -860,14 +864,13 @@ namespace Client.MirControls
                     tempPoint.Y = 0;
 
                 Location = tempPoint;
-                if (OnMoving != null)
-                    OnMoving.Invoke(this, e);
+                OnMoving?.Invoke(this, e);
                 return;
             }
 
             if (Controls != null)
                 for (int i = Controls.Count - 1; i >= 0; i--)
-                    if (Controls[i].IsMouseOver(CMain.MPoint))
+                    if (Controls[i].IsMouseOver(e.Location))
                     {
                         Controls[i].OnMouseMove(e);
                         return;
@@ -875,8 +878,7 @@ namespace Client.MirControls
 
             Highlight();
 
-            if (MouseMove != null)
-                MouseMove.Invoke(this, e);
+            MouseMove?.Invoke(this, e);
         }
         public virtual void OnMouseDown(MouseButtonEvent e)
         {

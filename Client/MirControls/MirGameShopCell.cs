@@ -8,6 +8,7 @@ using Client.MirScenes;
 using Client.MirSounds;
 using Client.MirScenes.Dialogs;
 using C = ClientPackets;
+using SDL;
 using Font = SDL.Font;
 
 namespace Client.MirControls
@@ -231,7 +232,7 @@ namespace Client.MirControls
             messageBox.Show();
         }
 
-        public override void OnMouseMove(MouseEventArgs e)
+        public override void OnMouseMove(MouseMotionEvent e)
         {
             base.OnMouseMove(e);
 

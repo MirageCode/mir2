@@ -735,7 +735,7 @@ namespace Client.MirScenes.Dialogs
             }
         }
 
-        void PositionBar_OnMoving(object sender, MouseEventArgs e)
+        void PositionBar_OnMoving(object sender, MouseMotionEvent e)
         {
             int x = Settings.Resolution != 800 ? 619 : 395;
             int y = PositionBar.Location.Y;
@@ -2012,7 +2012,7 @@ namespace Client.MirScenes.Dialogs
             OnMoving += SkillBar_OnMoving;
         }
 
-        private void SkillBar_OnMoving(object sender, MouseEventArgs e)
+        private void SkillBar_OnMoving(object sender, MouseMotionEvent e)
         {
             if (BarIndex * 2 >= Settings.SkillbarLocation.Length) return;
             Settings.SkillbarLocation[BarIndex, 0] = this.Location.X;
@@ -3894,9 +3894,9 @@ namespace Client.MirScenes.Dialogs
             }
         }
 
-        private void SoundBar_MouseMove(object sender, MouseEventArgs e)
+        private void SoundBar_MouseMove(object sender, MouseMotionEvent e)
         {
-            if (e.Button != MouseButtons.Left || SoundBar != ActiveControl) return;
+            if (e.Button != MouseButton.Left || SoundBar != ActiveControl) return;
 
             Point p = e.Location.Subtract(SoundBar.DisplayLocation);
 
@@ -4000,9 +4000,9 @@ namespace Client.MirScenes.Dialogs
             MusicVolumeBar.Location = percent > 0 ? new Point(159 + (int)((MusicSoundBar.Size.Width - 2) * percent), 244) : new Point(159, 244);
         }
 
-        private void MusicSoundBar_MouseMove(object sender, MouseEventArgs e)
+        private void MusicSoundBar_MouseMove(object sender, MouseMotionEvent e)
         {
-            if (e.Button != MouseButtons.Left || MusicSoundBar != ActiveControl) return;
+            if (e.Button != MouseButton.Left || MusicSoundBar != ActiveControl) return;
 
             Point p = e.Location.Subtract(MusicSoundBar.DisplayLocation);
 

@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using Client.MirGraphics;
 using System.Collections.Generic;
+using SDL;
 using Font = SDL.Font;
 
 namespace Client.MirControls
@@ -299,7 +300,7 @@ namespace Client.MirControls
             if (ScrollIndex < (Items.Count - 5)) ScrollIndex++;
             Update();
         }
-        void ScrollPosition(object sender, MouseEventArgs e)
+        void ScrollPosition(object sender, MouseMotionEvent e)
         {
             int x = Size.Width - 11;
             int y = _ScrollPosition.Location.Y;
