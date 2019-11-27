@@ -21,6 +21,8 @@ namespace Client.MirGraphics
 
             Window = new Window("Mir", Settings.ScreenWidth, Settings.ScreenHeight, 0);
             Renderer = Window.CreateRenderer(-1, 0);
+
+            LoadTextures();
         }
 
         public static void Destroy()
