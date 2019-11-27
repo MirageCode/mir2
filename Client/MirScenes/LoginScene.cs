@@ -450,8 +450,8 @@ namespace Client.MirScenes
                         MaxLength = Globals.MaxAccountIDLength
                 };
                 AccountIDTextBox.SetFocus();
+                AccountIDTextBox.TextBox.TextChanged += AccountIDTextBox_TextChanged;
                 // FIXME: TextBox
-                // AccountIDTextBox.TextBox.TextChanged += AccountIDTextBox_TextChanged;
                 // AccountIDTextBox.TextBox.KeyPress += TextBox_KeyPress;
                 AccountIDTextBox.Text = Settings.AccountID;
 
@@ -466,8 +466,8 @@ namespace Client.MirScenes
                         MaxLength = Globals.MaxPasswordLength
                     };
 
+                PasswordTextBox.TextBox.TextChanged += PasswordTextBox_TextChanged;
                 // FIXME: TextBox
-                // PasswordTextBox.TextBox.TextChanged += PasswordTextBox_TextChanged;
                 // PasswordTextBox.TextBox.KeyPress += TextBox_KeyPress;
                 PasswordTextBox.Text = Settings.Password;
 
@@ -852,9 +852,8 @@ namespace Client.MirScenes
                 };
                 AccountIDTextBox.SetFocus();
                 AccountIDTextBox.TextBox.MaxLength = Globals.MaxAccountIDLength;
-                // FIXME: TextBox
-                // AccountIDTextBox.TextBox.TextChanged += AccountIDTextBox_TextChanged;
-                // AccountIDTextBox.TextBox.GotFocus += AccountIDTextBox_GotFocus;
+                AccountIDTextBox.TextBox.TextChanged += AccountIDTextBox_TextChanged;
+                AccountIDTextBox.TextBox.GotFocus += AccountIDTextBox_GotFocus;
 
                 Password1TextBox = new MirTextBox
                 {
@@ -867,9 +866,8 @@ namespace Client.MirScenes
                     Size = new Size(136, 18),
                     TextBox = { MaxLength = Globals.MaxPasswordLength },
                 };
-                // FIXME: TextBox
-                // Password1TextBox.TextBox.TextChanged += Password1TextBox_TextChanged;
-                // Password1TextBox.TextBox.GotFocus += PasswordTextBox_GotFocus;
+                Password1TextBox.TextBox.TextChanged += Password1TextBox_TextChanged;
+                Password1TextBox.TextBox.GotFocus += PasswordTextBox_GotFocus;
 
                 Password2TextBox = new MirTextBox
                 {
@@ -882,9 +880,8 @@ namespace Client.MirScenes
                     Size = new Size(136, 18),
                     TextBox = { MaxLength = Globals.MaxPasswordLength },
                 };
-                // FIXME: TextBox
-                // Password2TextBox.TextBox.TextChanged += Password2TextBox_TextChanged;
-                // Password2TextBox.TextBox.GotFocus += PasswordTextBox_GotFocus;
+                Password2TextBox.TextBox.TextChanged += Password2TextBox_TextChanged;
+                Password2TextBox.TextBox.GotFocus += PasswordTextBox_GotFocus;
 
                 UserNameTextBox = new MirTextBox
                 {
@@ -896,9 +893,8 @@ namespace Client.MirScenes
                     Size = new Size(136, 18),
                     TextBox = { MaxLength = 20 },
                 };
-                // FIXME: TextBox
-                // UserNameTextBox.TextBox.TextChanged += UserNameTextBox_TextChanged;
-                // UserNameTextBox.TextBox.GotFocus += UserNameTextBox_GotFocus;
+                UserNameTextBox.TextBox.TextChanged += UserNameTextBox_TextChanged;
+                UserNameTextBox.TextBox.GotFocus += UserNameTextBox_GotFocus;
 
 
                 BirthDateTextBox = new MirTextBox
@@ -911,9 +907,8 @@ namespace Client.MirScenes
                     Size = new Size(136, 18),
                     TextBox = { MaxLength = 10 },
                 };
-                // FIXME: TextBox
-                // BirthDateTextBox.TextBox.TextChanged += BirthDateTextBox_TextChanged;
-                // BirthDateTextBox.TextBox.GotFocus += BirthDateTextBox_GotFocus;
+                BirthDateTextBox.TextBox.TextChanged += BirthDateTextBox_TextChanged;
+                BirthDateTextBox.TextBox.GotFocus += BirthDateTextBox_GotFocus;
 
                 QuestionTextBox = new MirTextBox
                 {
@@ -925,9 +920,8 @@ namespace Client.MirScenes
                     Size = new Size(190, 18),
                     TextBox = { MaxLength = 30 },
                 };
-                // FIXME: TextBox
-                // QuestionTextBox.TextBox.TextChanged += QuestionTextBox_TextChanged;
-                // QuestionTextBox.TextBox.GotFocus += QuestionTextBox_GotFocus;
+                QuestionTextBox.TextBox.TextChanged += QuestionTextBox_TextChanged;
+                QuestionTextBox.TextBox.GotFocus += QuestionTextBox_GotFocus;
 
                 AnswerTextBox = new MirTextBox
                 {
@@ -939,9 +933,8 @@ namespace Client.MirScenes
                     Size = new Size(190, 18),
                     TextBox = { MaxLength = 30 },
                 };
-                // FIXME: TextBox
-                // AnswerTextBox.TextBox.TextChanged += AnswerTextBox_TextChanged;
-                // AnswerTextBox.TextBox.GotFocus += AnswerTextBox_GotFocus;
+                AnswerTextBox.TextBox.TextChanged += AnswerTextBox_TextChanged;
+                AnswerTextBox.TextBox.GotFocus += AnswerTextBox_GotFocus;
 
                 EMailTextBox = new MirTextBox
                 {
@@ -953,9 +946,8 @@ namespace Client.MirScenes
                     Size = new Size(136, 18),
                     TextBox = { MaxLength = 50 },
                 };
-                // FIXME: TextBox
-                // EMailTextBox.TextBox.TextChanged += EMailTextBox_TextChanged;
-                // EMailTextBox.TextBox.GotFocus += EMailTextBox_GotFocus;
+                EMailTextBox.TextBox.TextChanged += EMailTextBox_TextChanged;
+                EMailTextBox.TextBox.GotFocus += EMailTextBox_GotFocus;
 
 
                 Description = new MirLabel
@@ -1273,9 +1265,7 @@ namespace Client.MirScenes
                     Size = new Size(136, 18),
                 };
                 AccountIDTextBox.SetFocus();
-                // FIXME: TextBox
-                // AccountIDTextBox.TextBox.MaxLength = Globals.MaxAccountIDLength;
-                // AccountIDTextBox.TextBox.TextChanged += AccountIDTextBox_TextChanged;
+                AccountIDTextBox.TextBox.TextChanged += AccountIDTextBox_TextChanged;
 
                 CurrentPasswordTextBox = new MirTextBox
                 {
@@ -1288,8 +1278,7 @@ namespace Client.MirScenes
                     Size = new Size(136, 18),
                     TextBox = { MaxLength = Globals.MaxPasswordLength },
                 };
-                // FIXME: TextBox
-                // CurrentPasswordTextBox.TextBox.TextChanged += CurrentPasswordTextBox_TextChanged;
+                CurrentPasswordTextBox.TextBox.TextChanged += CurrentPasswordTextBox_TextChanged;
 
                 NewPassword1TextBox = new MirTextBox
                 {
@@ -1302,8 +1291,7 @@ namespace Client.MirScenes
                     Size = new Size(136, 18),
                     TextBox = { MaxLength = Globals.MaxPasswordLength },
                 };
-                // FIXME: TextBox
-                // NewPassword1TextBox.TextBox.TextChanged += NewPassword1TextBox_TextChanged;
+                NewPassword1TextBox.TextBox.TextChanged += NewPassword1TextBox_TextChanged;
 
                 NewPassword2TextBox = new MirTextBox
                 {
@@ -1316,8 +1304,7 @@ namespace Client.MirScenes
                     Size = new Size(136, 18),
                     TextBox = { MaxLength = Globals.MaxPasswordLength },
                 };
-                // FIXME: TextBox
-                // NewPassword2TextBox.TextBox.TextChanged += NewPassword2TextBox_TextChanged;
+                NewPassword2TextBox.TextBox.TextChanged += NewPassword2TextBox_TextChanged;
 
             }
 

@@ -17,6 +17,7 @@ namespace Client.MirGraphics
         {
             SDLContext.Init(SubSystem.Video);
             SDLContext.InitTTF();
+            SDLContext.StartTextInput();
 
             Window = new Window("Mir", Settings.ScreenWidth, Settings.ScreenHeight, 0);
             Renderer = Window.CreateRenderer(-1, 0);
@@ -29,6 +30,7 @@ namespace Client.MirGraphics
             Renderer.Dispose();
             Window.Dispose();
 
+            SDLContext.StopTextInput();
             SDLContext.QuitTTF();
             SDLContext.Quit();
         }
@@ -154,6 +156,9 @@ namespace Client.MirGraphics
             using (var surface = font.CreateSurface(s, color, width))
                 return new Texture(Renderer, surface);
         }
+
+        public static Texture CreateTexture(TextBox textBox)
+        => textBox.CreateTexture(Renderer);
 
         public static void Clear(Texture texture)
         {

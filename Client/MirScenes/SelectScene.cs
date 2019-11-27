@@ -595,9 +595,9 @@ namespace Client.MirScenes
                         Size = new Size(240, 20),
                         MaxLength = Globals.MaxCharacterNameLength
                     };
+                NameTextBox.TextBox.TextChanged += CharacterNameTextBox_TextChanged;
                 // FIXME: TextBox
                 // NameTextBox.TextBox.KeyPress += TextBox_KeyPress;
-                // NameTextBox.TextBox.TextChanged += CharacterNameTextBox_TextChanged;
                 NameTextBox.SetFocus();
 
                 CharacterDisplay = new MirAnimatedControl

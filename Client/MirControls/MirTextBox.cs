@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Client.MirGraphics;
 using TextBox = SDL.TextBox;
 using Font = SDL.Font;
 
@@ -9,6 +10,8 @@ namespace Client.MirControls
 {
     public sealed class MirTextBox : MirControl
     {
+        public static MirTextBox ActiveTextBox { get; set; }
+
         #region Back Color
 
         protected override void OnBackColourChanged()
@@ -106,19 +109,11 @@ namespace Client.MirControls
 
         public override bool Focused
         {
-            get => ActiveControl == this &&
-                TextBox != null && !TextBox.Disposed && TextBox.Focused;
+            get => TextBox != null && !TextBox.Disposed && TextBox.Focused;
             set
             {
                 if (TextBox != null && !TextBox.Disposed)
-                {
                     TextBox.Focused = value;
-                    if (value) {
-                        if (ActiveControl != null)
-                            ActiveControl.Focused = false;
-                        ActiveControl = this;
-                    }
-                }
             }
         }
 
@@ -147,10 +142,8 @@ namespace Client.MirControls
 
         protected override void OnSizeChanged()
         {
-            // TODO: TextBox Size
-
-            // TextBox.Size = Size;
-            // _size = TextBox.Size;
+            TextBox.Size = Size;
+            _size = TextBox.Size;
 
             if (TextBox != null && !TextBox.Disposed)
                 base.OnSizeChanged();
@@ -222,12 +215,17 @@ namespace Client.MirControls
         {
             DialogChanged();
 
-            if (Visible && CanFocus && ActiveControl == null)
+            if (Visible && CanFocus && ActiveControl == null) {
                 ActiveControl = this;
+                Focused = true;
+            }
         }
         private void SetFocus(object sender, EventArgs e)
         {
-            if (Visible) ActiveControl = this;
+            if (Visible) {
+                ActiveControl = this;
+                Focused = true;
+            }
         }
 
         #endregion
@@ -241,9 +239,23 @@ namespace Client.MirControls
 
         #endregion
 
+        protected override void CreateTexture()
+        {
+            if (ControlTexture != null && !ControlTexture.Disposed)
+                ControlTexture.Dispose();
+
+            SDLManager.ControlList.Add(this);
+            ControlTexture = SDLManager.CreateTexture(TextBox);
+            ControlTexture.Disposing += ControlTexture_Disposing;
+            TextureSize = ControlTexture.Size;
+            TextureValid = true;
+        }
+
         public MirTextBox()
         {
             BackColour = Color.Black;
+
+            DrawControlTexture = true;
 
             TextBox = new TextBox(new Font(Settings.FontName, 10), Size)
             {
@@ -252,6 +264,17 @@ namespace Client.MirControls
                 // TODO: TextBox Location
                 // Location = DisplayLocation,
             };
+
+            TextBox.Updated += (o, e) => {
+                TextureValid = false;
+                Redraw();
+            };
+            TextBox.GotFocus += (o, e) => ActiveTextBox = this;
+            TextBox.LostFocus += (o, e) => {
+                if (ActiveTextBox != this) return;
+                ActiveTextBox = null;
+            };
+
             // TODO: Events
 
             // TextBox.VisibleChanged += TextBox_VisibleChanged;
@@ -261,6 +284,17 @@ namespace Client.MirControls
 
             // Shown += MirTextBox_Shown;
             // TextBox.MouseMove += CMain.CMain_MouseMove;
+        }
+
+        protected override void Activate()
+        {
+            if (ActiveControl == this) return;
+            base.Activate();
+
+            if (ActiveTextBox != null && ActiveTextBox != this)
+                ActiveTextBox.Focused = false;
+
+            Focused = true;
         }
 
         private void TextBoxOnKeyUp(object sender, KeyEventArgs e)
@@ -322,6 +356,8 @@ namespace Client.MirControls
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
+
+            Focused = false;
 
             if (!disposing) return;
         }
