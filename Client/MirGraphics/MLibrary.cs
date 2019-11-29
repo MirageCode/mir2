@@ -20,7 +20,7 @@ namespace Client.MirGraphics
             Prguse3 = new MLibrary(Path.Combine(Settings.DataPath, "Prguse3")),
             BuffIcon = new MLibrary(Path.Combine(Settings.DataPath, "BuffIcon")),
             Help = new MLibrary(Path.Combine(Settings.DataPath, "Help")),
-            MiniMap = new MLibrary(Path.Combine(Settings.DataPath, "MMap")),
+            MiniMap = new MLibrary(Path.Combine(Settings.DataPath, "mmap")),
             Title = new MLibrary(Path.Combine(Settings.DataPath, "Title")),
             MagIcon = new MLibrary(Path.Combine(Settings.DataPath, "MagIcon")),
             MagIcon2 = new MLibrary(Path.Combine(Settings.DataPath, "MagIcon2")),
@@ -44,9 +44,9 @@ namespace Client.MirGraphics
 
         //Items
         public static readonly MLibrary
-            Items = new MLibrary(Path.Combine(Settings.DataPath, "Items")),
-            StateItems = new MLibrary(Path.Combine(Settings.DataPath, "StateItem")),
-            FloorItems = new MLibrary(Path.Combine(Settings.DataPath, "DNItems"));
+            Items = new MLibrary(Path.Combine(Settings.DataPath, "items")),
+            StateItems = new MLibrary(Path.Combine(Settings.DataPath, "Stateitem")),
+            FloorItems = new MLibrary(Path.Combine(Settings.DataPath, "dnitems"));
 
         //Deco
         public static readonly MLibrary
