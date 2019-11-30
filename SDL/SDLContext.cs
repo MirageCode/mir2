@@ -60,7 +60,7 @@ namespace SDL
             }
         }
 
-        public static Keymod Modifier
+        public static KeyMod Modifier
         {
             get => SDL_GetModState();
             set => SDL_SetModState(value);
@@ -97,9 +97,9 @@ namespace SDL
 		private static extern UInt32 SDL_GetMouseState(out int x, out int y);
 
 		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern Keymod SDL_GetModState();
+		private static extern KeyMod SDL_GetModState();
 
 		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern void SDL_SetModState(Keymod modstate);
+		private static extern void SDL_SetModState(KeyMod modstate);
     }
 }

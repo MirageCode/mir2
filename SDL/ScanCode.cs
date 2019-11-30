@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace SDL
 {
-    public enum Scancode
+    public enum ScanCode
     {
         Unknown = 0,
 

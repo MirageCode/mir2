@@ -6,9 +6,9 @@ namespace SDL
     [StructLayout(LayoutKind.Sequential)]
     public struct Keysym
     {
-        public Scancode scancode;
-        public Keycode sym;
-        public Keymod mod; /* UInt16 */
+        public ScanCode scancode;
+        public KeyCode sym;
+        public KeyMod mod; /* UInt16 */
         public UInt32 unicode; /* Deprecated */
     }
 
