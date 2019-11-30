@@ -103,20 +103,38 @@ namespace SDL
             {
                 if (_Focused == value) return;
                 if (value) {
-                    Event.OnTextInput += TextInput;
+                    EnableEvents();
                     GotFocus?.Invoke(this, new EventArgs());
                 }
                 else {
-                    Event.OnTextInput -= TextInput;
+                    DisableEvents();
                     LostFocus?.Invoke(this, new EventArgs());
                 }
                 _Focused = value;
             }
         }
 
+        private void EnableEvents()
+        {
+            Event.OnTextInput += TextInput;
+            Event.OnKeyDown += KeyDown;
+        }
+
+        private void DisableEvents()
+        {
+            Event.OnTextInput -= TextInput;
+            Event.OnKeyDown -= KeyDown;
+        }
+
         public void TextInput(TextInputEvent e)
         {
             if (Text.Length < MaxLength) Text += e.Text;
+        }
+
+        public void KeyDown(KeyboardEvent e)
+        {
+            if (e.KeyCode == KeyCode.Backspace && Text.Length > 0)
+                Text = Text.Remove(Text.Length - 1);
         }
 
         public Texture CreateTexture(Renderer renderer)
@@ -173,6 +191,9 @@ namespace SDL
         {
             if (Disposed) return;
             if (disposing) Disposing?.Invoke(this, new EventArgs());
+
+            _Focused = false;
+            DisableEvents();
 
             Disposed = true;
         }
