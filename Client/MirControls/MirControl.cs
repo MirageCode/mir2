@@ -248,14 +248,16 @@ namespace Client.MirControls
             object sender, MouseWheelEvent Event);
         public delegate void MouseMotionEventHandler(
             object sender, MouseMotionEvent Event);
+        public delegate void KeyboardEventHandler(
+            object sender, KeyboardEvent Event);
 
         public event MouseButtonEventHandler MouseDown, MouseUp, Click;
         public event MouseWheelEventHandler MouseWheel;
         public event MouseMotionEventHandler MouseMove;
+        public event KeyboardEventHandler KeyDown, KeyUp;
 
         protected bool HasShown;
         public event EventHandler BeforeDraw , AfterDraw , MouseEnter , MouseLeave , Shown , BeforeShown, Disposing;
-        public event KeyEventHandler KeyDown , KeyUp;
         public event KeyPressEventHandler KeyPress;
         #endregion
 
@@ -938,7 +940,7 @@ namespace Client.MirControls
                 return;
             KeyPress.Invoke(this, e);
         }
-        public virtual void OnKeyDown(KeyEventArgs e)
+        public virtual void OnKeyDown(KeyboardEvent e)
         {
             if (!_enabled)
                 return;
@@ -954,7 +956,7 @@ namespace Client.MirControls
                 return;
             KeyDown.Invoke(this, e);
         }
-        public virtual void OnKeyUp(KeyEventArgs e)
+        public virtual void OnKeyUp(KeyboardEvent e)
         {
             if (!_enabled)
                 return;

@@ -312,14 +312,14 @@ namespace Client.MirScenes
                 }
             }
         }
-        private void GameScene_KeyDown(object sender, KeyEventArgs e)
+        private void GameScene_KeyDown(object sender, KeyboardEvent e)
         {
             //bool skillMode = Settings.SkillMode ? CMain.Tilde : CMain.Ctrl;
             //bool altBind = skillMode ? Settings.SkillSet : !Settings.SkillSet;
 
             foreach (KeyBind KeyCheck in CMain.InputKeys.Keylist)
             {
-                if (KeyCheck.Key == Keys.None)
+                if (KeyCheck.Key == KeyCode.None)
                     continue;
                 if (KeyCheck.Key != e.KeyCode)
                     continue;

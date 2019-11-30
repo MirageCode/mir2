@@ -585,8 +585,6 @@ namespace Client.MirScenes.Dialogs
             };
             // FIXME: TextBox
             // ChatTextBox.TextBox.KeyPress += ChatTextBox_KeyPress;
-            // ChatTextBox.TextBox.KeyDown += ChatTextBox_KeyDown;
-            // ChatTextBox.TextBox.KeyUp += ChatTextBox_KeyUp;
 
             HomeButton = new MirButton
             {
@@ -935,31 +933,31 @@ namespace Client.MirScenes.Dialogs
 
         }
 
-        private void ChatPanel_KeyDown(object sender, KeyEventArgs e)
+        private void ChatPanel_KeyDown(object sender, KeyboardEvent e)
         {
             switch (e.KeyCode)
             {
-                case Keys.Up:
+                case KeyCode.Up:
                     if (StartIndex == 0) return;
                     StartIndex--;
                     break;
-                case Keys.Home:
+                case KeyCode.Home:
                     if (StartIndex == 0) return;
                     StartIndex = 0;
                     break;
-                case Keys.Down:
+                case KeyCode.Down:
                     if (StartIndex == History.Count - 1) return;
                     StartIndex++;
                     break;
-                case Keys.End:
+                case KeyCode.End:
                     if (StartIndex == History.Count - 1) return;
                     StartIndex = History.Count - 1;
                     break;
-                case Keys.PageUp:
+                case KeyCode.PageUp:
                     if (StartIndex == 0) return;
                     StartIndex -= LineCount;
                     break;
-                case Keys.PageDown:
+                case KeyCode.PageDown:
                     if (StartIndex == History.Count - 1) return;
                     StartIndex += LineCount;
                     break;
@@ -1009,59 +1007,6 @@ namespace Client.MirScenes.Dialogs
             StartIndex -= count;
             Update();
         }
-        private void ChatTextBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            CMain.Shift = e.Shift;
-            CMain.Alt = e.Alt;
-            CMain.Ctrl = e.Control;
-
-            switch (e.KeyCode)
-            {
-                case Keys.F1:
-                case Keys.F2:
-                case Keys.F3:
-                case Keys.F4:
-                case Keys.F5:
-                case Keys.F6:
-                case Keys.F7:
-                case Keys.F8:
-                case Keys.F9:
-                case Keys.F10:
-                case Keys.F11:
-                case Keys.F12:
-                case Keys.Tab:
-                    CMain.CMain_KeyUp(sender, e);
-                    break;
-
-            }
-        }
-        private void ChatTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            CMain.Shift = e.Shift;
-            CMain.Alt = e.Alt;
-            CMain.Ctrl = e.Control;
-
-            switch (e.KeyCode)
-            {
-                case Keys.F1:
-                case Keys.F2:
-                case Keys.F3:
-                case Keys.F4:
-                case Keys.F5:
-                case Keys.F6:
-                case Keys.F7:
-                case Keys.F8:
-                case Keys.F9:
-                case Keys.F10:
-                case Keys.F11:
-                case Keys.F12:
-                case Keys.Tab:
-                    CMain.CMain_KeyDown(sender, e);
-                    break;
-
-            }
-        }
-
 
         public void ChangeSize()
         {
@@ -3884,7 +3829,7 @@ namespace Client.MirScenes.Dialogs
         {
             foreach (KeyBind KeyCheck in CMain.InputKeys.Keylist)
             {
-                if (KeyCheck.Key == Keys.None)
+                if (KeyCheck.Key == KeyCode.None)
                     continue;
                 if ((KeyCheck.function < KeybindOptions.Bar1Skill1) || (KeyCheck.function > KeybindOptions.Bar2Skill8)) continue;
                 //need to test this 

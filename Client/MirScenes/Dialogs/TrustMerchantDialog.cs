@@ -60,8 +60,6 @@ namespace Client.MirScenes.Dialogs
             };
             // FIXME: TextBox
             // SearchTextBox.TextBox.KeyPress += SearchTextBox_KeyPress;
-            // SearchTextBox.TextBox.KeyUp += SearchTextBox_KeyUp;
-            // SearchTextBox.TextBox.KeyDown += SearchTextBox_KeyDown;
 
             FindButton = new MirButton
             {
@@ -401,63 +399,6 @@ namespace Client.MirScenes.Dialogs
                 case (char)Keys.Escape:
                     e.Handled = true;
                     break;
-            }
-        }
-
-
-        private void SearchTextBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            CMain.Shift = e.Shift;
-            CMain.Alt = e.Alt;
-            CMain.Ctrl = e.Control;
-
-            switch (e.KeyCode)
-            {
-                case Keys.F1:
-                case Keys.F2:
-                case Keys.F3:
-                case Keys.F4:
-                case Keys.F5:
-                case Keys.F6:
-                case Keys.F7:
-                case Keys.F8:
-                case Keys.F9:
-                case Keys.F10:
-                case Keys.F11:
-                case Keys.F12:
-                case Keys.Tab:
-                case Keys.Escape:
-                    CMain.CMain_KeyUp(sender, e);
-                    break;
-
-            }
-        }
-
-        private void SearchTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            CMain.Shift = e.Shift;
-            CMain.Alt = e.Alt;
-            CMain.Ctrl = e.Control;
-
-            switch (e.KeyCode)
-            {
-                case Keys.F1:
-                case Keys.F2:
-                case Keys.F3:
-                case Keys.F4:
-                case Keys.F5:
-                case Keys.F6:
-                case Keys.F7:
-                case Keys.F8:
-                case Keys.F9:
-                case Keys.F10:
-                case Keys.F11:
-                case Keys.F12:
-                case Keys.Tab:
-                case Keys.Escape:
-                    CMain.CMain_KeyDown(sender, e);
-                    break;
-
             }
         }
 

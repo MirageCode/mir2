@@ -1529,33 +1529,33 @@ namespace Client.MirScenes.Dialogs
             UpdateNoticeScrollPosition();
         }
 
-        private void NoticePanel_KeyDown(object sender, KeyEventArgs e)
+        private void NoticePanel_KeyDown(object sender, KeyboardEvent e)
         {
             switch (e.KeyCode)
             {
-                case Keys.Up:
+                case KeyCode.Up:
                     if (NoticeScrollIndex == 0) break;
                     if (NoticeScrollIndex >= 25) NoticeScrollIndex -= 24;
                     NoticeScrollIndex--;
                     break;
-                case Keys.Home:
+                case KeyCode.Home:
                     if (NoticeScrollIndex == 0) break;
                     NoticeScrollIndex = 0;
                     break;
-                case Keys.Down:
+                case KeyCode.Down:
                     if (NoticeScrollIndex == Notice.MultiText.Length - 1) break;
                     if (NoticeScrollIndex < 25) NoticeScrollIndex = 24;
                     NoticeScrollIndex++;
                     break;
-                case Keys.End:
+                case KeyCode.End:
                     if (NoticeScrollIndex == Notice.MultiText.Length - 1) break;
                     NoticeScrollIndex = Notice.MultiText.Length - 1;
                     break;
-                case Keys.PageUp:
+                case KeyCode.PageUp:
                     if (NoticeScrollIndex == 0) break;
                     NoticeScrollIndex -= 25;
                     break;
-                case Keys.PageDown:
+                case KeyCode.PageDown:
                     if (NoticeScrollIndex == Notice.MultiText.Length - 25) break;
                     NoticeScrollIndex += 25;
                     break;
@@ -1813,34 +1813,34 @@ namespace Client.MirScenes.Dialogs
             UpdateMembersScrollPosition();
         }
 
-        private void MembersPanel_KeyDown(object sender, KeyEventArgs e)
+        private void MembersPanel_KeyDown(object sender, KeyboardEvent e)
         {
             switch (e.KeyCode)
             {
-                case Keys.Up:
+                case KeyCode.Up:
                     if (MemberScrollIndex == 0) break;
                     MemberScrollIndex--;
                     break;
-                case Keys.Home:
+                case KeyCode.Home:
                     if (MemberScrollIndex == 0) break;
                     MemberScrollIndex = 0;
                     break;
-                case Keys.Down:
+                case KeyCode.Down:
                     if (MembersShowCount < MemberPageRows) break;
                     if (MemberScrollIndex == MembersShowCount - MemberPageRows) break;
                     MemberScrollIndex++;
                     break;
-                case Keys.End:
+                case KeyCode.End:
                     if (MembersShowCount < MemberPageRows) break;
                     if (MemberScrollIndex == MembersShowCount - MemberPageRows) break;
                     MemberScrollIndex = MembersShowCount - MemberPageRows;
                     break;
-                case Keys.PageUp:
+                case KeyCode.PageUp:
                     if (MemberScrollIndex == 0) break;
                     MemberScrollIndex -= 25;
                     if (MemberScrollIndex < 0) MemberScrollIndex = 0;
                     break;
-                case Keys.PageDown:
+                case KeyCode.PageDown:
                     if (MembersShowCount < MemberPageRows) break;
                     if (MemberScrollIndex == MembersShowCount - 25) break;
                     MemberScrollIndex += 25;

@@ -87,12 +87,12 @@ namespace Client.MirControls
             Dispose();
         }
 
-        public override void OnKeyDown(KeyEventArgs e)
+        public override void OnKeyDown(KeyboardEvent e)
         {
             base.OnKeyDown(e);
             e.Handled = true;
         }
-        public override void OnKeyUp(KeyEventArgs e)
+        public override void OnKeyUp(KeyboardEvent e)
         {
             base.OnKeyUp(e);
             e.Handled = true;

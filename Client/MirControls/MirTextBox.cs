@@ -279,11 +279,9 @@ namespace Client.MirControls
 
             // TextBox.VisibleChanged += TextBox_VisibleChanged;
             // TextBox.ParentChanged += TextBox_VisibleChanged;
-            // TextBox.KeyUp += TextBoxOnKeyUp;
             // TextBox.KeyPress += TextBox_KeyPress;
 
             // Shown += MirTextBox_Shown;
-            // TextBox.MouseMove += CMain.CMain_MouseMove;
         }
 
         protected override void Activate()
@@ -295,17 +293,6 @@ namespace Client.MirControls
                 ActiveTextBox.Focused = false;
 
             Focused = true;
-        }
-
-        private void TextBoxOnKeyUp(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.PrintScreen:
-                    CMain.CMain_KeyUp(sender, e);
-                    break;
-
-            }
         }
 
         void TextBox_KeyPress(object sender, KeyPressEventArgs e)

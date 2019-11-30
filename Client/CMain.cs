@@ -54,8 +54,8 @@ namespace Client
             Event.OnMouseButtonUp += CMain_MouseUp;
             Event.OnMouseMotion += CMain_MouseMove;
             KeyPress += CMain_KeyPress;
-            KeyDown += CMain_KeyDown;
-            KeyUp += CMain_KeyUp;
+            Event.OnKeyDown += CMain_KeyDown;
+            Event.OnKeyUp += CMain_KeyUp;
             Deactivate += CMain_Deactivate;
             Event.OnMouseWheel += CMain_MouseWheel;
 
@@ -112,18 +112,20 @@ namespace Client
             Tilde = false;
         }
 
-        public static void CMain_KeyDown(object sender, KeyEventArgs e)
+        public static void CMain_KeyDown(KeyboardEvent e)
         {
             Shift = e.Shift;
             Alt = e.Alt;
-            Ctrl = e.Control;
+            Ctrl = e.Ctrl;
 
-            if (e.KeyCode == Keys.Oem8)
-                CMain.Tilde = true;
+            // TODO: Tilde
+
+            // if (e.KeyCode == Keys.Oem8)
+            //     CMain.Tilde = true;
 
             try
             {
-                if (e.Alt && e.KeyCode == Keys.Enter)
+                if (e.Alt && e.KeyCode == KeyCode.Return)
                 {
                     ToggleFullScreen();
                     return;
@@ -137,7 +139,7 @@ namespace Client
             {
                 SaveError(ex.ToString());
             }
-            if (e.KeyCode == Keys.F10)
+            if (e.KeyCode == KeyCode.F10)
             {
                 e.Handled = true;
                 if (GameScene.Scene != null)
@@ -161,14 +163,16 @@ namespace Client
                 SaveError(ex.ToString());
             }
         }
-        public static void CMain_KeyUp(object sender, KeyEventArgs e)
+        public static void CMain_KeyUp(KeyboardEvent e)
         {
             Shift = e.Shift;
             Alt = e.Alt;
-            Ctrl = e.Control;
+            Ctrl = e.Ctrl;
 
-            if (e.KeyCode == Keys.Oem8)
-                CMain.Tilde = false;
+            // TODO: Tilde
+
+            // if (e.KeyCode == Keys.Oem8)
+            //     CMain.Tilde = false;
 
             foreach (KeyBind KeyCheck in CMain.InputKeys.Keylist)
             {

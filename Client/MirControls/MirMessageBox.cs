@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Client.MirGraphics;
+using KeyboardEvent = SDL.KeyboardEvent;
 
 namespace Client.MirControls
 {
@@ -162,7 +163,7 @@ namespace Client.MirControls
         }
 
 
-        public override void OnKeyDown(KeyEventArgs e)
+        public override void OnKeyDown(KeyboardEvent e)
         {
             if (AllowKeyPress)
             {
@@ -170,7 +171,7 @@ namespace Client.MirControls
                 e.Handled = true;
             }
         }
-        public override void OnKeyUp(KeyEventArgs e)
+        public override void OnKeyUp(KeyboardEvent e)
         {
             if (AllowKeyPress)
             {
