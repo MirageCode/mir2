@@ -203,6 +203,7 @@ namespace Client.MirControls
                 SDLManager.ControlList.Add(this);
 
                 ControlTexture = SDLManager.CreateTexture(Size.Width, Size.Height);
+                ControlTexture.BlendMode = BlendMode.Blend;
                 ControlTexture.Disposing += ControlTexture_Disposing;
                 TextureSize = Size;
             }
