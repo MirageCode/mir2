@@ -87,6 +87,8 @@ namespace Client.MirScenes
                 _ViewKey = new InputKeyDialog(_login) { Parent = _background };
             };
 
+            _login.CloseButton.Click += (o, e) => Close();
+
             Version = new MirLabel
                 {
                     AutoSize = true,
@@ -132,6 +134,7 @@ namespace Client.MirScenes
             //};
 
             _connectBox = new MirMessageBox("Attempting to connect to the server.", MirMessageBoxButtons.Cancel);
+            _connectBox.CancelButton.Click += (o, e) => Close();
             Shown += (sender, args) =>
                 {
                     Network.Connect();

@@ -430,7 +430,7 @@ namespace Client.MirScenes
                         else QuestLogDialog.Hide();
                         break;
                     case KeybindOptions.Exit:
-                        QuitGame();
+                        Close();
                         return;
 
                     case KeybindOptions.Closeall:
@@ -804,7 +804,7 @@ namespace Client.MirScenes
 
         }
 
-        public void QuitGame()
+        public override void Close()
         {
             if (CMain.Time >= LogTime)
             {

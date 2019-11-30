@@ -39,6 +39,8 @@ namespace Client
         public static bool Shift, Alt, Ctrl, Tilde;
         public static KeyBindSettings InputKeys = new KeyBindSettings();
 
+        public bool Closing = false;
+
         public CMain()
         {
             SDLManager.Create();
@@ -46,8 +48,7 @@ namespace Client
             LoginScene LoginScene = new LoginScene();
             MirScene.ActiveScene = LoginScene;
 
-            LoginScene.OnCancel += (o, e) => Close();
-            LoginScene.OnClose += (o, e) => Close();
+            Event.OnQuit += e => MirScene.ActiveScene.Close();
 
             Event.OnMouseButtonUp += CMain_MouseClick;
             Event.OnMouseButtonDown += CMain_MouseDown;
@@ -81,14 +82,13 @@ namespace Client
         }
 
 
+        public void Close() => Closing = true;
+
         public void Run()
         {
             try
             {
-                var done = false;
-                Event.OnQuit += e => { done = true; };
-
-                while (!done)
+                while (!Closing)
                 {
                     UpdateTime();
                     Event.Poll();
@@ -569,14 +569,5 @@ namespace Client
             private readonly Point p;
         }
         #endregion
-
-        private void CMain_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (CMain.Time < GameScene.LogTime)
-            {
-                GameScene.Scene.ChatDialog.ReceiveChat(string.Format(GameLanguage.CannotLeaveGame, (GameScene.LogTime - CMain.Time) / 1000), ChatType.System);
-                e.Cancel = true;
-            }
-        }
     }
 }

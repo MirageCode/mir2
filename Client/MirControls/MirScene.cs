@@ -163,6 +163,8 @@ namespace Client.MirControls
                 GameScene.Bind(info.Info.Ingredients[j]);
         }
 
+        public virtual void Close() => Program.Form.Close();
+
         private static void Disconnect(S.Disconnect p)
         {
             switch (p.Reason)

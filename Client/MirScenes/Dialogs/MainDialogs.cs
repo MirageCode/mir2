@@ -4082,7 +4082,7 @@ namespace Client.MirScenes.Dialogs
                 PressedIndex = 635,
                 Hint = string.Format(GameLanguage.Exit, CMain.InputKeys.GetKey(KeybindOptions.Exit))
             };
-            ExitButton.Click += (o, e) => GameScene.Scene.QuitGame();
+            ExitButton.Click += (o, e) => GameScene.Scene.Close();
 
             LogOutButton = new MirButton
             {
