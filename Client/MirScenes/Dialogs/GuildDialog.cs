@@ -5,7 +5,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using Client.MirControls;
 using Client.MirGraphics;
 using Client.MirNetwork;
@@ -19,6 +18,9 @@ using Effect = Client.MirObjects.Effect;
 
 using Client.MirScenes.Dialogs;
 using System.Drawing.Imaging;
+
+using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
+using SystemInformation = System.Windows.Forms.SystemInformation;
 
 namespace Client.MirScenes.Dialogs
 {

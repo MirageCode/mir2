@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
 using Client.MirGraphics;
 using SDL;
+
+using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
 
 namespace Client.MirControls
 {

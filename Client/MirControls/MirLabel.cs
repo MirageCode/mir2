@@ -3,10 +3,11 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
-using System.Windows.Forms;
 using Client.MirGraphics;
 using SDL;
 using Font = SDL.Font;
+
+using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
 
 namespace Client.MirControls
 {

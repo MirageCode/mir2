@@ -4,8 +4,9 @@ using Client.MirControls;
 using Client.MirGraphics;
 using Client.MirSounds;
 using System.Drawing;
-using System.Windows.Forms;
 using Font = SDL.Font;
+
+using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
 
 namespace Client.MirScenes.Dialogs
 {

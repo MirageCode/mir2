@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
 using Client.MirSounds;
+
+using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
 
 namespace Client.MirControls
 {

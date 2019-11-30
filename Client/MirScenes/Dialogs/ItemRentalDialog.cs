@@ -5,10 +5,10 @@ using Client.MirGraphics;
 using Client.MirSounds;
 using System.Drawing;
 using System.Globalization;
-using System.Windows.Forms;
 using Client.MirNetwork;
-
 using C = ClientPackets;
+
+using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
 
 namespace Client.MirScenes.Dialogs
 {

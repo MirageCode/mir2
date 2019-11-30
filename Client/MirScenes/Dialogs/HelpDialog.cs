@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using Client.MirControls;
 using Client.MirGraphics;
 using Client.MirNetwork;
@@ -14,6 +13,8 @@ using Client.MirSounds;
 using S = ServerPackets;
 using C = ClientPackets;
 using Font = SDL.Font;
+
+using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
 
 namespace Client.MirScenes.Dialogs
 {

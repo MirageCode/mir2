@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
 using Client.MirGraphics;
 using Client.MirSounds;
 using KeyboardEvent = SDL.KeyboardEvent;
 using KeyCode = SDL.KeyCode;
+
+using TextBox = System.Windows.Forms.TextBox;
 
 namespace Client.MirControls
 {

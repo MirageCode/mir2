@@ -4,7 +4,6 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Windows.Forms;
 using Client.MirControls;
 using Client.MirGraphics;
 using Client.MirNetwork;
@@ -16,6 +15,8 @@ using System.Linq;
 using KeyboardEvent = SDL.KeyboardEvent;
 using KeyCode = SDL.KeyCode;
 using KeyMod = SDL.KeyMod;
+
+using Application = System.Windows.Forms.Application;
 
 namespace Client.MirScenes
 {

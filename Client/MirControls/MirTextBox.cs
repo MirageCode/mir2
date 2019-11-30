@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
-using System.Windows.Forms;
 using Client.MirGraphics;
 using TextBox = SDL.TextBox;
 using Font = SDL.Font;

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
 using Client.MirGraphics;
 using Client.MirNetwork;
 using Client.MirObjects;

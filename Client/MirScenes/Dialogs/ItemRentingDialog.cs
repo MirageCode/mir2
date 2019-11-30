@@ -3,9 +3,9 @@ using Client.MirGraphics;
 using Client.MirNetwork;
 using Client.MirSounds;
 using System.Drawing;
-using System.Windows.Forms;
-
 using C = ClientPackets;
+
+using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
 
 namespace Client.MirScenes.Dialogs
 {

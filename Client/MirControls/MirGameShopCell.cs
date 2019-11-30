@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
 using Client.MirGraphics;
 using Client.MirNetwork;
 using Client.MirObjects;
@@ -10,6 +9,8 @@ using Client.MirScenes.Dialogs;
 using C = ClientPackets;
 using SDL;
 using Font = SDL.Font;
+
+using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
 
 namespace Client.MirControls
 {
