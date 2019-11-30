@@ -690,11 +690,11 @@ namespace Client.MirScenes.Dialogs
             Visible = false;
         }
 
-        private void ChatTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void ChatTextBox_KeyPress(object sender, KeyboardEvent e)
         {
-            switch (e.KeyChar)
+            switch (e.KeyCode)
             {
-                case (char)Keys.Enter:
+                case KeyCode.Return:
                     e.Handled = true;
                     if (!string.IsNullOrEmpty(ChatTextBox.Text))
                     {
@@ -725,7 +725,7 @@ namespace Client.MirScenes.Dialogs
                     ChatTextBox.Visible = false;
                     ChatTextBox.Text = string.Empty;
                     break;
-                case (char)Keys.Escape:
+                case KeyCode.Escape:
                     e.Handled = true;
                     ChatTextBox.Visible = false;
                     ChatTextBox.Text = string.Empty;
@@ -967,17 +967,17 @@ namespace Client.MirScenes.Dialogs
             Update();
             e.Handled = true;
         }
-        private void ChatPanel_KeyPress(object sender, KeyPressEventArgs e)
+        private void ChatPanel_KeyPress(object sender, KeyboardEvent e)
         {
-            switch (e.KeyChar)
+            switch (e.KeyCode)
             {
-                case '@':
-                case '!':
-                case ' ':
-                case (char)Keys.Enter:
+                case KeyCode.At:
+                case KeyCode.Exclaim:
+                case KeyCode.Space:
+                case KeyCode.Return:
                     ChatTextBox.SetFocus();
-                    if (e.KeyChar == '!') ChatTextBox.Text = "!";
-                    if (e.KeyChar == '@') ChatTextBox.Text = "@";
+                    if (e.KeyCode == KeyCode.Exclaim) ChatTextBox.Text = "!";
+                    if (e.KeyCode == KeyCode.At) ChatTextBox.Text = "@";
                     if (ChatPrefix != "") ChatTextBox.Text = ChatPrefix;
 
                     ChatTextBox.Visible = true;
@@ -986,7 +986,7 @@ namespace Client.MirScenes.Dialogs
                     // ChatTextBox.TextBox.SelectionStart = ChatTextBox.Text.Length;
                     e.Handled = true;
                     break;
-                case '/':
+                case KeyCode.Slash:
                     ChatTextBox.SetFocus();
                     ChatTextBox.Text = LastPM + " ";
                     ChatTextBox.Visible = true;

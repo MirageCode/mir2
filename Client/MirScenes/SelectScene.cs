@@ -10,6 +10,9 @@ using Client.MirSounds;
 using C = ClientPackets;
 using S = ServerPackets;
 using System.Threading;
+using KeyboardEvent = SDL.KeyboardEvent;
+using KeyCode = SDL.KeyCode;
+
 namespace Client.MirScenes
 {
     public class SelectScene : MirScene
@@ -216,9 +219,9 @@ namespace Client.MirScenes
             UpdateInterface();
         }
 
-        private void SelectScene_KeyPress(object sender, KeyPressEventArgs e)
+        private void SelectScene_KeyPress(object sender, KeyboardEvent e)
         {
-            if (e.KeyChar != (char)Keys.Enter) return;
+            if (e.KeyCode != KeyCode.Return) return;
             if (StartGameButton.Enabled)
                 StartGame();
             e.Handled = true;
@@ -743,10 +746,10 @@ namespace Client.MirScenes
                     };
             }
 
-            private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+            private void TextBox_KeyPress(object sender, KeyboardEvent e)
             {
                 if (sender == null) return;
-                if (e.KeyChar != (char)Keys.Enter) return;
+                if (e.KeyCode != KeyCode.Return) return;
                 e.Handled = true;
 
                 if (OKButton.Enabled)

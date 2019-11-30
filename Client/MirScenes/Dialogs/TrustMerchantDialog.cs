@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using C = ClientPackets;
+using KeyboardEvent = SDL.KeyboardEvent;
+using KeyCode = SDL.KeyCode;
 
 namespace Client.MirScenes.Dialogs
 {
@@ -376,7 +378,7 @@ namespace Client.MirScenes.Dialogs
             ExpireLabel.Text = string.Format("Finish Date: {0}", Selected.Listing.ConsignmentDate.AddDays(Globals.ConsignmentLength));
 
         }
-        private void SearchTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void SearchTextBox_KeyPress(object sender, KeyboardEvent e)
         {
             if (CMain.Time < SearchTime)
             {
@@ -384,9 +386,9 @@ namespace Client.MirScenes.Dialogs
                 return;
             }
 
-            switch (e.KeyChar)
+            switch (e.KeyCode)
             {
-                case (char)Keys.Enter:
+                case KeyCode.Return:
                     e.Handled = true;
                     if (string.IsNullOrEmpty(SearchTextBox.Text)) return;
                     SearchTime = CMain.Time + Globals.SearchDelay;
@@ -396,7 +398,7 @@ namespace Client.MirScenes.Dialogs
                     });
                     Program.Form.ActiveControl = null;
                     break;
-                case (char)Keys.Escape:
+                case KeyCode.Escape:
                     e.Handled = true;
                     break;
             }

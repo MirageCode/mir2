@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using Client.MirGraphics;
 using TextBox = SDL.TextBox;
 using Font = SDL.Font;
+using KeyboardEvent = SDL.KeyboardEvent;
+using KeyCode = SDL.KeyCode;
 
 namespace Client.MirControls
 {
@@ -295,11 +297,11 @@ namespace Client.MirControls
             Focused = true;
         }
 
-        void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        void TextBox_KeyPress(object sender, KeyboardEvent e)
         {
             base.OnKeyPress(e);
 
-            if (e.KeyChar == (char)Keys.Escape)
+            if (e.KeyCode == KeyCode.Escape)
             {
                 ActiveControl = null;
                 e.Handled = true;

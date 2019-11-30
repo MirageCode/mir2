@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Client.MirGraphics;
 using Client.MirSounds;
 using KeyboardEvent = SDL.KeyboardEvent;
+using KeyCode = SDL.KeyCode;
 
 namespace Client.MirControls
 {
@@ -199,21 +200,15 @@ namespace Client.MirControls
             }
         }
 
-        void MirInputBox_KeyPress(object sender, KeyPressEventArgs e)
+        void MirInputBox_KeyPress(object sender, KeyboardEvent e)
         {
-            if (!char.IsControl(e.KeyChar)
-                && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-
-            if (e.KeyChar == (char)Keys.Enter)
+            if (e.KeyCode == KeyCode.Return)
             {
                 if (OKButton != null && !OKButton.IsDisposed)
                     OKButton.InvokeMouseClick(null);
                 e.Handled = true;
             }
-            else if (e.KeyChar == (char)Keys.Escape)
+            else if (e.KeyCode == KeyCode.Escape)
             {
                 if (CancelButton != null && !CancelButton.IsDisposed)
                     CancelButton.InvokeMouseClick(null);
@@ -274,13 +269,13 @@ namespace Client.MirControls
             base.OnKeyUp(e);
             e.Handled = true;
         }
-        public override void OnKeyPress(KeyPressEventArgs e)
+        public override void OnKeyPress(KeyboardEvent e)
         {
             base.OnKeyPress(e);
 
-            if (e.KeyChar == (char)Keys.Escape)
+            if (e.KeyCode == KeyCode.Escape)
                 CancelButton.InvokeMouseClick(null);
-            else if (e.KeyChar == (char)Keys.Enter)
+            else if (e.KeyCode == KeyCode.Return)
                 OKButton.InvokeMouseClick(null);
             e.Handled = true;
         }

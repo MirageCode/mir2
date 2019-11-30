@@ -13,6 +13,9 @@ namespace Client.MirGraphics
         public static Window Window;
         public static Renderer Renderer;
 
+        public static bool IsKeyLocked(KeyMod key) =>
+            (SDLContext.Modifier & key) == key;
+
         public static void Create()
         {
             SDLContext.Init(SubSystem.Video);

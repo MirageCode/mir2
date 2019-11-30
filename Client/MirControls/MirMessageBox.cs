@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Client.MirGraphics;
 using KeyboardEvent = SDL.KeyboardEvent;
+using KeyCode = SDL.KeyCode;
 
 namespace Client.MirControls
 {
@@ -179,13 +180,13 @@ namespace Client.MirControls
                 e.Handled = true;
             }
         }
-        public override void OnKeyPress(KeyPressEventArgs e)
+        public override void OnKeyPress(KeyboardEvent e)
         {
             base.OnKeyPress(e);
 
             if (AllowKeyPress)
             {
-                if (e.KeyChar == (char)Keys.Escape)
+                if (e.KeyCode == KeyCode.Escape)
                 {
                     switch (Buttons)
                     {
@@ -202,7 +203,7 @@ namespace Client.MirControls
                     }
                 }
 
-                else if (e.KeyChar == (char)Keys.Enter)
+                else if (e.KeyCode == KeyCode.Return)
                 {
                     switch (Buttons)
                     {

@@ -254,11 +254,10 @@ namespace Client.MirControls
         public event MouseButtonEventHandler MouseDown, MouseUp, Click;
         public event MouseWheelEventHandler MouseWheel;
         public event MouseMotionEventHandler MouseMove;
-        public event KeyboardEventHandler KeyDown, KeyUp;
+        public event KeyboardEventHandler KeyDown, KeyUp, KeyPress;
 
         protected bool HasShown;
         public event EventHandler BeforeDraw , AfterDraw , MouseEnter , MouseLeave , Shown , BeforeShown, Disposing;
-        public event KeyPressEventHandler KeyPress;
         #endregion
 
         #region Fore Colour
@@ -924,7 +923,7 @@ namespace Client.MirControls
             if (MouseWheel != null)
                 MouseWheel(this, e);
         }
-        public virtual void OnKeyPress(KeyPressEventArgs e)
+        public virtual void OnKeyPress(KeyboardEvent e)
         {
             if (!_enabled)
                 return;

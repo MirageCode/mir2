@@ -2012,18 +2012,18 @@ namespace Client.MirScenes.Dialogs
                 RanksName.Enabled = false;
             }
         }
-        public void RanksName_KeyPress(object sender, KeyPressEventArgs e)
+        public void RanksName_KeyPress(object sender, KeyboardEvent e)
         {
-            switch (e.KeyChar)
+            switch (e.KeyCode)
             {
-                case (char)'\\':
+                case KeyCode.Backslash:
                     e.Handled = true;
                     break;
-                case (char)Keys.Enter:
+                case KeyCode.Return:
                     e.Handled = true;
                     RanksChangeName();
                     break;
-                case (char)Keys.Escape:
+                case KeyCode.Escape:
                     e.Handled = true;
                     UpdateRanks();
                     break;

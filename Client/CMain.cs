@@ -53,7 +53,7 @@ namespace Client
             Event.OnMouseButtonDown += CMain_MouseDown;
             Event.OnMouseButtonUp += CMain_MouseUp;
             Event.OnMouseMotion += CMain_MouseMove;
-            KeyPress += CMain_KeyPress;
+            Event.OnKeyDown += CMain_KeyPress;
             Event.OnKeyDown += CMain_KeyDown;
             Event.OnKeyUp += CMain_KeyUp;
             Deactivate += CMain_Deactivate;
@@ -201,8 +201,10 @@ namespace Client
                 SaveError(ex.ToString());
             }
         }
-        public static void CMain_KeyPress(object sender, KeyPressEventArgs e)
+        public static void CMain_KeyPress(KeyboardEvent e)
         {
+            if (e.Repeat) return;
+
             try
             {
                 if (MirScene.ActiveScene != null)

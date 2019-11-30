@@ -13,6 +13,9 @@ using S = ServerPackets;
 using C = ClientPackets;
 using System.Collections.Generic;
 using System.Linq;
+using KeyboardEvent = SDL.KeyboardEvent;
+using KeyCode = SDL.KeyCode;
+using KeyMod = SDL.KeyMod;
 
 namespace Client.MirScenes
 {
@@ -512,9 +515,9 @@ namespace Client.MirScenes
 
                 RefreshLoginButton();
             }
-            public void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+            public void TextBox_KeyPress(object sender, KeyboardEvent e)
             {
-                if (sender == null || e.KeyChar != (char) Keys.Enter) return;
+                if (sender == null || e.KeyCode != KeyCode.Return) return;
 
                 e.Handled = true;
 
@@ -649,9 +652,11 @@ namespace Client.MirScenes
                 };
                 KeyEnterButton.Click += (o, e) =>
                 {
-                    KeyPressEventArgs arg = new KeyPressEventArgs((char)Keys.Enter);
+                    // FIXME: KeyPress
 
-                    _loginDialog.TextBox_KeyPress(o, arg);
+                    // KeyPressEventArgs arg = new KeyPressEventArgs((char)Keys.Enter);
+
+                    // _loginDialog.TextBox_KeyPress(o, arg);
                 };
 
                 KeyRandButton = new MirButton
@@ -738,12 +743,9 @@ namespace Client.MirScenes
 
                 string keyToAdd = chr.ToString();
 
-                if (CMain.IsKeyLocked(Keys.CapsLock)) 
-                    keyToAdd = keyToAdd.ToUpper(); 
-                else 
-                    keyToAdd = keyToAdd.ToLower();
+                currentTextBox.Text += SDLManager.IsKeyLocked(KeyMod.Caps)
+                    ? keyToAdd.ToUpper() : keyToAdd.ToLower();
 
-                currentTextBox.Text += keyToAdd;
                 // FIXME: TextBox
                 // currentTextBox.TextBox.SelectionLength = 0;
                 // currentTextBox.TextBox.SelectionStart = currentTextBox.Text.Length;
