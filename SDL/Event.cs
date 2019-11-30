@@ -561,6 +561,8 @@ namespace SDL
         public EventType Type { get => GenericEvent.type; }
         public UInt32 Timestamp { get => GenericEvent.any.timestamp; }
 
+        public bool Handled { get; set; } = false;
+
         protected internal Event(GenericEvent genericEvent) => GenericEvent = genericEvent;
 
         private static void EnsureSafe(int status)
