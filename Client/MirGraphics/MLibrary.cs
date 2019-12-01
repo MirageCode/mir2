@@ -676,7 +676,7 @@ namespace Client.MirGraphics
 
             // TODO: Set Blend rate
 
-            SDLManager.Draw2D(mi.Image, point, colour);
+            SDLManager.DrawBlend(mi.Image, point, colour);
 
             mi.CleanTime = CMain.Time + Settings.CleanDelay;
         }

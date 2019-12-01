@@ -300,6 +300,15 @@ namespace Client.MirGraphics
             texture.Opacity = oldOpacity;
         }
 
+        public static void DrawBlend(
+            Texture texture, Point point, Color color)
+        {
+            var oldBlendMode = texture.BlendMode;
+            texture.BlendMode = BlendMode.Add;
+            Draw2D(texture, point, color);
+            texture.BlendMode = oldBlendMode;
+        }
+
         public static void DrawRectangle(Rectangle rectangle, Color color)
         {
             var oldColor = Renderer.Color;
