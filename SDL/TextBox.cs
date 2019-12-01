@@ -14,6 +14,9 @@ namespace SDL
         public event EventHandler Updated;
         public event EventHandler TextChanged, GotFocus, LostFocus;
 
+        public delegate void KeyPressHandler(TextBox sender, KeyboardEvent e);
+        public event KeyPressHandler OnKeyPress;
+
         private Font _Font;
         public Font Font
         {
@@ -135,6 +138,8 @@ namespace SDL
         {
             if (e.KeyCode == KeyCode.Backspace && Text.Length > 0)
                 Text = Text.Remove(Text.Length - 1);
+
+            OnKeyPress?.Invoke(this, e);
         }
 
         public Texture CreateTexture(Renderer renderer)
