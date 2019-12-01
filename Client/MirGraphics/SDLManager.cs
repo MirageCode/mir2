@@ -225,7 +225,7 @@ namespace Client.MirGraphics
             texture.Opacity = opacity;
 
             Renderer.RenderCopy(
-                texture, section, new Rectangle(point, texture.Size));
+                texture, section, new Rectangle(point, section.Size));
 
             texture.Opacity = oldOpacity;
         }
@@ -240,7 +240,7 @@ namespace Client.MirGraphics
             texture.Opacity = opacity;
 
             Renderer.RenderCopy(
-                texture, section, new Rectangle(point, texture.Size));
+                texture, section, new Rectangle(point, section.Size));
 
             texture.Color = oldColor;
             texture.Opacity = oldOpacity;
@@ -280,7 +280,7 @@ namespace Client.MirGraphics
             texture.Opacity = Opacity;
 
             Renderer.RenderCopy(
-                texture, section, new Rectangle(point, texture.Size));
+                texture, section, new Rectangle(point, section.Size));
 
             texture.Opacity = oldOpacity;
         }
@@ -294,7 +294,7 @@ namespace Client.MirGraphics
             texture.Opacity = Opacity;
 
             Renderer.RenderCopy(
-                texture, section, new Rectangle(point, texture.Size));
+                texture, section, new Rectangle(point, section.Size));
 
             texture.Color = oldColor;
             texture.Opacity = oldOpacity;
