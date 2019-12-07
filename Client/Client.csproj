@@ -1,33 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{35050645-A39D-483B-BB24-3EFCC5F7E720}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <OutputPath>..\Build\Client\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
     <RootNamespace>Client</RootNamespace>
     <AssemblyName>Client</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <PublishWizardCompleted>true</PublishWizardCompleted>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
     <AssemblyVersion>2017.6.25.1919</AssemblyVersion>
     <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
     <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
@@ -37,75 +17,7 @@
     <AssemblyInfoVersionSettings>YearStamp.MonthStamp.DayStamp.TimeStamp</AssemblyInfoVersionSettings>
     <PrimaryVersionType>AssemblyVersionAttribute</PrimaryVersionType>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\Build\Client\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>1</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>
-    </DocumentationFile>
-    <Prefer32Bit>true</Prefer32Bit>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
-    <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\Client\</OutputPath>
-    <DefineConstants>
-    </DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>2</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <DebugSymbols>false</DebugSymbols>
-    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
-    <LangVersion>6</LangVersion>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>MIR2.ICO</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestCertificateThumbprint>9E5B013900C639479A5BE07D94C6D9183B921CCA</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>Client_TemporaryKey.pfx</ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <GenerateManifests>false</GenerateManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <TargetZone>LocalIntranet</TargetZone>
-  </PropertyGroup>
-  <PropertyGroup />
-  <PropertyGroup>
-    <SignManifests>false</SignManifests>
-  </PropertyGroup>
-  <PropertyGroup />
-  <PropertyGroup>
-    <NoWin32Manifest>true</NoWin32Manifest>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
+
   <ItemGroup>
     <Compile Include="..\ClientPackets.cs">
       <Link>MirNetwork\ClientPackets.cs</Link>
@@ -116,110 +28,10 @@
     <Compile Include="..\ServerPackets.cs">
       <Link>MirNetwork\ServerPackets.cs</Link>
     </Compile>
-    <Compile Include="CMain.cs" />
-    <Compile Include="KeyBindSettings.cs" />
-    <Compile Include="MirControls\MirGameShopCell.cs" />
-    <Compile Include="MirControls\MirAmountBox.cs" />
-    <Compile Include="MirControls\MirAnimatedButton.cs" />
-    <Compile Include="MirControls\MirAnimatedControl.cs" />
-    <Compile Include="MirControls\MirButton.cs" />
-    <Compile Include="MirControls\MirCheckBox.cs" />
-    <Compile Include="MirControls\MirControl.cs" />
-    <Compile Include="MirControls\MirDropDownBox.cs" />
-    <Compile Include="MirControls\MirGoodsCell.cs" />
-    <Compile Include="MirControls\MirImageControl.cs" />
-    <Compile Include="MirControls\MirInputBox.cs" />
-    <Compile Include="MirControls\MirItemCell.cs" />
-    <Compile Include="MirControls\MirLabel.cs" />
-    <Compile Include="MirControls\MirMessageBox.cs" />
-    <Compile Include="MirControls\MirScene.cs" />
-    <Compile Include="MirControls\MirScrollingLabel.cs" />
-    <Compile Include="MirControls\MirTextBox.cs" />
-    <Compile Include="MirGraphics\MLibrary.cs" />
+  </ItemGroup>
 
-    <Compile Include="MirGraphics\SDLManager.cs" />
+  <ItemGroup>
     <ProjectReference Include="..\SDL\SDL.csproj" />
-
-    <Compile Include="MirObjects\Damage.cs" />
-    <Compile Include="MirObjects\DecoObject.cs" />
-    <Compile Include="MirObjects\Effect.cs" />
-    <Compile Include="MirObjects\Frames.cs" />
-    <Compile Include="MirObjects\ItemObject.cs" />
-    <Compile Include="MirObjects\MapCode.cs" />
-    <Compile Include="MirObjects\MapObject.cs" />
-    <Compile Include="MirObjects\MonsterObject.cs" />
-    <Compile Include="MirObjects\NPCObject.cs" />
-    <Compile Include="MirObjects\PlayerObject.cs" />
-    <Compile Include="MirObjects\SpellObject.cs" />
-    <Compile Include="MirObjects\UserObject.cs" />
-    <Compile Include="MirScenes\Dialogs\BuffDialog.cs" />
-    <Compile Include="MirScenes\Dialogs\ChatNoticeDialog.cs" />
-    <Compile Include="MirScenes\Dialogs\ChatOptionDialog.cs" />
-    <Compile Include="MirScenes\Dialogs\FishingDialog.cs" />
-    <Compile Include="MirScenes\Dialogs\FriendDialog.cs" />
-    <Compile Include="MirScenes\Dialogs\GameshopDialog.cs" />
-    <Compile Include="MirScenes\Dialogs\GroupDialog.cs" />
-    <Compile Include="MirScenes\Dialogs\GuildDialog.cs" />
-    <Compile Include="MirScenes\Dialogs\HelpDialog.cs" />
-    <Compile Include="MirScenes\Dialogs\IntelligentCreatureDialogs.cs" />
-    <Compile Include="MirScenes\Dialogs\KeyboardLayoutDialog.cs" />
-    <Compile Include="MirScenes\Dialogs\ItemRentingDialog.cs" />
-    <Compile Include="MirScenes\Dialogs\MailDialogs.cs" />
-    <Compile Include="MirScenes\Dialogs\MainDialogs.cs" />
-    <Compile Include="MirScenes\Dialogs\MentorDialog.cs" />
-    <Compile Include="MirScenes\Dialogs\MountDialog.cs" />
-    <Compile Include="MirScenes\Dialogs\NPCDialogs.cs" />
-    <Compile Include="MirScenes\Dialogs\RankingDialog.cs" />
-    <Compile Include="MirScenes\Dialogs\RelationshipDialog.cs" />
-    <Compile Include="MirScenes\Dialogs\ItemRentalDialog.cs" />
-    <Compile Include="MirScenes\Dialogs\ItemRentDialog.cs" />
-    <Compile Include="MirScenes\Dialogs\ReportDialog.cs" />
-    <Compile Include="MirScenes\Dialogs\TradeDialogs.cs" />
-    <Compile Include="MirScenes\Dialogs\TrustMerchantDialog.cs" />
-    <Compile Include="MirScenes\GameScene.cs" />
-    <Compile Include="MirScenes\LoginScene.cs" />
-    <Compile Include="MirNetwork\Network.cs" />
-    <Compile Include="MirScenes\Dialogs\QuestDialogs.cs" />
-    <Compile Include="MirScenes\SelectScene.cs" />
-    <Compile Include="MirSounds\SoundLibrary.cs" />
-    <Compile Include="MirSounds\SoundManager.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="Utils\BrowserHelper.cs" />
-    <None Include="App.config" />
+    <PackageReference Include="System.Drawing.Common" Version="4.6.0" />
   </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
-      <Visible>False</Visible>
-      <ProductName>Windows Installer 4.5</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="MIR2.ICO" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
