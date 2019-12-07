@@ -8676,10 +8676,10 @@ namespace Client.MirScenes
             return null;
         }
 
-        public override void Draw()
-        {
-            //Do nothing.
-        }
+        // public override void Draw()
+        // {
+        //     //Do nothing.
+        // }
 
         protected override void CreateTexture()
         {
@@ -8753,12 +8753,14 @@ namespace Client.MirScenes
                     break;
                 }
 
-                SDLManager.DrawToTexture(
-                    _lightTexture,
-                    setting == LightSetting.Night ? Darkness : Color.FromArgb(255, 50, 50, 50),
-                    () => {
-                        DrawLights(setting);
-                    });
+                // SDLManager.DrawToTexture(
+                //     _lightTexture,
+                //     setting == LightSetting.Night ? Darkness : Color.FromArgb(255, 50, 50, 50),
+                //     () => {
+                //         DrawLights(setting);
+                //     });
+
+                // SDLManager.DrawBlend(_lightTexture, Point.Empty, Color.White);
             }
 
             if (Settings.DropView || GameScene.DropViewTime > CMain.Time)
@@ -9115,6 +9117,8 @@ namespace Client.MirScenes
 
         private void DrawLights(LightSetting setting)
         {
+            if (SDLManager.Lights.Count == 0) return;
+
             int light;
             Point p;
 
@@ -9276,7 +9280,8 @@ namespace Client.MirScenes
             // Device.RenderState.SourceBlend = Blend.DestinationColor;
             // Device.RenderState.DestinationBlend = Blend.BothInvSourceAlpha;
 
-            SDLManager.Draw2D(_lightTexture, Point.Empty, Color.White);
+
+            // SDLManager.Draw2D(_lightTexture, Point.Empty, Color.White);
         }
 
         private static void OnMouseClick(object sender, MouseButtonEvent e)
