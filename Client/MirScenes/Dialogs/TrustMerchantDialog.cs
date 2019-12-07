@@ -396,7 +396,11 @@ namespace Client.MirScenes.Dialogs
                     {
                         Match = SearchTextBox.Text,
                     });
-                    Program.Form.ActiveControl = null;
+                    if (MirTextBox.ActiveTextBox != null)
+                    {
+                        MirTextBox.ActiveTextBox.Focused = false;
+                        MirTextBox.ActiveTextBox = null;
+                    }
                     break;
                 case KeyCode.Escape:
                     e.Handled = true;
