@@ -8,7 +8,6 @@ using System.Drawing;
 using Client.MirSounds;
 using Font = SDL.Font;
 
-using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
 
 namespace Client.MirScenes.Dialogs
 {

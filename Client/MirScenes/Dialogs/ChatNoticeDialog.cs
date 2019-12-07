@@ -9,7 +9,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Font = SDL.Font;
 
-using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
 
 namespace Client.MirScenes.Dialogs
 {

@@ -320,6 +320,27 @@ namespace Client.MirGraphics
         }
 
         public static void DrawText(
+            string s, Font font, Rectangle dst, Color color,
+            TextFormatFlags flags = TextFormatFlags.Default)
+        {
+            var size = font.GetSize(s);
+
+            var location = new Point(
+                flags.HasFlag(TextFormatFlags.Right)
+                ? dst.X + dst.Width - size.Width :
+                flags.HasFlag(TextFormatFlags.HorizontalCenter)
+                ? dst.X + (dst.Width - size.Width) / 2 :
+                dst.X,
+                flags.HasFlag(TextFormatFlags.VerticalCenter)
+                ? dst.Y + (dst.Height - size.Height) / 2 :
+                dst.Y);
+
+            using (var surface = font.CreateSurface(s, color))
+                using (var texture = new Texture(Renderer, surface))
+                    Draw2D(texture, location);
+        }
+
+        public static void DrawTextWrapped(
             string s, Font font, Rectangle dst, Color color)
         {
             using (var surface = font.CreateSurface(s, color, (uint) dst.Width))

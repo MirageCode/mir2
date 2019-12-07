@@ -8,7 +8,6 @@ using System.Globalization;
 using Client.MirNetwork;
 using C = ClientPackets;
 
-using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
 
 namespace Client.MirScenes.Dialogs
 {

@@ -14,7 +14,6 @@ using S = ServerPackets;
 using C = ClientPackets;
 using Font = SDL.Font;
 
-using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
 
 namespace Client.MirScenes.Dialogs
 {

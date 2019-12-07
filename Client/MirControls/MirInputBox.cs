@@ -3,7 +3,6 @@ using System.Drawing;
 using Client.MirGraphics;
 using SDL;
 
-using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
 
 namespace Client.MirControls
 {

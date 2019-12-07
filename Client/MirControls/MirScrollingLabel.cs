@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Font = SDL.Font;
 
-using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
 
 namespace Client.MirControls
 {

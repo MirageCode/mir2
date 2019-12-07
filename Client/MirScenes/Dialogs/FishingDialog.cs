@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using C = ClientPackets;
 using S = ServerPackets;
 
-using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
 
 namespace Client.MirScenes.Dialogs
 {

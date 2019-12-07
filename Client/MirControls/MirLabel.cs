@@ -7,10 +7,20 @@ using Client.MirGraphics;
 using SDL;
 using Font = SDL.Font;
 
-using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
-
 namespace Client.MirControls
 {
+    [Flags]
+    public enum TextFormatFlags
+    {
+        Default = Left,
+        Left = 0,
+        HorizontalCenter = 1,
+        Right = 2,
+        VerticalCenter = 4,
+        WordBreak = 16,
+        RightToLeft = 131072,
+    }
+
     public class MirLabel : MirControl
     {
         #region Auto Size
@@ -208,18 +218,17 @@ namespace Client.MirControls
                 TextureSize = Size;
             }
 
-            // TODO: DrawFormat
             SDLManager.DrawToTexture(ControlTexture, BackColour, () => {
                 if (OutLine)
                 {
-                    SDLManager.DrawText(Text, Font, new Rectangle(1, 0, Size.Width, Size.Height), OutLineColour);
-                    SDLManager.DrawText(Text, Font, new Rectangle(0, 1, Size.Width, Size.Height), OutLineColour);
-                    SDLManager.DrawText(Text, Font, new Rectangle(2, 1, Size.Width, Size.Height), OutLineColour);
-                    SDLManager.DrawText(Text, Font, new Rectangle(1, 2, Size.Width, Size.Height), OutLineColour);
-                    SDLManager.DrawText(Text, Font, new Rectangle(1, 1, Size.Width, Size.Height), ForeColour);
+                    SDLManager.DrawText(Text, Font, new Rectangle(1, 0, Size.Width, Size.Height), OutLineColour, DrawFormat);
+                    SDLManager.DrawText(Text, Font, new Rectangle(0, 1, Size.Width, Size.Height), OutLineColour, DrawFormat);
+                    SDLManager.DrawText(Text, Font, new Rectangle(2, 1, Size.Width, Size.Height), OutLineColour, DrawFormat);
+                    SDLManager.DrawText(Text, Font, new Rectangle(1, 2, Size.Width, Size.Height), OutLineColour, DrawFormat);
+                    SDLManager.DrawText(Text, Font, new Rectangle(1, 1, Size.Width, Size.Height), ForeColour, DrawFormat);
                 }
                 else
-                    SDLManager.DrawText(Text, Font, new Rectangle(1, 0, Size.Width, Size.Height), ForeColour);
+                    SDLManager.DrawText(Text, Font, new Rectangle(1, 0, Size.Width, Size.Height), ForeColour, DrawFormat);
             });
 
             TextureValid = true;

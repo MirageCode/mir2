@@ -5,7 +5,6 @@ using Client.MirSounds;
 using System.Drawing;
 using C = ClientPackets;
 
-using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
 
 namespace Client.MirScenes.Dialogs
 {

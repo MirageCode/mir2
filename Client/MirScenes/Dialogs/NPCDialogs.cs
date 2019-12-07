@@ -19,7 +19,6 @@ using Effect = Client.MirObjects.Effect;
 using Client.MirScenes.Dialogs;
 using System.Drawing.Imaging;
 
-using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
 using SystemInformation = System.Windows.Forms.SystemInformation;
 
 namespace Client.MirScenes.Dialogs

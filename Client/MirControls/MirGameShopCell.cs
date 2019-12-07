@@ -10,7 +10,6 @@ using C = ClientPackets;
 using SDL;
 using Font = SDL.Font;
 
-using TextFormatFlags = System.Windows.Forms.TextFormatFlags;
 
 namespace Client.MirControls
 {
