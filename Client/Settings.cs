@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System;
 using Client.MirSounds;
-using System.Windows.Forms;
 
 namespace Client
 {
@@ -170,7 +169,6 @@ namespace Client
         public static string P_Password = string.Empty;
         public static string P_ServerName = string.Empty;
         public static string P_BrowserAddress = "https://launcher.mironline.co.uk/web/";
-        public static string P_Client = Application.StartupPath;
         public static bool P_AutoStart = false;
 
         public static void Load()
