@@ -5,8 +5,6 @@ using Client.MirSounds;
 using KeyboardEvent = SDL.KeyboardEvent;
 using KeyCode = SDL.KeyCode;
 
-using TextBox = System.Windows.Forms.TextBox;
-
 namespace Client.MirControls
 {
     public sealed class MirAmountBox : MirImageControl
@@ -237,28 +235,8 @@ namespace Client.MirControls
 
             Highlight();
 
-            for (int i = 0; i < Program.Form.Controls.Count; i++)
-            {
-                TextBox T = Program.Form.Controls[i] as TextBox;
-                if (T != null && T.Tag != null && T.Tag != null)
-                    ((MirTextBox)T.Tag).DialogChanged();
-            }
-            
-            /*
-            CMain.Shift = false;
-            CMain.Ctrl = false;
-            CMain.Alt = false;
-
-            Parent = MirScene.ActiveScene;
-            Activate();
-            Highlight();
-
-            for (int i = 0; i < Main.This.Controls.Count; i++)
-            {
-                TextBox T = (TextBox)Main.This.Controls[i];
-                if (T != null && T.Tag != null && T.Tag != null)
-                    ((MirTextBox)T.Tag).DialogChanged();
-            }*/
+            for (int i = 0; i < MirTextBox.TextBoxList.Count; i++)
+                MirTextBox.TextBoxList[i].DialogChanged();
         }
         public override void OnKeyDown(KeyboardEvent e)
         {
@@ -289,12 +267,8 @@ namespace Client.MirControls
 
             if (!disposing) return;
 
-            for (int i = 0; i < Program.Form.Controls.Count; i++)
-            {
-                TextBox T = (TextBox)Program.Form.Controls[i];
-                if (T != null && T.Tag != null && T.Tag != null)
-                    ((MirTextBox)T.Tag).DialogChanged();
-            }
+            for (int i = 0; i < MirTextBox.TextBoxList.Count; i++)
+                MirTextBox.TextBoxList[i].DialogChanged();
         }
 
         #endregion

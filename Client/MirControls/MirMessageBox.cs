@@ -4,8 +4,6 @@ using Client.MirGraphics;
 using KeyboardEvent = SDL.KeyboardEvent;
 using KeyCode = SDL.KeyCode;
 
-using TextBox = System.Windows.Forms.TextBox;
-
 namespace Client.MirControls
 {
     public enum MirMessageBoxButtons { OK, OKCancel, YesNo, YesNoCancel, Cancel }
@@ -156,12 +154,8 @@ namespace Client.MirControls
 
             Highlight();
 
-            for (int i = 0; i < Program.Form.Controls.Count; i++)
-            {
-                TextBox T = Program.Form.Controls[i] as TextBox;
-                if (T != null && T.Tag != null && T.Tag != null)
-                    ((MirTextBox)T.Tag).DialogChanged();
-            }
+            for (int i = 0; i < MirTextBox.TextBoxList.Count; i++)
+                MirTextBox.TextBoxList[i].DialogChanged();
         }
 
 
@@ -249,12 +243,8 @@ namespace Client.MirControls
             YesButton = null;
             Buttons = 0;
 
-            for (int i = 0; i < Program.Form.Controls.Count; i++)
-            {
-                TextBox T = (TextBox) Program.Form.Controls[i];
-                if (T != null && T.Tag != null)
-                    ((MirTextBox) T.Tag).DialogChanged();
-            }
+            for (int i = 0; i < MirTextBox.TextBoxList.Count; i++)
+                MirTextBox.TextBoxList[i].DialogChanged();
         }
 
         #endregion

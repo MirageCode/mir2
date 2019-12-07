@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using Client.MirGraphics;
@@ -12,6 +13,8 @@ namespace Client.MirControls
     public sealed class MirTextBox : MirControl
     {
         public static MirTextBox ActiveTextBox { get; set; }
+
+        public static List<MirTextBox> TextBoxList = new List<MirTextBox>();
 
         #region Back Color
 
@@ -283,6 +286,8 @@ namespace Client.MirControls
             // TextBox.KeyPress += TextBox_KeyPress;
 
             // Shown += MirTextBox_Shown;
+
+            TextBoxList.Add(this);
         }
 
         protected override void Activate()
@@ -346,6 +351,7 @@ namespace Client.MirControls
             base.Dispose(disposing);
 
             Focused = false;
+            TextBoxList.Remove(this);
 
             if (!disposing) return;
         }
