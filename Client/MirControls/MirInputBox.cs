@@ -42,8 +42,7 @@ namespace Client.MirControls
                 MaxLength = 50,
             };
             InputTextBox.SetFocus();
-            // FIXME: TextBox
-            // InputTextBox.TextBox.KeyPress += MirInputBox_KeyPress;
+            InputTextBox.TextBox.OnKeyPress += MirInputBox_KeyPress;
 
             OKButton = new MirButton
             {
@@ -67,7 +66,7 @@ namespace Client.MirControls
             CancelButton.Click += DisposeDialog;
         }
 
-        void MirInputBox_KeyPress(object sender, KeyboardEvent e)
+        void MirInputBox_KeyPress(TextBox sender, KeyboardEvent e)
         {
             if (e.KeyCode == KeyCode.Return)
             {

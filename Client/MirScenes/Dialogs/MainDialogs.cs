@@ -582,8 +582,7 @@ namespace Client.MirScenes.Dialogs
                 // FIXME:
                 // Font = ChatFont,
             };
-            // FIXME: TextBox
-            // ChatTextBox.TextBox.KeyPress += ChatTextBox_KeyPress;
+            ChatTextBox.TextBox.OnKeyPress += ChatTextBox_KeyPress;
 
             HomeButton = new MirButton
             {
@@ -689,7 +688,7 @@ namespace Client.MirScenes.Dialogs
             Visible = false;
         }
 
-        private void ChatTextBox_KeyPress(object sender, KeyboardEvent e)
+        private void ChatTextBox_KeyPress(TextBox sender, KeyboardEvent e)
         {
             switch (e.KeyCode)
             {
@@ -723,11 +722,13 @@ namespace Client.MirScenes.Dialogs
                     }
                     ChatTextBox.Visible = false;
                     ChatTextBox.Text = string.Empty;
+                    ChatTextBox.TextBox.Focused = false;
                     break;
                 case KeyCode.Escape:
                     e.Handled = true;
                     ChatTextBox.Visible = false;
                     ChatTextBox.Text = string.Empty;
+                    ChatTextBox.TextBox.Focused = false;
                     break;
             }
         }

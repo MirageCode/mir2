@@ -125,7 +125,8 @@ namespace Client
                     return;
                 }
 
-                if (MirScene.ActiveScene != null)
+                if (MirScene.ActiveScene != null
+                    && MirTextBox.ActiveTextBox == null)
                     MirScene.ActiveScene.OnKeyDown(e);
 
             }
@@ -184,7 +185,8 @@ namespace Client
             }
             try
             {
-                if (MirScene.ActiveScene != null)
+                if (MirScene.ActiveScene != null
+                    && MirTextBox.ActiveTextBox == null)
                     MirScene.ActiveScene.OnKeyUp(e);
             }
             catch (Exception ex)
@@ -198,7 +200,8 @@ namespace Client
 
             try
             {
-                if (MirScene.ActiveScene != null)
+                if (MirScene.ActiveScene != null
+                    && MirTextBox.ActiveTextBox == null)
                     MirScene.ActiveScene.OnKeyPress(e);
             }
             catch (Exception ex)

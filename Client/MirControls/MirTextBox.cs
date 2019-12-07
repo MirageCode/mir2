@@ -283,7 +283,7 @@ namespace Client.MirControls
 
             // TextBox.VisibleChanged += TextBox_VisibleChanged;
             // TextBox.ParentChanged += TextBox_VisibleChanged;
-            // TextBox.KeyPress += TextBox_KeyPress;
+            TextBox.OnKeyPress += TextBox_KeyPress;
 
             // Shown += MirTextBox_Shown;
 
@@ -301,12 +301,13 @@ namespace Client.MirControls
             Focused = true;
         }
 
-        void TextBox_KeyPress(object sender, KeyboardEvent e)
+        void TextBox_KeyPress(TextBox sender, KeyboardEvent e)
         {
             base.OnKeyPress(e);
 
             if (e.KeyCode == KeyCode.Escape)
             {
+                Focused = false;
                 ActiveControl = null;
                 e.Handled = true;
             }
