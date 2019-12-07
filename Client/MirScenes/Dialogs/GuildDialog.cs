@@ -19,8 +19,6 @@ using Effect = Client.MirObjects.Effect;
 using Client.MirScenes.Dialogs;
 using System.Drawing.Imaging;
 
-using SystemInformation = System.Windows.Forms.SystemInformation;
-
 namespace Client.MirScenes.Dialogs
 {
 
@@ -1052,7 +1050,7 @@ namespace Client.MirScenes.Dialogs
 
         private void BuffsPanel_MouseWheel(object sender, MouseWheelEvent e)
         {
-            int count = e.Scrolled.Y / SystemInformation.MouseWheelScrollDelta;
+            int count = e.Scrolled.Y * Settings.MouseWheelScrollDelta;
 
             if (StartIndex == 0 && count >= 0) return;
             if (StartIndex == (GuildBuffInfos.Count - 8) && count <= 0) return;
@@ -1510,7 +1508,7 @@ namespace Client.MirScenes.Dialogs
         }
         private void NoticePanel_MouseWheel(object sender, MouseWheelEvent e)
         {
-            int count = e.Scrolled.Y / SystemInformation.MouseWheelScrollDelta;
+            int count = e.Scrolled.Y * Settings.MouseWheelScrollDelta;
 
             if (NoticeScrollIndex == 0 && count >= 0) return;
             if (NoticeScrollIndex == Notice.MultiText.Length - 25 && count <= 0) return;
@@ -1805,7 +1803,7 @@ namespace Client.MirScenes.Dialogs
         }
         private void MembersPanel_MouseWheel(object sender, MouseWheelEvent e)
         {
-            int count = e.Scrolled.Y / SystemInformation.MouseWheelScrollDelta;
+            int count = e.Scrolled.Y * Settings.MouseWheelScrollDelta;
 
             if (MemberScrollIndex == 0 && count >= 0) return;
             if (MemberScrollIndex == MembersShowCount - MemberPageRows && count <= 0) return;
@@ -2072,7 +2070,7 @@ namespace Client.MirScenes.Dialogs
 
         private void StoragePanel_MouseWheel(object sender, MouseWheelEvent e)
         {
-            int count = e.Scrolled.Y / SystemInformation.MouseWheelScrollDelta;
+            int count = e.Scrolled.Y * Settings.MouseWheelScrollDelta;
 
             if (StorageIndex == 0 && count >= 0) return;
             if (StorageIndex == 6 && count <= 0) return;

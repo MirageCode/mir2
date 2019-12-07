@@ -15,8 +15,6 @@ using C = ClientPackets;
 using SDL;
 using Font = SDL.Font;
 
-using SystemInformation = System.Windows.Forms.SystemInformation;
-
 namespace Client.MirScenes.Dialogs
 {
     public sealed class QuestListDialog : MirImageControl
@@ -1112,7 +1110,7 @@ namespace Client.MirScenes.Dialogs
 
         private void QuestMessage_MouseWheel(object sender, MouseWheelEvent e)
         {
-            int count = e.Scrolled.Y / SystemInformation.MouseWheelScrollDelta;
+            int count = e.Scrolled.Y * Settings.MouseWheelScrollDelta;
 
             if (TopLine == 0 && count >= 0) return;
             if (TopLine == CurrentLines.Count - 1 && count <= 0) return;

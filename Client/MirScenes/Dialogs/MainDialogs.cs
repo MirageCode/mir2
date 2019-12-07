@@ -19,8 +19,6 @@ using Effect = Client.MirObjects.Effect;
 using Client.MirScenes.Dialogs;
 using System.Drawing.Imaging;
 
-using SystemInformation = System.Windows.Forms.SystemInformation;
-
 namespace Client.MirScenes.Dialogs
 {
     public sealed class MainDialog : MirImageControl
@@ -1000,7 +998,7 @@ namespace Client.MirScenes.Dialogs
         }
         private void ChatPanel_MouseWheel(object sender, MouseWheelEvent e)
         {
-            int count = e.Scrolled.Y / SystemInformation.MouseWheelScrollDelta;
+            int count = e.Scrolled.Y * Settings.MouseWheelScrollDelta;
 
             if (StartIndex == 0 && count >= 0) return;
             if (StartIndex == History.Count - 1 && count <= 0) return;

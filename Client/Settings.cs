@@ -71,6 +71,8 @@ namespace Client
         public static int Resolution = 1024;
         public static bool DebugMode = false;
 
+        public static int MouseWheelScrollDelta = 5;
+
         //Network
         public static bool UseConfig = false;
         public static string IPAddress = "127.0.0.1";
@@ -186,6 +188,7 @@ namespace Client
             FPSCap = Reader.ReadBoolean("Graphics", "FPSCap", FPSCap);
             Resolution = Reader.ReadInt32("Graphics", "Resolution", Resolution);
             DebugMode = Reader.ReadBoolean("Graphics", "DebugMode", DebugMode);
+            MouseWheelScrollDelta = Reader.ReadInt32("Graphics", "MouseWheelScrollDelta", MouseWheelScrollDelta);
 
             //Network
             UseConfig = Reader.ReadBoolean("Network", "UseConfig", UseConfig);
@@ -272,6 +275,7 @@ namespace Client
             Reader.Write("Graphics", "FPSCap", FPSCap);
             Reader.Write("Graphics", "Resolution", Resolution);
             Reader.Write("Graphics", "DebugMode", DebugMode);
+            Reader.Write("Graphics", "MouseWheelScrollDelta", MouseWheelScrollDelta);
 
             //Sound
             Reader.Write("Sound", "Volume", Volume);
