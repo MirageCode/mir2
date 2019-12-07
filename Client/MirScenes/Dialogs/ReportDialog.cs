@@ -84,11 +84,11 @@ namespace Client.MirScenes.Dialogs
 
         private void SendScreenshot()
         {
-            Point location = Program.Form.PointToClient(Program.Form.Location);
-
-            location = new Point(-location.X, -location.Y);
-
             // TODO: Screenshot
+
+            // Point location = Program.Form.PointToClient(Program.Form.Location);
+
+            // location = new Point(-location.X, -location.Y);
 
             // using (Bitmap image = CMain.GetImage(Program.Form.Handle, new Rectangle(location, Program.Form.ClientSize)))
             // {

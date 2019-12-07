@@ -36,7 +36,7 @@ namespace Client.MirSounds
 
         public static void Create()
         {
-            if (Program.Form == null || Program.Form.IsDisposed) return;
+            if (Program.Form == null || Program.Form.Disposed) return;
 
             // Device = new Device();
             // Device.SetCooperativeLevel(Program.Form, CooperativeLevel.Normal);

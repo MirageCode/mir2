@@ -8,7 +8,6 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Threading;
-using System.Windows.Forms;
 using Client.MirControls;
 using Client.MirGraphics;
 using Client.MirNetwork;
@@ -18,7 +17,7 @@ using SDL;
 
 namespace Client
 {
-    public partial class CMain : Form
+    public partial class CMain : IDisposable
     {
         public static MirControl DebugBaseLabel, HintBaseLabel;
         public static MirLabel DebugTextLabel, HintTextLabel, ScreenshotTextLabel;
@@ -41,9 +40,15 @@ namespace Client
 
         public bool Closing = false;
 
+        public bool Disposed { get; private set; }
+        public event EventHandler Disposing;
+
         public CMain()
         {
             SDLManager.Create();
+
+            // TODO: Sound
+            // SoundManager.Create();
 
             LoginScene LoginScene = new LoginScene();
             MirScene.ActiveScene = LoginScene;
@@ -57,30 +62,28 @@ namespace Client
             Event.OnKeyDown += CMain_KeyPress;
             Event.OnKeyDown += CMain_KeyDown;
             Event.OnKeyUp += CMain_KeyUp;
-            Deactivate += CMain_Deactivate;
             Event.OnMouseWheel += CMain_MouseWheel;
-
-
-            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.Selectable, true);
-            FormBorderStyle = Settings.FullScreen ? FormBorderStyle.None : FormBorderStyle.FixedDialog;
         }
 
-        private void CMain_Load(object sender, EventArgs e)
+        ~CMain() => Dispose(false);
+
+        public void Dispose()
         {
-            this.Text = GameLanguage.GameName;
-            try
-            {
-                ClientSize = new Size(Settings.ScreenWidth, Settings.ScreenHeight);
-
-                // TODO: Sound
-                // SoundManager.Create();
-            }
-            catch (Exception ex)
-            {
-                SaveError(ex.ToString());
-            }
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (Disposed) return;
+
+            if (disposing) {
+                EventHandler handler = Disposing;
+                if (handler != null) handler(this, new EventArgs());
+            }
+
+            Disposed = true;
+        }
 
         public void Close() => Closing = true;
 
@@ -101,15 +104,6 @@ namespace Client
             {
                 SaveError(ex.ToString());
             }
-        }
-
-        private static void CMain_Deactivate(object sender, EventArgs e)
-        {
-            MapControl.MapButtons = MouseButton.None;
-            Shift = false;
-            Alt = false;
-            Ctrl = false;
-            Tilde = false;
         }
 
         public static void CMain_KeyDown(KeyboardEvent e)
@@ -150,9 +144,6 @@ namespace Client
         }
         public static void CMain_MouseMove(MouseMotionEvent e)
         {
-            if (Settings.FullScreen)
-                Cursor.Clip = new Rectangle(0, 0, Settings.ScreenWidth, Settings.ScreenHeight);
-
             try
             {
                 if (MirScene.ActiveScene != null)
@@ -203,7 +194,7 @@ namespace Client
         }
         public static void CMain_KeyPress(KeyboardEvent e)
         {
-            if (e.Repeat) return;
+            if (e.Repeat || MirTextBox.ActiveTextBox != null) return;
 
             try
             {
@@ -484,9 +475,9 @@ namespace Client
 
         public void CreateScreenShot()
         {
-            Point location = PointToClient(Location);
+            // Point location = PointToClient(Location);
 
-            location = new Point(-location.X, -location.Y);
+            // location = new Point(-location.X, -location.Y);
 
             string text = string.Format("[{0} Server {1}] {2} {3:hh\\:mm\\:ss}", 
                 Settings.P_ServerName.Length > 0 ? Settings.P_ServerName : "Crystal", 
@@ -540,34 +531,8 @@ namespace Client
 
             Settings.ScreenWidth = width;
             Settings.ScreenHeight = height;
-            Program.Form.ClientSize = new Size(width, height);
+            // TODO: Set Window size
+            // Program.Form.ClientSize = new Size(width, height);
         }
-
-        #region Idle Check
-        private static bool AppStillIdle
-        {
-            get
-            {
-                PeekMsg msg;
-                return !PeekMessage(out msg, IntPtr.Zero, 0, 0, 0);
-            }
-        }
-
-        [SuppressUnmanagedCodeSecurity]
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
-        private static extern bool PeekMessage(out PeekMsg msg, IntPtr hWnd, uint messageFilterMin,
-                                               uint messageFilterMax, uint flags);
-
-        [StructLayout(LayoutKind.Sequential)]
-        private struct PeekMsg
-        {
-            private readonly IntPtr hWnd;
-            private readonly Message msg;
-            private readonly IntPtr wParam;
-            private readonly IntPtr lParam;
-            private readonly uint time;
-            private readonly Point p;
-        }
-        #endregion
     }
 }
