@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Drawing;
 using System.IO;
 using System.Security.Cryptography;
@@ -15,8 +16,6 @@ using System.Linq;
 using KeyboardEvent = SDL.KeyboardEvent;
 using KeyCode = SDL.KeyCode;
 using KeyMod = SDL.KeyMod;
-
-using Application = System.Windows.Forms.Application;
 
 namespace Client.MirScenes
 {
@@ -97,7 +96,7 @@ namespace Client.MirScenes
                     BorderColour = Color.Black,
                     Location = new Point(5, 580),
                     Parent = _background,
-                    Text = string.Format("Version: {0}", Application.ProductVersion),
+                    Text = string.Format("Version: {0}", Assembly.GetEntryAssembly().GetName().Version),
                 };
 
             TestLabel = new MirImageControl
@@ -191,7 +190,7 @@ namespace Client.MirScenes
             {
                 byte[] sum;
                 using (MD5 md5 = MD5.Create())
-                using (FileStream stream = File.OpenRead(Application.ExecutablePath))
+                using (FileStream stream = File.OpenRead(Environment.CommandLine))
                     sum = md5.ComputeHash(stream);
 
                 p.VersionHash = sum;
