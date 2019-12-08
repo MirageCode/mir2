@@ -18,10 +18,21 @@ namespace SDL
 		Noparachute = 0x00100000,
     }
 
+    [Flags]
+    public enum MixerFlags
+    {
+        Flac = 0x00000001,
+        Mod = 0x00000002,
+        Mp3 = 0x00000008,
+        Ogg = 0x00000010,
+        Mid = 0x00000020,
+    }
+
     public static class SDLContext
     {
 		public const string SDLLib = "libSDL2-2.0.so.0";
 		public const string TTFLib = "libSDL2_ttf-2.0.so.0";
+		public const string MixerLib = "libSDL2_mixer-2.0.so.0";
 
         public static void Init(SubSystem flags)
         {
@@ -45,6 +56,9 @@ namespace SDL
 
         public static void QuitTTF() => TTF_Quit();
 
+        public static void InitMixer(MixerFlags flags) => Mix_Init(flags);
+        public static void QuitMixer() => Mix_Quit();
+
         public static void Delay(UInt32 ms) => SDL_Delay(ms);
 
         public static void StartTextInput() => SDL_StartTextInput();
@@ -66,6 +80,14 @@ namespace SDL
             set => SDL_SetModState(value);
         }
 
+        internal static IntPtr RWFromFile(string file, string mode)
+        {
+            var handle = SDL_RWFromFile(
+                Util.FromString(file), Util.FromString(mode));
+            if (handle == IntPtr.Zero) throw new SDLException();
+            return handle;
+        }
+
         [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
         private static extern int SDL_Init(SubSystem flags);
 
@@ -84,6 +106,12 @@ namespace SDL
 		[DllImport(TTFLib, CallingConvention = CallingConvention.Cdecl)]
 		private static extern void TTF_Quit();
 
+		[DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
+		private static extern int Mix_Init(MixerFlags flags);
+
+		[DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void Mix_Quit();
+
 		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
 		private static extern void SDL_Delay(UInt32 ms);
 
@@ -101,5 +129,8 @@ namespace SDL
 
 		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
 		private static extern void SDL_SetModState(KeyMod modstate);
+
+		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+		private static extern IntPtr SDL_RWFromFile(byte[] file, byte[] mode);
     }
 }
