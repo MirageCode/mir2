@@ -12,7 +12,6 @@ using System.Threading;
 using KeyboardEvent = SDL.KeyboardEvent;
 using KeyCode = SDL.KeyCode;
 
-
 namespace Client.MirScenes
 {
     public class SelectScene : MirScene
@@ -30,9 +29,8 @@ namespace Client.MirScenes
 
         public SelectScene(List<SelectInfo> characters)
         {
-            SoundManager.PlaySound(SoundList.SelectMusic, true);
-            Disposing += (o, e) => SoundManager.StopSound(SoundList.SelectMusic);
-
+            SoundManager.PlaySoundAsMusic(SoundList.SelectMusic);
+            Disposing += (o, e) => SoundManager.StopMusic();
 
             Characters = characters;
             SortList();
@@ -444,8 +442,8 @@ namespace Client.MirScenes
                         CMain.SetResolution(1280, 800);
                     else if (Settings.Resolution == 1366)
                         CMain.SetResolution(1366, 768);
-                    ActiveScene = new GameScene();
                     Dispose();
+                    ActiveScene = new GameScene();
                     break;
             }
         }

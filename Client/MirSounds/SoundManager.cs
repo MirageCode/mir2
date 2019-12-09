@@ -1,45 +1,38 @@
 ﻿using System.Collections.Generic;
+using System;
 using System.IO;
+using SDL;
 
 namespace Client.MirSounds
 {
     static class SoundManager
     {
-        // public static Device Device;
-        private static readonly List<SoundLibrary> Sounds = new List<SoundLibrary>();
+        private static readonly Dictionary<int, Sound> Sounds = new Dictionary<int, Sound>();
         private static readonly Dictionary<int, string> IndexList = new Dictionary<int, string>();
 
-        public static SoundLibrary Music;
+        public static Music Music;
 
-        private static int _vol;
         public static int Vol
         {
-            get { return _vol; }
-            set
-            {
-                if (_vol == value) return;
-                _vol = value;
-                AdjustAllVolumes();
-            }
+            get => Audio.SoundVolume;
+            set => Audio.SoundVolume = Math.Max(0, Math.Min(value, 100));
         }
 
-        private static int _musicVol;
         public static int MusicVol
         {
-            get { return _musicVol; }
-            set
-            {
-                if (_musicVol == value) return;
-                _musicVol = value;
-            }
+            get => Audio.MusicVolume;
+            set => Audio.MusicVolume = Math.Max(0, Math.Min(value, 100));
         }
 
         public static void Create()
         {
-            if (Program.Form == null || Program.Form.Disposed) return;
+            SDLContext.InitSubSystem(SubSystem.Audio);
 
-            // Device = new Device();
-            // Device.SetCooperativeLevel(Program.Form, CooperativeLevel.Normal);
+            Audio.Open();
+            Audio.Channels = 100;
+
+            Audio.MusicVolume = 32;
+
             LoadSoundList();
         }
         public static void LoadSoundList()
@@ -66,65 +59,83 @@ namespace Client.MirSounds
 
         public static void StopSound(int index)
         {
-            for (int i = 0; i < Sounds.Count; i++)
-            {
-                if (Sounds[i].Index != index) continue;
-                
-                Sounds[i].Stop();
-                return;
-            }
+            // TODO: Stop Sound
+        }
+
+        private static string SoundFileName(int index)
+        {
+            if (IndexList.ContainsKey(index)) return IndexList[index];
+            if (index > 20000) return string.Format(
+                "M{0:0}-{1:0}.wav", (index - 20000) / 10, (index - 20000) % 10);
+            if (index < 10000) return string.Format(
+                "{0:000}-{1:0}.wav", index / 10, index % 10);
+            return null;
         }
 
         public static void PlaySound(int index, bool loop = false)
         {
-            // if (Device == null) return;
-            
-            if (_vol <= -3000) return;
-
-            for (int i = 0; i < Sounds.Count; i++)
+            if (Sounds.ContainsKey(index))
             {
-                if (Sounds[i].Index != index) continue;
-                Sounds[i].Play();
+                Sounds[index].Play();
                 return;
             }
 
+            var filename = SoundFileName(index);
+            if (filename == null) return;
 
+            // TODO: Enable looping sounds
+            // Needs StopSound implemented first
+            loop = false;
 
-            if (IndexList.ContainsKey(index))
-                Sounds.Add(new SoundLibrary(index, IndexList[index], loop));
-            else
+            try
             {
-                string filename;
-                if (index > 20000)
-                {
-                    index -= 20000;
-                    filename = string.Format("M{0:0}-{1:0}.wav", index/10, index%10);
-                    Sounds.Add(new SoundLibrary(index + 20000, filename, loop));
-                }
-                else if (index < 10000)
-                {
-
-                    filename = string.Format("{0:000}-{1:0}.wav", index/10, index%10);
-                    Sounds.Add(new SoundLibrary(index, filename, loop));
-                }
+                var sound = Audio.LoadSound(Path.Combine(Settings.SoundPath, filename));
+                Sounds.Add(index, sound);
+                sound.Play(loop ? -1 : 0);
+            }
+            catch (Exception)
+            {
+                CMain.SaveError($"Failed to load sound: {filename}");
             }
         }
 
-        public static void PlayMusic(int index, bool loop = false)
+        public static void PlayMusic(int index, bool loop = true)
         {
-            // if (Device == null) return;
+            var filename = $"{index}.wav";
 
-            Music = new SoundLibrary(index, index + ".wav", true);
-            Music.SetVolume(MusicVol);
-            Music.Play();
+            try
+            {
+                Music = Audio.LoadMusic(Path.Combine(Settings.SoundPath, filename));
+                Music.Play(loop ? -1 : 1);
+            }
+            catch (Exception)
+            {
+                Audio.HaltMusic();
+                CMain.SaveError($"Failed to load music: {filename}");
+            }
         }
 
-        static void AdjustAllVolumes()
+        // For some reason, the login and character select music use
+        // "sound" file names
+        public static void PlaySoundAsMusic(int index, bool loop = true)
         {
-            for (int i = 0; i < Sounds.Count; i++)
-                Sounds[i].Dispose();
-            Sounds.Clear();
+            var filename = SoundFileName(index);
+            if (filename == null) return;
+
+            try
+            {
+                Music = Audio.LoadMusic(Path.Combine(Settings.SoundPath, filename));
+                Music.Play(loop ? -1 : 1);
+            }
+            catch (Exception)
+            {
+                Audio.HaltMusic();
+                CMain.SaveError($"Failed to load music: {filename}");
+            }
         }
+
+        public static void StopSound() => Audio.HaltSound();
+        public static void StopMusic() => Audio.HaltMusic();
     }
 
     public static class SoundList

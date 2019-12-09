@@ -3810,7 +3810,6 @@ namespace Client.MirScenes.Dialogs
             };
             MusicSoundBar.MouseDown += MusicSoundBar_MouseDown;
             MusicSoundBar.MouseMove += MusicSoundBar_MouseMove;
-            MusicSoundBar.MouseUp += MusicSoundBar_MouseUp;
             MusicSoundBar.BeforeDraw += MusicSoundBar_BeforeDraw;
 
             MusicVolumeBar = new MirImageControl
@@ -3909,24 +3908,6 @@ namespace Client.MirScenes.Dialogs
             }
             else
                 MusicVolumeBar.Location = new Point(159, 244);
-        }
-
-        public void MusicSoundBar_MouseUp(object sender, MouseButtonEvent e)
-        {
-            if (SoundManager.MusicVol <= -2900)
-                SoundManager.MusicVol = -3000;
-            if (SoundManager.MusicVol >= -100)
-                SoundManager.MusicVol = 0;
-
-
-            //SoundManager.Device.Dispose();
-            //SoundManager.Create();
-            //SoundManager.PlayMusic(SoundList.Music, true);
-
-            if (SoundManager.Music == null) return;
-
-            SoundManager.Music.SetVolume(SoundManager.MusicVol);
-
         }
 
         private void MusicSoundBar_MouseDown(object sender, MouseButtonEvent e)

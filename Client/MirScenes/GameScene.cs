@@ -8495,7 +8495,7 @@ namespace Client.MirScenes
 
         public string FileName = String.Empty;
         public string Title = String.Empty;
-        public ushort MiniMap, BigMap, Music, SetMusic;
+        public ushort MiniMap, BigMap;
         public LightSetting Lights;
         public bool Lightning, Fire;
         public byte MapDarkLight;
@@ -8506,6 +8506,20 @@ namespace Client.MirScenes
         private Texture _floorTexture, _lightTexture;
 
         public long OutputDelay;
+
+        public ushort _Music;
+        public ushort Music
+        {
+            get => _Music;
+            set
+            {
+                if (_Music == value) return;
+                _Music = value;
+                SoundList.Music = value;
+                if (value == 0) SoundManager.StopMusic();
+                else SoundManager.PlayMusic(value);
+            }
+        }
 
         private static bool _awakeningAction;
         public static bool AwakeningAction
@@ -8539,6 +8553,8 @@ namespace Client.MirScenes
 
         public MapControl()
         {
+            Disposing += (o, e) => SoundManager.StopMusic();
+
             MapButtons = MouseButton.None;
 
             OffSetX = Settings.ScreenWidth / 2 / CellWidth;
@@ -8575,23 +8591,6 @@ namespace Client.MirScenes
             M2CellInfo = Map.MapCells;
             Width = Map.Width;
             Height = Map.Height;
-
-            try
-            {
-                if (SetMusic != Music)
-                {
-                    // SoundManager.Device.Dispose();
-                    SoundManager.Create();
-                    SoundManager.PlayMusic(Music, true);
-                }
-            }
-            catch (Exception)
-            {
-                // Do nothing. index was not valid.
-            }
-
-            SetMusic = Music;
-            SoundList.Music = Music;
         }
 
 

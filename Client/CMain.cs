@@ -12,6 +12,7 @@ using Client.MirControls;
 using Client.MirGraphics;
 using Client.MirNetwork;
 using Client.MirScenes;
+using Client.MirSounds;
 using Font = System.Drawing.Font;
 using SDL;
 
@@ -46,9 +47,7 @@ namespace Client
         public CMain()
         {
             SDLManager.Create();
-
-            // TODO: Sound
-            // SoundManager.Create();
+            SoundManager.Create();
 
             LoginScene LoginScene = new LoginScene();
             MirScene.ActiveScene = LoginScene;

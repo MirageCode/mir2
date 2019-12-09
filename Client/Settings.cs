@@ -80,38 +80,16 @@ namespace Client
 
         //Sound
         public static int SoundOverLap = 3;
-        private static byte _volume = 100;
         public static byte Volume
         {
-            get { return _volume; }
-            set
-            {
-                if (_volume == value) return;
-
-                _volume = (byte) (value > 100 ? 100 : value);
-
-                if (_volume == 0)
-                    SoundManager.Vol = -10000;
-                else 
-                    SoundManager.Vol = (int)(-3000 + (3000 * (_volume / 100M)));
-            }
+            get => (byte) SoundManager.Vol;
+            set => SoundManager.Vol = value;
         }
 
-        private static byte _musicVolume = 100;
         public static byte MusicVolume
         {
-            get { return _musicVolume; }
-            set
-            {
-                if (_musicVolume == value) return;
-
-                _musicVolume = (byte)(value > 100 ? 100 : value);
-
-                if (_musicVolume == 0)
-                    SoundManager.MusicVol = -10000;
-                else
-                    SoundManager.MusicVol = (int)(-3000 + (3000 * (_musicVolume / 100M)));
-            }
+            get => (byte) SoundManager.MusicVol;
+            set => SoundManager.MusicVol = value;
         }
 
         //Game
