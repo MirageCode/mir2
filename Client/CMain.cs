@@ -81,6 +81,8 @@ namespace Client
                 if (handler != null) handler(this, new EventArgs());
             }
 
+            SDLManager.Destroy();
+
             Disposed = true;
         }
 

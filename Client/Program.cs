@@ -43,6 +43,10 @@ namespace Client
             {
                 CMain.SaveError(ex.ToString());
             }
+            finally
+            {
+                Form.Dispose();
+            }
         }
     }
 }
