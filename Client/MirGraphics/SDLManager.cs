@@ -22,8 +22,10 @@ namespace Client.MirGraphics
             SDLContext.InitTTF();
             SDLContext.StartTextInput();
 
-            Window = new Window("Mir", Settings.ScreenWidth, Settings.ScreenHeight, 0);
-            Renderer = Window.CreateRenderer(-1, 0);
+            Window = new Window(
+                "Mir", Settings.ScreenWidth, Settings.ScreenHeight,
+                Settings.FullScreen ? WindowFlags.Fullscreen : WindowFlags.None);
+            Renderer = Window.CreateRenderer();
 
             LoadTextures();
         }
@@ -38,6 +40,11 @@ namespace Client.MirGraphics
             SDLContext.StopTextInput();
             SDLContext.QuitTTF();
             SDLContext.Quit();
+        }
+
+        public static void ToggleFullScreen()
+        {
+            Window.Fullscreen = !Window.Fullscreen;
         }
 
         public static float Opacity = 1.0F;

@@ -122,7 +122,7 @@ namespace Client
             {
                 if (e.Alt && e.KeyCode == KeyCode.Return)
                 {
-                    ToggleFullScreen();
+                    SDLManager.ToggleFullScreen();
                     return;
                 }
 
@@ -463,19 +463,6 @@ namespace Client
 
             HintBaseLabel.Location = point;
         }
-
-        private static void ToggleFullScreen()
-        {
-            // TODO: Full screen
-
-            // Settings.FullScreen = !Settings.FullScreen;
-
-            // Program.Form.FormBorderStyle = Settings.FullScreen ? FormBorderStyle.None : FormBorderStyle.FixedDialog;
-
-            // DXManager.Parameters.Windowed = !Settings.FullScreen;
-            // DXManager.Device.Reset(DXManager.Parameters);
-            // Program.Form.ClientSize = new Size(Settings.ScreenWidth, Settings.ScreenHeight);
-        }//
 
         public void CreateScreenShot()
         {
