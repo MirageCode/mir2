@@ -53,11 +53,25 @@ namespace SDL
             int index = -1, RendererFlags flags = RendererFlags.None) =>
             new Renderer(this, index, flags);
 
+        public bool Fullscreen
+        {
+            get => SDL_GetWindowFlags(handle).HasFlag(WindowFlags.Fullscreen);
+            set => EnsureSafe(SDL_SetWindowFullscreen(
+                handle, value ? WindowFlags.Fullscreen : WindowFlags.None));
+        }
+
 		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr SDL_CreateWindow(
 			byte[] title, int x, int y, int w, int h, WindowFlags flags);
 
 		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
 		private static extern void SDL_DestroyWindow(IntPtr window);
+
+		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+		private static extern WindowFlags SDL_GetWindowFlags(IntPtr window);
+
+		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+		private static extern int SDL_SetWindowFullscreen(
+            IntPtr window, WindowFlags flags);
     }
 }
