@@ -9,9 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using C = ClientPackets;
+using TextBox = SDL.TextBox;
 using KeyboardEvent = SDL.KeyboardEvent;
 using KeyCode = SDL.KeyCode;
-
 
 namespace Client.MirScenes.Dialogs
 {
@@ -60,8 +60,7 @@ namespace Client.MirScenes.Dialogs
                 MaxLength = 20,
                 CanLoseFocus = true
             };
-            // FIXME: TextBox
-            // SearchTextBox.TextBox.KeyPress += SearchTextBox_KeyPress;
+            SearchTextBox.TextBox.OnKeyPress += SearchTextBox_KeyPress;
 
             FindButton = new MirButton
             {
@@ -378,7 +377,7 @@ namespace Client.MirScenes.Dialogs
             ExpireLabel.Text = string.Format("Finish Date: {0}", Selected.Listing.ConsignmentDate.AddDays(Globals.ConsignmentLength));
 
         }
-        private void SearchTextBox_KeyPress(object sender, KeyboardEvent e)
+        private void SearchTextBox_KeyPress(TextBox sender, KeyboardEvent e)
         {
             if (CMain.Time < SearchTime)
             {

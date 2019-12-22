@@ -9,6 +9,7 @@ using Client.MirSounds;
 using C = ClientPackets;
 using S = ServerPackets;
 using System.Threading;
+using TextBox = SDL.TextBox;
 using KeyboardEvent = SDL.KeyboardEvent;
 using KeyCode = SDL.KeyCode;
 
@@ -597,8 +598,7 @@ namespace Client.MirScenes
                         MaxLength = Globals.MaxCharacterNameLength
                     };
                 NameTextBox.TextBox.TextChanged += CharacterNameTextBox_TextChanged;
-                // FIXME: TextBox
-                // NameTextBox.TextBox.KeyPress += TextBox_KeyPress;
+                NameTextBox.TextBox.OnKeyPress += TextBox_KeyPress;
                 NameTextBox.SetFocus();
 
                 CharacterDisplay = new MirAnimatedControl
@@ -744,7 +744,7 @@ namespace Client.MirScenes
                     };
             }
 
-            private void TextBox_KeyPress(object sender, KeyboardEvent e)
+            private void TextBox_KeyPress(TextBox sender, KeyboardEvent e)
             {
                 if (sender == null) return;
                 if (e.KeyCode != KeyCode.Return) return;

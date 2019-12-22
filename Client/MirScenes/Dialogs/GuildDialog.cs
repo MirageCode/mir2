@@ -818,8 +818,7 @@ namespace Client.MirScenes.Dialogs
                 BorderColour = Color.FromArgb(255, 35, 35, 35),
             };
             RanksName.BeforeDraw += (o, e) => RanksName_BeforeDraw();
-            // FIXME: TextBox
-            // RanksName.TextBox.KeyPress += RanksName_KeyPress;
+            RanksName.TextBox.OnKeyPress += RanksName_KeyPress;
             RanksSaveName = new MirButton()
             {
                 Location = new Point(155, 290),
@@ -2011,7 +2010,7 @@ namespace Client.MirScenes.Dialogs
                 RanksName.Enabled = false;
             }
         }
-        public void RanksName_KeyPress(object sender, KeyboardEvent e)
+        public void RanksName_KeyPress(TextBox sender, KeyboardEvent e)
         {
             switch (e.KeyCode)
             {

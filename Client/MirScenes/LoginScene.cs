@@ -16,6 +16,7 @@ using System.Linq;
 using KeyboardEvent = SDL.KeyboardEvent;
 using KeyCode = SDL.KeyCode;
 using KeyMod = SDL.KeyMod;
+using TextBox = SDL.TextBox;
 
 namespace Client.MirScenes
 {
@@ -456,8 +457,7 @@ namespace Client.MirScenes
                 };
                 AccountIDTextBox.SetFocus();
                 AccountIDTextBox.TextBox.TextChanged += AccountIDTextBox_TextChanged;
-                // FIXME: TextBox
-                // AccountIDTextBox.TextBox.KeyPress += TextBox_KeyPress;
+                AccountIDTextBox.TextBox.OnKeyPress += TextBox_KeyPress;
                 AccountIDTextBox.Text = Settings.AccountID;
 
 
@@ -472,8 +472,7 @@ namespace Client.MirScenes
                     };
 
                 PasswordTextBox.TextBox.TextChanged += PasswordTextBox_TextChanged;
-                // FIXME: TextBox
-                // PasswordTextBox.TextBox.KeyPress += TextBox_KeyPress;
+                PasswordTextBox.TextBox.OnKeyPress += TextBox_KeyPress;
                 PasswordTextBox.Text = Settings.Password;
 
             }
@@ -517,12 +516,15 @@ namespace Client.MirScenes
 
                 RefreshLoginButton();
             }
-            public void TextBox_KeyPress(object sender, KeyboardEvent e)
+            public void TextBox_KeyPress(TextBox sender, KeyboardEvent e)
             {
                 if (sender == null || e.KeyCode != KeyCode.Return) return;
 
                 e.Handled = true;
-
+                Submit();
+            }
+            public void Submit()
+            {
                 if (!_accountIDValid)
                 {
                     AccountIDTextBox.SetFocus();
@@ -652,14 +654,7 @@ namespace Client.MirScenes
                     CenterText = true
 
                 };
-                KeyEnterButton.Click += (o, e) =>
-                {
-                    // FIXME: KeyPress
-
-                    // KeyPressEventArgs arg = new KeyPressEventArgs((char)Keys.Enter);
-
-                    // _loginDialog.TextBox_KeyPress(o, arg);
-                };
+                KeyEnterButton.Click += (o, e) => loginDialog.Submit();
 
                 KeyRandButton = new MirButton
                 {
