@@ -152,47 +152,47 @@ namespace SDL
             IntPtr renderer, PixelFormat format, TextureAccess access,
             int w, int h);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern void SDL_DestroyTexture(IntPtr texture);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern void SDL_DestroyTexture(IntPtr texture);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr SDL_CreateTextureFromSurface(
-			IntPtr renderer, IntPtr surface);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr SDL_CreateTextureFromSurface(
+            IntPtr renderer, IntPtr surface);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int SDL_GetTextureAlphaMod(
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SDL_GetTextureAlphaMod(
             IntPtr texture, out byte alpha);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int SDL_SetTextureAlphaMod(
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int SDL_SetTextureAlphaMod(
             IntPtr texture, byte alpha);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int SDL_GetTextureColorMod(
-			IntPtr texture, out byte r, out byte g, out byte b);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int SDL_GetTextureColorMod(
+            IntPtr texture, out byte r, out byte g, out byte b);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int SDL_SetTextureColorMod(
-			IntPtr texture, byte r, byte g, byte b);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int SDL_SetTextureColorMod(
+            IntPtr texture, byte r, byte g, byte b);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int SDL_GetTextureBlendMode(
-			IntPtr texture, out BlendMode blendMode);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int SDL_GetTextureBlendMode(
+            IntPtr texture, out BlendMode blendMode);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int SDL_SetTextureBlendMode(
-			IntPtr texture, BlendMode blendMode);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int SDL_SetTextureBlendMode(
+            IntPtr texture, BlendMode blendMode);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int SDL_QueryTexture(
-			IntPtr texture, out uint format, out int access,
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int SDL_QueryTexture(
+            IntPtr texture, out uint format, out int access,
             out int w, out int h);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int SDL_LockTexture(
-			IntPtr texture, IntPtr rect, out IntPtr pixels, out int pitch);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int SDL_LockTexture(
+            IntPtr texture, IntPtr rect, out IntPtr pixels, out int pitch);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern void SDL_UnlockTexture(IntPtr texture);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern void SDL_UnlockTexture(IntPtr texture);
     }
 }

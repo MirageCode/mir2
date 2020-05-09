@@ -78,31 +78,31 @@ namespace SDL
         public static Music LoadMusic(string file) => new Music(file);
         public static Sound LoadSound(string file) => new Sound(file);
 
-		[DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int Mix_QuerySpec(
-			out int frequency, out AudioFormat format, out int channels);
+        [DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int Mix_QuerySpec(
+            out int frequency, out AudioFormat format, out int channels);
 
-		[DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int Mix_OpenAudio(
-			int frequency, AudioFormat format, int channels, int chunksize);
+        [DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int Mix_OpenAudio(
+            int frequency, AudioFormat format, int channels, int chunksize);
 
-		[DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern void Mix_CloseAudio();
+        [DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern void Mix_CloseAudio();
 
-		[DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int Mix_HaltMusic();
+        [DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int Mix_HaltMusic();
 
-		[DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int Mix_HaltChannel(int channel);
+        [DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int Mix_HaltChannel(int channel);
 
-		[DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int Mix_AllocateChannels(int numchans);
+        [DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int Mix_AllocateChannels(int numchans);
 
-		[DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int Mix_VolumeMusic(int volume);
+        [DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int Mix_VolumeMusic(int volume);
 
-		[DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int Mix_Volume(int channel, int volume);
+        [DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int Mix_Volume(int channel, int volume);
     }
 
     public class Music : Audio
@@ -118,14 +118,14 @@ namespace SDL
                 throw new SDLException();
         }
 
-		[DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr Mix_LoadMUS(byte[] file);
+        [DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr Mix_LoadMUS(byte[] file);
 
-		[DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern void Mix_FreeMusic(IntPtr music);
+        [DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern void Mix_FreeMusic(IntPtr music);
 
-		[DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int Mix_PlayMusic(IntPtr music, int loops);
+        [DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int Mix_PlayMusic(IntPtr music, int loops);
     }
 
     public class Sound : Audio
@@ -141,14 +141,14 @@ namespace SDL
                 throw new SDLException();
         }
 
-		[DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr Mix_LoadWAV_RW(IntPtr src, int freesrc);
+        [DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr Mix_LoadWAV_RW(IntPtr src, int freesrc);
 
-		[DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern void Mix_FreeChunk(IntPtr chunk);
+        [DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern void Mix_FreeChunk(IntPtr chunk);
 
-		[DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int Mix_PlayChannelTimed(
-			int channel, IntPtr chunk, int loops, int ticks);
+        [DllImport(MixerLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int Mix_PlayChannelTimed(
+            int channel, IntPtr chunk, int loops, int ticks);
     }
 }

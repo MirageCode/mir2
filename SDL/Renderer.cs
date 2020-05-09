@@ -181,59 +181,59 @@ namespace SDL
             RenderTarget = oldTarget;
         }
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr SDL_CreateRenderer(
-			IntPtr window, int index, RendererFlags flags);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr SDL_CreateRenderer(
+            IntPtr window, int index, RendererFlags flags);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern void SDL_DestroyRenderer(IntPtr renderer);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern void SDL_DestroyRenderer(IntPtr renderer);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern void SDL_RenderPresent(IntPtr renderer);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern void SDL_RenderPresent(IntPtr renderer);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int SDL_RenderClear(IntPtr renderer);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int SDL_RenderClear(IntPtr renderer);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int SDL_RenderCopy(
-			IntPtr renderer, IntPtr texture, IntPtr srcrect, IntPtr dstrect);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int SDL_RenderCopy(
+            IntPtr renderer, IntPtr texture, IntPtr srcrect, IntPtr dstrect);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int SDL_RenderDrawRect(
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int SDL_RenderDrawRect(
             IntPtr renderer, IntPtr rect);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int SDL_RenderFillRect(
-			IntPtr renderer, IntPtr rect);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int SDL_RenderFillRect(
+            IntPtr renderer, IntPtr rect);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int SDL_GetRenderDrawColor(
-			IntPtr renderer, out byte r, out byte g, out byte b, out byte a);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int SDL_GetRenderDrawColor(
+            IntPtr renderer, out byte r, out byte g, out byte b, out byte a);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int SDL_SetRenderDrawColor(
-			IntPtr renderer, byte r, byte g, byte b, byte a);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int SDL_SetRenderDrawColor(
+            IntPtr renderer, byte r, byte g, byte b, byte a);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern void SDL_RenderGetLogicalSize(
-			IntPtr renderer, out int w, out int h);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern void SDL_RenderGetLogicalSize(
+            IntPtr renderer, out int w, out int h);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int SDL_RenderSetLogicalSize(
-			IntPtr renderer, int w, int h);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int SDL_RenderSetLogicalSize(
+            IntPtr renderer, int w, int h);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern Bool SDL_RenderTargetSupported(IntPtr renderer);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern Bool SDL_RenderTargetSupported(IntPtr renderer);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr SDL_GetRenderTarget(IntPtr renderer);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr SDL_GetRenderTarget(IntPtr renderer);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int SDL_SetRenderTarget(
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int SDL_SetRenderTarget(
             IntPtr renderer, IntPtr texture);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int SDL_RenderDrawLine(
-			IntPtr renderer, int x1, int y1, int x2, int y2);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int SDL_RenderDrawLine(
+            IntPtr renderer, int x1, int y1, int x2, int y2);
     }
 }

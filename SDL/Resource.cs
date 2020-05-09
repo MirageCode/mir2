@@ -6,8 +6,8 @@ namespace SDL
     public abstract class Resource<ExceptionType> : IDisposable
     where ExceptionType : Exception, new()
     {
-		public const string SDLLib = SDLContext.SDLLib;
-		public const string TTFLib = SDLContext.TTFLib;
+        public const string SDLLib = SDLContext.SDLLib;
+        public const string TTFLib = SDLContext.TTFLib;
 
         internal IntPtr handle { get; private set; }
 

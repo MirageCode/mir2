@@ -60,18 +60,18 @@ namespace SDL
                 handle, value ? WindowFlags.Fullscreen : WindowFlags.None));
         }
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr SDL_CreateWindow(
-			byte[] title, int x, int y, int w, int h, WindowFlags flags);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr SDL_CreateWindow(
+            byte[] title, int x, int y, int w, int h, WindowFlags flags);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern void SDL_DestroyWindow(IntPtr window);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern void SDL_DestroyWindow(IntPtr window);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern WindowFlags SDL_GetWindowFlags(IntPtr window);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern WindowFlags SDL_GetWindowFlags(IntPtr window);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern int SDL_SetWindowFullscreen(
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int SDL_SetWindowFullscreen(
             IntPtr window, WindowFlags flags);
     }
 }

@@ -208,7 +208,7 @@ namespace SDL
         public EventType type;
         public UInt32 timestamp;
         public UInt32 windowID;
-		/* Default size is according to SDL2 default. */
+        /* Default size is according to SDL2 default. */
         public fixed byte text[32];
         public Int32 start;
         public Int32 length;
@@ -226,7 +226,7 @@ namespace SDL
         public EventType type;
         public UInt32 timestamp;
         public UInt32 windowID;
-		/* Default size is according to SDL2 default. */
+        /* Default size is according to SDL2 default. */
         public fixed byte text[32];
 
         public unsafe string Text {
@@ -371,7 +371,7 @@ namespace SDL
     {
         public EventType type;
         public UInt32 timestamp;
-        public Int32 which;	/* joystick id for ADDED, else instance id */
+        public Int32 which; /* joystick id for ADDED, else instance id */
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -549,7 +549,7 @@ namespace SDL
 
     public class Event
     {
-		public const string SDLLib = SDLContext.SDLLib;
+        public const string SDLLib = SDLContext.SDLLib;
 
         private GenericEvent _GenericEvent;
         protected GenericEvent GenericEvent
@@ -617,8 +617,8 @@ namespace SDL
         protected static MouseButton ToButton(byte X) =>
             (MouseButton) (1 << ((int) X - 1));
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		public static extern int SDL_PollEvent(out GenericEvent GenericEvent);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SDL_PollEvent(out GenericEvent GenericEvent);
     }
 
     public class QuitEvent : Event

@@ -35,7 +35,7 @@ namespace SDL
             if (s == IntPtr.Zero) return null;
 
             byte* ptr = (byte*) s;
-			while (*ptr != 0) ptr++;
+            while (*ptr != 0) ptr++;
 
             // TODO: Update .NET and do this:
             // return Encoding.UTF8.GetString(
@@ -44,11 +44,11 @@ namespace SDL
             int len = (int) (ptr - (byte*) s);
             if (len == 0) return string.Empty;
 
-			char* chars = stackalloc char[len];
-			int strLen = System.Text.Encoding.UTF8.GetChars(
+            char* chars = stackalloc char[len];
+            int strLen = System.Text.Encoding.UTF8.GetChars(
                 (byte*) s, len, chars, len);
 
-			return new string(chars, 0, strLen);
+            return new string(chars, 0, strLen);
         }
 
         public static byte[] FromString(String s) =>

@@ -81,49 +81,49 @@ namespace SDL
             }
         }
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr SDL_CreateRGBSurface(
-			uint flags, int width, int height, int depth,
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr SDL_CreateRGBSurface(
+            uint flags, int width, int height, int depth,
             uint Rmask, uint Gmask, uint Bmask, uint Amask);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr SDL_CreateRGBSurfaceFrom(
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr SDL_CreateRGBSurfaceFrom(
             byte[] pixels, int width, int height, int depth, int pitch,
             uint Rmask, uint Gmask, uint Bmask, uint Amask);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr SDL_FreeSurface(IntPtr surface);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr SDL_FreeSurface(IntPtr surface);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern void SDL_GetClipRect(
-			IntPtr surface, out Rect rect);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern void SDL_GetClipRect(
+            IntPtr surface, out Rect rect);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern Bool SDL_SetClipRect(
-			IntPtr surface, ref Rect rect);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern Bool SDL_SetClipRect(
+            IntPtr surface, ref Rect rect);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
-		private static extern Bool SDL_SetClipRect(
-			IntPtr surface, IntPtr rect);
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern Bool SDL_SetClipRect(
+            IntPtr surface, IntPtr rect);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl,
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "SDL_UpperBlit")]
-		private static extern int SDL_BlitSurface(
-			IntPtr src, ref Rect srcrect, IntPtr dst, ref Rect dstrect);
+        private static extern int SDL_BlitSurface(
+            IntPtr src, ref Rect srcrect, IntPtr dst, ref Rect dstrect);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl,
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "SDL_UpperBlit")]
-		private static extern int SDL_BlitSurface(
-			IntPtr src, IntPtr srcrect, IntPtr dst, ref Rect dstrect);
+        private static extern int SDL_BlitSurface(
+            IntPtr src, IntPtr srcrect, IntPtr dst, ref Rect dstrect);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl,
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "SDL_UpperBlit")]
-		private static extern int SDL_BlitSurface(
-			IntPtr src, ref Rect srcrect, IntPtr dst, IntPtr dstrect);
+        private static extern int SDL_BlitSurface(
+            IntPtr src, ref Rect srcrect, IntPtr dst, IntPtr dstrect);
 
-		[DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl,
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl,
             EntryPoint = "SDL_UpperBlit")]
-		private static extern int SDL_BlitSurface(
-			IntPtr src, IntPtr srcrect, IntPtr dst, IntPtr dstrect);
+        private static extern int SDL_BlitSurface(
+            IntPtr src, IntPtr srcrect, IntPtr dst, IntPtr dstrect);
     }
 }
