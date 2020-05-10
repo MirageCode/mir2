@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Color = System.Drawing.Color;
 using Size = System.Drawing.Size;
+using Rectangle = System.Drawing.Rectangle;
 
 namespace SDL
 {
@@ -12,12 +14,18 @@ namespace SDL
 
         protected override void Free(IntPtr handle) => TTF_CloseFont(handle);
 
-        public Size GetSize(string s)
+        private Size GetLineSize(string s)
         {
             int w, h;
             EnsureSafe(TTF_SizeUTF8(handle, Util.FromString(s), out w, out h));
             return new Size(w, h);
         }
+
+        public Size GetSize(string[] lines) => new Size(
+            lines.Select(line => GetLineSize(line).Width).Max(),
+            lines.Length * LineSkip);
+
+        public Size GetSize(string s) => GetSize(s.Split('\n'));
 
         public int Height { get => TTF_FontHeight(handle); }
         public int Ascent { get => TTF_FontAscent(handle); }
@@ -29,10 +37,31 @@ namespace SDL
                 handle, Util.FromString(s.Length == 0 ? " " : s),
                 new InternalColor(color), width));
 
-        public Surface CreateSurface(string s, Color color) =>
+        private Surface CreateLineSurface(string s, Color color) =>
             new Surface(TTF_RenderUTF8_Solid(
                 handle, Util.FromString(s.Length == 0 ? " " : s),
                 new InternalColor(color)));
+
+        public Surface CreateSurface(string s, Color color)
+        {
+            var lines = s.Split('\n');
+            if (lines.Length <= 1) return CreateLineSurface(s, color);
+
+            var size = GetSize(lines);
+            var surface = new Surface(size.Width, size.Height);
+
+            for (var i = 0; i < lines.Length; i++)
+            {
+                var lineSize = GetLineSize(lines[i]);
+                var dstRectangle = new Rectangle(
+                    0, i * LineSkip, lineSize.Width, lineSize.Height);
+
+                using (var lineSurface = CreateLineSurface(lines[i], color))
+                    surface.BlitFrom(lineSurface, Rectangle.Empty, dstRectangle);
+            }
+
+            return surface;
+        }
 
         [DllImport(TTFLib, CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr TTF_OpenFont(byte[] file, int ptsize);
