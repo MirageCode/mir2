@@ -42,10 +42,10 @@ namespace SDL
                 handle, Util.FromString(s.Length == 0 ? " " : s),
                 new InternalColor(color)));
 
-        public Surface CreateSurface(string s, Color color)
+        public Surface CreateSurface(string[] lines, Color color)
         {
-            var lines = s.Split('\n');
-            if (lines.Length <= 1) return CreateLineSurface(s, color);
+            if (lines.Length <= 1) return CreateLineSurface(
+                lines.Length == 0 ? string.Empty : lines[0], color);
 
             var size = GetSize(lines);
             var surface = new Surface(size.Width, size.Height);
@@ -62,6 +62,9 @@ namespace SDL
 
             return surface;
         }
+
+        public Surface CreateSurface(string s, Color color) =>
+            CreateSurface(s.Split('\n'), color);
 
         [DllImport(TTFLib, CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr TTF_OpenFont(byte[] file, int ptsize);
