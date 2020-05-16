@@ -184,13 +184,13 @@ namespace Client.MirControls
             get
             {
                 if (TextBox != null && !TextBox.Disposed)
-                    return TextBox.Lines;
+                    return TextBox.Lines.ToArray();
                 return null;
             }
             set
             {
                 if (TextBox != null && !TextBox.Disposed)
-                    TextBox.Lines = value;
+                    TextBox.Lines = value.ToList();
             }
         }
 
