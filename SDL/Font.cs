@@ -18,7 +18,7 @@ namespace SDL
         {
             int w, h;
             EnsureSafe(TTF_SizeUTF8(handle, Util.FromString(s), out w, out h));
-            return new Size(w, h);
+            return new Size(Math.Max(1, w), Math.Max(1, h));
         }
 
         public Size GetSize(string[] lines) => new Size(
