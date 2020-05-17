@@ -4,6 +4,7 @@ using Color = System.Drawing.Color;
 using Point = System.Drawing.Point;
 using Rectangle = System.Drawing.Rectangle;
 using Size = System.Drawing.Size;
+using SizeF = System.Drawing.SizeF;
 
 namespace SDL
 {
@@ -164,6 +165,18 @@ namespace SDL
                 handle, value.Width, value.Height));
         }
 
+        public SizeF Scale
+        {
+            get {
+                float x, y;
+                SDL_RenderGetScale(handle, out x, out y);
+                return new SizeF(x, y);
+            }
+
+            set => EnsureSafe(SDL_RenderSetScale(
+                handle, value.Width, value.Height));
+        }
+
         public bool RenderTargetSupported
         {
             get => SDL_RenderTargetSupported(handle) == Bool.True
@@ -224,6 +237,14 @@ namespace SDL
         [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
         private static extern int SDL_RenderSetLogicalSize(
             IntPtr renderer, int w, int h);
+
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern void SDL_RenderGetScale(
+            IntPtr renderer, out float x, out float y);
+
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern int SDL_RenderSetScale(
+            IntPtr renderer, float x, float y);
 
         [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
         private static extern Bool SDL_RenderTargetSupported(IntPtr renderer);
