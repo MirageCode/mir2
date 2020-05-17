@@ -57,5 +57,10 @@ namespace SDL
         {
             if (ptr == IntPtr.Zero) throw new ExceptionType();
         }
+
+        public override int GetHashCode() => handle.ToInt32();
+
+        public override bool Equals(Object obj) =>
+            GetType() == obj.GetType() && GetHashCode() == obj.GetHashCode();
     }
 }
