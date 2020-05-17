@@ -39,6 +39,9 @@ namespace SDL
         public Renderer(Window window, int index, RendererFlags flags)
         : base(SDL_CreateRenderer(window.handle, index, flags)) {}
 
+        internal Renderer(IntPtr handle, bool managed = true, bool safe = true)
+        : base(handle, managed, safe) {}
+
         protected override void Free(IntPtr handle) =>
             SDL_DestroyRenderer(handle);
 
