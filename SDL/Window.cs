@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
+using Size = System.Drawing.Size;
 
 namespace SDL
 {
@@ -68,6 +69,17 @@ namespace SDL
                 handle, value ? WindowFlags.Fullscreen : WindowFlags.None));
         }
 
+        public Size Size
+        {
+            get
+            {
+                int w, h;
+                SDL_GetWindowSize(handle, out w, out h);
+                return new Size(w, h);
+            }
+            set => SDL_SetWindowSize(handle, value.Width, value.Height);
+        }
+
         [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr SDL_CreateWindow(
             byte[] title, int x, int y, int w, int h, WindowFlags flags);
@@ -87,5 +99,13 @@ namespace SDL
         [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
         private static extern int SDL_SetWindowFullscreen(
             IntPtr window, WindowFlags flags);
+
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern void SDL_GetWindowSize(
+            IntPtr window, out int w, out int h);
+
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern void SDL_SetWindowSize(
+            IntPtr window, int w, int h);
     }
 }
