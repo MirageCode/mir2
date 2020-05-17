@@ -46,6 +46,9 @@ namespace SDL
                    Util.FromString(title), WindowPositionCentered,
                    WindowPositionCentered, w, h, flags)) {}
 
+        internal Window(UInt32 id, bool managed = true, bool safe = true)
+        : base(SDL_GetWindowFromID(id), managed, safe) {}
+
         protected override void Free(IntPtr handle) =>
             SDL_DestroyWindow(handle);
 
@@ -71,6 +74,9 @@ namespace SDL
 
         [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
         private static extern void SDL_DestroyWindow(IntPtr window);
+
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr SDL_GetWindowFromID(UInt32 id);
 
         [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
         private static extern WindowFlags SDL_GetWindowFlags(IntPtr window);

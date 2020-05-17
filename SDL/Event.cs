@@ -582,6 +582,11 @@ namespace SDL
         public static event EventDelegate<TextEditingEvent> OnTextEditing;
         public static event EventDelegate<KeyboardEvent> OnKeyDown;
         public static event EventDelegate<KeyboardEvent> OnKeyUp;
+        public static event EventDelegate<WindowEvent> OnWindowResize;
+        public static event EventDelegate<WindowEvent> OnWindowSizeChange;
+        public static event EventDelegate<WindowEvent> OnWindowMinimize;
+        public static event EventDelegate<WindowEvent> OnWindowMaximize;
+        public static event EventDelegate<WindowEvent> OnWindowRestore;
 
         public static void Poll()
         {
@@ -612,6 +617,20 @@ namespace SDL
                 OnKeyDown?.Invoke(new KeyboardEvent(GenericEvent));
             else if (GenericEvent.type == EventType.KeyUp)
                 OnKeyUp?.Invoke(new KeyboardEvent(GenericEvent));
+            else if (GenericEvent.type == EventType.Window)
+            {
+                var Event = new WindowEvent(GenericEvent);
+                if (Event.WindowEventType == WindowEventType.Resized)
+                    OnWindowResize?.Invoke(Event);
+                else if (Event.WindowEventType == WindowEventType.SizeChanged)
+                    OnWindowSizeChange?.Invoke(Event);
+                else if (Event.WindowEventType == WindowEventType.Minimized)
+                    OnWindowMinimize?.Invoke(Event);
+                else if (Event.WindowEventType == WindowEventType.Maximized)
+                    OnWindowMaximize?.Invoke(Event);
+                else if (Event.WindowEventType == WindowEventType.Restored)
+                    OnWindowRestore?.Invoke(Event);
+            }
         }
 
         protected static MouseButton ToButton(byte X) =>
@@ -699,5 +718,14 @@ namespace SDL
             get => KeyMod.HasFlag(KeyMod.LAlt)
                 || KeyMod.HasFlag(KeyMod.RAlt);
         }
+    }
+
+    public class WindowEvent : Event
+    {
+        internal WindowEvent(GenericEvent genericEvent) : base(genericEvent) {}
+        private InternalWindowEvent Event { get => GenericEvent.window; }
+
+        public WindowEventType WindowEventType { get => Event.windowEventType; }
+        public Window Window { get => new Window(Event.windowID, false); }
     }
 }
