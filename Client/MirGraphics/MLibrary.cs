@@ -613,21 +613,18 @@ namespace Client.MirGraphics
 
         public void Draw(int index, int x, int y)
         {
-            if (x >= Settings.ScreenWidth || y >= Settings.ScreenHeight)
-                return;
-
             if (!CheckImage(index))
                 return;
 
             MImage mi = _images[index];
 
-            if (x + mi.Width < 0 || y + mi.Height < 0)
-                return;
+            var section = new Rectangle(Point.Empty, mi.Image.Size);
+            var point = new Point(x, y);
+            var colour = mi.Image.Color;
+            var opacity = SDLManager.Opacity;
+            var offSet = false;
 
-            // TODO: Figure out PointF
-
-            SDLManager.Draw2D(mi.Image, new Point(x, y));
-            mi.CleanTime = CMain.Time + Settings.CleanDelay;
+            Draw(mi, section, point, colour, opacity, offSet);
         }
         public void Draw(int index, Point point, Color colour, bool offSet = false)
         {
@@ -636,14 +633,10 @@ namespace Client.MirGraphics
 
             MImage mi = _images[index];
 
-            if (offSet) point.Offset(mi.X, mi.Y);
+            var section = new Rectangle(Point.Empty, mi.Image.Size);
+            var opacity = SDLManager.Opacity;
 
-            if (point.X >= Settings.ScreenWidth || point.Y >= Settings.ScreenHeight || point.X + mi.Width < 0 || point.Y + mi.Height < 0)
-                return;
-
-            SDLManager.Draw2D(mi.Image, point, colour);
-
-            mi.CleanTime = CMain.Time + Settings.CleanDelay;
+            Draw(mi, section, point, colour, opacity, offSet);
         }
 
         public void Draw(int index, Point point, Color colour, bool offSet, float opacity)
@@ -653,12 +646,60 @@ namespace Client.MirGraphics
 
             MImage mi = _images[index];
 
+            var section = new Rectangle(Point.Empty, mi.Image.Size);
+
+            Draw(mi, section, point, colour, opacity, offSet);
+        }
+        public void Draw(int index, Rectangle section, Point point, Color colour, bool offSet)
+        {
+            if (!CheckImage(index))
+                return;
+
+            MImage mi = _images[index];
+            var opacity = SDLManager.Opacity;
+
+            Draw(mi, section, point, colour, opacity, offSet);
+        }
+        public void Draw(int index, Rectangle section, Point point, Color colour, float opacity)
+        {
+            if (!CheckImage(index))
+                return;
+
+            MImage mi = _images[index];
+
+            Draw(mi, section, point, colour, opacity);
+        }
+
+        public void Draw(int index, Point point, Size size, Color colour)
+        {
+            if (!CheckImage(index))
+                return;
+
+            MImage mi = _images[index];
+
+            // TODO: Figure out what "size" is for
+
+            var section = new Rectangle(Point.Empty, new Size(mi.Width, mi.Height));
+
+            Draw(mi, section, point, colour, SDLManager.Opacity);
+        }
+
+        private void Draw(
+            MImage mi, Rectangle section, Point point, Color colour,
+            float opacity, bool offSet = false)
+        {
             if (offSet) point.Offset(mi.X, mi.Y);
 
             if (point.X >= Settings.ScreenWidth || point.Y >= Settings.ScreenHeight || point.X + mi.Width < 0 || point.Y + mi.Height < 0)
                 return;
 
-            SDLManager.Draw2D(mi.Image, point, colour, opacity);
+            if (section.Right > mi.Width)
+                section.Width -= section.Right - mi.Width;
+
+            if (section.Bottom > mi.Height)
+                section.Height -= section.Bottom - mi.Height;
+
+            SDLManager.Draw2D(mi.Image, section, point, colour, opacity);
             mi.CleanTime = CMain.Time + Settings.CleanDelay;
         }
 
@@ -678,63 +719,6 @@ namespace Client.MirGraphics
 
             SDLManager.DrawBlend(mi.Image, point, colour);
 
-            mi.CleanTime = CMain.Time + Settings.CleanDelay;
-        }
-        public void Draw(int index, Rectangle section, Point point, Color colour, bool offSet)
-        {
-            if (!CheckImage(index))
-                return;
-
-            MImage mi = _images[index];
-
-            if (offSet) point.Offset(mi.X, mi.Y);
-
-
-            if (point.X >= Settings.ScreenWidth || point.Y >= Settings.ScreenHeight || point.X + mi.Width < 0 || point.Y + mi.Height < 0)
-                return;
-
-            if (section.Right > mi.Width)
-                section.Width -= section.Right - mi.Width;
-
-            if (section.Bottom > mi.Height)
-                section.Height -= section.Bottom - mi.Height;
-
-            SDLManager.Draw2D(mi.Image, section, point, colour);
-            mi.CleanTime = CMain.Time + Settings.CleanDelay;
-        }
-        public void Draw(int index, Rectangle section, Point point, Color colour, float opacity)
-        {
-            if (!CheckImage(index))
-                return;
-
-            MImage mi = _images[index];
-
-
-            if (point.X >= Settings.ScreenWidth || point.Y >= Settings.ScreenHeight || point.X + mi.Width < 0 || point.Y + mi.Height < 0)
-                return;
-
-            if (section.Right > mi.Width)
-                section.Width -= section.Right - mi.Width;
-
-            if (section.Bottom > mi.Height)
-                section.Height -= section.Bottom - mi.Height;
-
-            SDLManager.Draw2D(mi.Image, section, point, colour, opacity);
-            mi.CleanTime = CMain.Time + Settings.CleanDelay;
-        }
-        public void Draw(int index, Point point, Size size, Color colour)
-        {
-            if (!CheckImage(index))
-                return;
-
-            MImage mi = _images[index];
-
-            if (point.X >= Settings.ScreenWidth || point.Y >= Settings.ScreenHeight || point.X + size.Width < 0 || point.Y + size.Height < 0)
-                return;
-
-            // TODO: Figure out what "size" is for
-
-            SDLManager.Draw2D(mi.Image, new Rectangle(Point.Empty, new Size(mi.Width, mi.Height)), point, colour);
             mi.CleanTime = CMain.Time + Settings.CleanDelay;
         }
 

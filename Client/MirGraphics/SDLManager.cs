@@ -196,44 +196,33 @@ namespace Client.MirGraphics
             Renderer.RenderTarget = oldTexture;
         }
 
-        public static void Draw2D(
-            Texture texture, Point point, float opacity)
-        {
-            var oldOpacity = texture.Opacity;
-            texture.Opacity = opacity;
+        public static void Draw2D(Texture texture, Point point) =>
+            Draw2D(texture, point, texture.Color, Opacity);
 
-            Renderer.RenderCopy(
-                texture, Rectangle.Empty, new Rectangle(point, texture.Size));
-
-            texture.Opacity = oldOpacity;
-        }
+        public static void Draw2D(Texture texture, Point point, Color color) =>
+            Draw2D(texture, point, color, Opacity);
 
         public static void Draw2D(
-            Texture texture, Point point, Color color, float opacity)
-        {
-            var oldColor = texture.Color;
-            var oldOpacity = texture.Opacity;
-            texture.Color = color;
-            texture.Opacity = opacity;
-
-            Renderer.RenderCopy(
-                texture, Rectangle.Empty, new Rectangle(point, texture.Size));
-
-            texture.Color = oldColor;
-            texture.Opacity = oldOpacity;
-        }
+            Texture texture, Point point, float opacity) =>
+            Draw2D(texture, point, texture.Color, opacity);
 
         public static void Draw2D(
-            Texture texture, Rectangle section, Point point, float opacity)
-        {
-            var oldOpacity = texture.Opacity;
-            texture.Opacity = opacity;
+            Texture texture, Point point, Color color, float opacity) =>
+            Draw2D(
+                texture, new Rectangle(new Point(0, 0), texture.Size),
+                point, color, opacity);
 
-            Renderer.RenderCopy(
-                texture, section, new Rectangle(point, section.Size));
+        public static void Draw2D(
+            Texture texture, Rectangle section, Point point) =>
+            Draw2D(texture, section, point, texture.Color, Opacity);
 
-            texture.Opacity = oldOpacity;
-        }
+        public static void Draw2D(
+            Texture texture, Rectangle section, Point point, Color color) =>
+            Draw2D(texture, section, point, color, Opacity);
+
+        public static void Draw2D(
+            Texture texture, Rectangle section, Point point, float opacity) =>
+            Draw2D(texture, section, point, texture.Color, opacity);
 
         public static void Draw2D(
             Texture texture, Rectangle section, Point point, Color color,
@@ -243,60 +232,6 @@ namespace Client.MirGraphics
             var oldOpacity = texture.Opacity;
             texture.Color = color;
             texture.Opacity = opacity;
-
-            Renderer.RenderCopy(
-                texture, section, new Rectangle(point, section.Size));
-
-            texture.Color = oldColor;
-            texture.Opacity = oldOpacity;
-        }
-
-        public static void Draw2D(
-            Texture texture, Point point)
-        {
-            var oldOpacity = texture.Opacity;
-            texture.Opacity = Opacity;
-
-            Renderer.RenderCopy(
-                texture, Rectangle.Empty, new Rectangle(point, texture.Size));
-
-            texture.Opacity = oldOpacity;
-        }
-
-        public static void Draw2D(
-            Texture texture, Point point, Color color)
-        {
-            var oldColor = texture.Color;
-            var oldOpacity = texture.Opacity;
-            texture.Color = color;
-            texture.Opacity = Opacity;
-
-            Renderer.RenderCopy(
-                texture, Rectangle.Empty, new Rectangle(point, texture.Size));
-
-            texture.Color = oldColor;
-            texture.Opacity = oldOpacity;
-        }
-
-        public static void Draw2D(
-            Texture texture, Rectangle section, Point point)
-        {
-            var oldOpacity = texture.Opacity;
-            texture.Opacity = Opacity;
-
-            Renderer.RenderCopy(
-                texture, section, new Rectangle(point, section.Size));
-
-            texture.Opacity = oldOpacity;
-        }
-
-        public static void Draw2D(
-            Texture texture, Rectangle section, Point point, Color color)
-        {
-            var oldColor = texture.Color;
-            var oldOpacity = texture.Opacity;
-            texture.Color = color;
-            texture.Opacity = Opacity;
 
             Renderer.RenderCopy(
                 texture, section, new Rectangle(point, section.Size));
