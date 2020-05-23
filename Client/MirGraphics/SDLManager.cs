@@ -20,7 +20,6 @@ namespace Client.MirGraphics
         {
             SDLContext.Init(SubSystem.Video);
             SDLContext.InitTTF();
-            SDLContext.StartTextInput();
 
             Window = new Window(
                 "Mir", Settings.ScreenWidth, Settings.ScreenHeight,
@@ -37,7 +36,6 @@ namespace Client.MirGraphics
             Renderer.Dispose();
             Window.Dispose();
 
-            SDLContext.StopTextInput();
             SDLContext.QuitTTF();
             SDLContext.Quit();
         }
