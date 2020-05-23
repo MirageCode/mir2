@@ -61,8 +61,15 @@ namespace SDL
 
         public static void Delay(UInt32 ms) => SDL_Delay(ms);
 
-        public static void StartTextInput() => SDL_StartTextInput();
-        public static void StopTextInput() => SDL_StopTextInput();
+        public static bool TextInputActive
+        {
+            get => SDL_IsTextInputActive() == Bool.True;
+            set
+            {
+                if (value) SDL_StartTextInput();
+                else SDL_StopTextInput();
+            }
+        }
 
         public static Point MousePoint
         {
@@ -120,6 +127,9 @@ namespace SDL
 
         [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
         private static extern void SDL_StopTextInput();
+
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern Bool SDL_IsTextInputActive();
 
         [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
         private static extern UInt32 SDL_GetMouseState(out int x, out int y);
