@@ -182,8 +182,7 @@ namespace Client.MirScenes.Dialogs
                 Parent = this,
                 Size = new Size(140, 16),
                 Location = new Point(540, 69),
-                // FIXME:
-                // Font = new Font(Settings.FontName, 9),
+                Font = new Font(Settings.FontName, 9),
                 MaxLength = 23,
                 CanLoseFocus = true,
             };

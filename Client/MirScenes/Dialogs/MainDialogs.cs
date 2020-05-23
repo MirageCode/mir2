@@ -579,8 +579,7 @@ namespace Client.MirScenes.Dialogs
                 Location = new Point(1, 54),
                 MaxLength = Globals.MaxChatLength,
                 Visible = false,
-                // FIXME:
-                // Font = ChatFont,
+                Font = ChatFont,
             };
             ChatTextBox.TextBox.OnKeyPress += ChatTextBox_KeyPress;
 

@@ -235,8 +235,7 @@ namespace Client.MirScenes.Dialogs
             Notice = new MirTextBox()
             {
                 ForeColour = Color.White,
-                // FIXME:
-                // Font = new Font(Settings.FontName, 8),
+                Font = new Font(Settings.FontName, 8),
                 Enabled = false,
                 Visible = true,
                 Parent = NoticePage,

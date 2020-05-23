@@ -599,8 +599,7 @@ namespace Client.MirScenes.Dialogs
             {
                 ForeColour = Color.White,
                 Parent = this,
-                // FIXME:
-                // Font = new Font(Settings.FontName, 8),
+                Font = new Font(Settings.FontName, 8),
                 Location = new Point(15, 92),
                 Size = new Size(202, 165),
             };
@@ -711,8 +710,7 @@ namespace Client.MirScenes.Dialogs
             {
                 ForeColour = Color.White,
                 Parent = this,
-                // FIXME:
-                // Font = new Font(Settings.FontName, 8),
+                Font = new Font(Settings.FontName, 8),
                 Location = new Point(15, 98),
                 Size = new Size(202, 165),
             };
