@@ -688,6 +688,8 @@ namespace SDL
         private InternalTextEditingEvent Event { get => GenericEvent.edit; }
 
         public string Text { get => Event.Text; }
+        public int Start { get => Event.start; }
+        public int Length { get => Event.length; }
     }
 
     public class KeyboardEvent : Event
