@@ -9064,7 +9064,8 @@ namespace Client.MirScenes
                 }
             }
 
-            // TODO: Set Opacity to 0.4F
+            var oldOpacity = SDLManager.Opacity;
+            SDLManager.Opacity = 0.4F;
 
             //MapObject.User.DrawMount();
 
@@ -9085,7 +9086,7 @@ namespace Client.MirScenes
                 MapObject.User.DrawHead();
             }
 
-            // TODO: Reset Opacity
+            SDLManager.Opacity = oldOpacity;
 
             if (MapObject.MouseObject != null && !MapObject.MouseObject.Dead && MapObject.MouseObject != MapObject.TargetObject && MapObject.MouseObject.Blend) //Far
                 MapObject.MouseObject.DrawBlend();

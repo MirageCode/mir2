@@ -229,15 +229,15 @@ namespace Client.MirGraphics
             float opacity)
         {
             var oldColor = texture.Color;
-            var oldOpacity = texture.Opacity;
+            var oldAlpha = texture.Alpha;
             texture.Color = color;
-            texture.Opacity = opacity;
+            texture.Opacity = opacity; // This sets texture.Alpha
 
             Renderer.RenderCopy(
                 texture, section, new Rectangle(point, section.Size));
 
             texture.Color = oldColor;
-            texture.Opacity = oldOpacity;
+            texture.Alpha = oldAlpha;
         }
 
         public static void DrawBlend(
