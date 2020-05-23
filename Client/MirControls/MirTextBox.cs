@@ -55,7 +55,7 @@ namespace Client.MirControls
         protected override void OnLocationChanged()
         {
             base.OnLocationChanged();
-            // TODO TextBox Location
+            TextBox.Location = DisplayLocation;
         }
 
         #endregion
@@ -265,8 +265,7 @@ namespace Client.MirControls
             {
                 BackColor = BackColour,
                 ForeColor = ForeColour,
-                // TODO: TextBox Location
-                // Location = DisplayLocation,
+                Location = DisplayLocation,
             };
 
             TextBox.Updated += (o, e) => {
