@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using Rectangle = System.Drawing.Rectangle;
 using Point = System.Drawing.Point;
 
 namespace SDL
@@ -71,6 +72,15 @@ namespace SDL
             }
         }
 
+        public static Rectangle TextInputRect
+        {
+            set
+            {
+                Rect rect = new Rect(value);
+                SDL_SetTextInputRect(ref rect);
+            }
+        }
+
         public static Point MousePoint
         {
             get
@@ -130,6 +140,9 @@ namespace SDL
 
         [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
         private static extern Bool SDL_IsTextInputActive();
+
+        [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
+        private static extern void SDL_SetTextInputRect(ref Rect rect);
 
         [DllImport(SDLLib, CallingConvention = CallingConvention.Cdecl)]
         private static extern UInt32 SDL_GetMouseState(out int x, out int y);
