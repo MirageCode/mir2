@@ -920,9 +920,7 @@ namespace Client.MirScenes.Dialogs
                     ChatTextBox.SetFocus();
                     ChatTextBox.Text = string.Format("/{0} ", name);
                     ChatTextBox.Visible = true;
-                    // FIXME: TextBox
-                    // ChatTextBox.TextBox.SelectionLength = 0;
-                    // ChatTextBox.TextBox.SelectionStart = ChatTextBox.Text.Length;
+                    ChatTextBox.TextBox.Cursor = new Point(ChatTextBox.Text.Length, 0);
                 };
 
 
@@ -980,18 +978,14 @@ namespace Client.MirScenes.Dialogs
                     if (ChatPrefix != "") ChatTextBox.Text = ChatPrefix;
 
                     ChatTextBox.Visible = true;
-                    // FIXME: TextBox
-                    // ChatTextBox.TextBox.SelectionLength = 0;
-                    // ChatTextBox.TextBox.SelectionStart = ChatTextBox.Text.Length;
+                    ChatTextBox.TextBox.Cursor = new Point(ChatTextBox.Text.Length, 0);
                     e.Handled = true;
                     break;
                 case KeyCode.Slash:
                     ChatTextBox.SetFocus();
                     ChatTextBox.Text = LastPM + " ";
                     ChatTextBox.Visible = true;
-                    // FIXME: TextBox
-                    // ChatTextBox.TextBox.SelectionLength = 0;
-                    // ChatTextBox.TextBox.SelectionStart = ChatTextBox.Text.Length;
+                    ChatTextBox.TextBox.Cursor = new Point(ChatTextBox.Text.Length, 0);
                     e.Handled = true;
                     break;
             }
@@ -3390,9 +3384,7 @@ namespace Client.MirScenes.Dialogs
                 GameScene.Scene.ChatDialog.ChatTextBox.SetFocus();
                 GameScene.Scene.ChatDialog.ChatTextBox.Text = string.Format("/{0} ", Name);
                 GameScene.Scene.ChatDialog.ChatTextBox.Visible = true;
-                // FIXME: TextBox
-                // GameScene.Scene.ChatDialog.ChatTextBox.TextBox.SelectionLength = 0;
-                // GameScene.Scene.ChatDialog.ChatTextBox.TextBox.SelectionStart = Name.Length + 2;
+                GameScene.Scene.ChatDialog.ChatTextBox.TextBox.Cursor = new Point(Name.Length + 2, 0);
 
             };
             LoverButton = new MirButton

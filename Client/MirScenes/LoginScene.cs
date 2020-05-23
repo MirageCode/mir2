@@ -743,9 +743,7 @@ namespace Client.MirScenes
                 currentTextBox.Text += SDLManager.IsKeyLocked(KeyMod.Caps)
                     ? keyToAdd.ToUpper() : keyToAdd.ToLower();
 
-                // FIXME: TextBox
-                // currentTextBox.TextBox.SelectionLength = 0;
-                // currentTextBox.TextBox.SelectionStart = currentTextBox.Text.Length;
+                currentTextBox.TextBox.Cursor = new Point(currentTextBox.Text.Length, 0);
             }
 
             private void SecureKeyDelete()

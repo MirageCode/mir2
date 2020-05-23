@@ -185,8 +185,7 @@ namespace Client.MirControls
                 {
                     Amount = MaxAmount;
                     InputTextBox.Text = MaxAmount.ToString();
-                    // FIXME: TextBox
-                    // InputTextBox.TextBox.SelectionStart = InputTextBox.Text.Length;
+                    InputTextBox.TextBox.Cursor = new Point(InputTextBox.Text.Length, 0);
                 }
 
                 if (Amount == MaxAmount)

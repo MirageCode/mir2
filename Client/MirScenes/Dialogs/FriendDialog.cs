@@ -255,9 +255,8 @@ namespace Client.MirScenes.Dialogs
                 GameScene.Scene.ChatDialog.ChatTextBox.SetFocus();
                 GameScene.Scene.ChatDialog.ChatTextBox.Text = "/" + SelectedFriend.Name + " ";
                 GameScene.Scene.ChatDialog.ChatTextBox.Visible = true;
-                // FIXME: TextBox
-                // GameScene.Scene.ChatDialog.ChatTextBox.TextBox.SelectionLength = 0;
-                // GameScene.Scene.ChatDialog.ChatTextBox.TextBox.SelectionStart = GameScene.Scene.ChatDialog.ChatTextBox.Text.Length;
+                GameScene.Scene.ChatDialog.ChatTextBox.TextBox.Cursor = new Point(
+                    GameScene.Scene.ChatDialog.ChatTextBox.Text.Length, 0);
             };
             #endregion
         }
@@ -576,9 +575,7 @@ namespace Client.MirScenes.Dialogs
 
             MemoTextBox.Text = Friend.Memo;
             MemoTextBox.SetFocus();
-            // FIXME: TextBox
-            // MemoTextBox.TextBox.SelectionLength = 0;
-            // MemoTextBox.TextBox.SelectionStart = MemoTextBox.Text.Length;
+            MemoTextBox.TextBox.Cursor = new Point(MemoTextBox.Text.Length, 0);
         }
     }
 }
