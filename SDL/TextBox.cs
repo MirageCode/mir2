@@ -30,6 +30,12 @@ namespace SDL
             }
         }
 
+        private Point GetCursorLocation(Point cursor, string[] lines) =>
+            new Point(
+                Font.GetSize(lines[cursor.Y].Substring(
+                    0, Math.Min(cursor.X, lines[cursor.Y].Length))).Width,
+                cursor.Y * Font.LineSkip);
+
         private Font _Font;
         public Font Font
         {
@@ -74,6 +80,17 @@ namespace SDL
             }
         }
 
+        private string _EditText = string.Empty;
+        private string EditText
+        {
+            get => _EditText;
+            set
+            {
+                _EditText = value;
+                Updated?.Invoke(this, new EventArgs());
+            }
+        }
+
         public string Text
         {
             get => string.Join("\n", Lines);
@@ -92,7 +109,27 @@ namespace SDL
             }
         }
 
+        private string[] DisplayLines
+        {
+            get
+            {
+                var lines = UsePasswordChar
+                    ? Lines.Select(ToPasswordChar).ToArray()
+                    : Lines.ToArray();
+
+                var cursor = Cursor;
+
+                if (EditText.Length > 0)
+                    lines[cursor.Y] = lines[cursor.Y].Substring(0, cursor.X)
+                        + EditText + lines[cursor.Y].Substring(cursor.X);
+
+                return lines;
+            }
+        }
+
         public bool Multiline { get; set; } = false;
+
+        public Point Location { get; set; }
 
         private Size _Size;
         public Size Size
@@ -138,6 +175,7 @@ namespace SDL
 
             Event.OnTextInput += TextInput;
             Event.OnKeyDown += KeyDown;
+            Event.OnTextEditing += TextEditing;
         }
 
         private void DisableEvents()
@@ -146,6 +184,9 @@ namespace SDL
 
             Event.OnTextInput -= TextInput;
             Event.OnKeyDown -= KeyDown;
+            Event.OnTextEditing -= TextEditing;
+
+            EditText = string.Empty;
         }
 
         public void TextInput(TextInputEvent e)
@@ -161,6 +202,22 @@ namespace SDL
 
             TextChanged?.Invoke(this, new EventArgs());
             Updated?.Invoke(this, new EventArgs());
+        }
+
+        public void TextEditing(TextEditingEvent e)
+        {
+            EditText = e.Text;
+
+            if (Location.IsEmpty) return;
+
+            var cursor = Cursor;
+            cursor.Offset(e.Start, 0);
+
+            var location = Location;
+            location.Offset(GetCursorLocation(cursor, DisplayLines));
+
+            SDLContext.TextInputRect = new Rectangle(
+                location, Font.GetSize(e.Text.Substring(e.Start, e.Length)));
         }
 
         private void HandleBackspace()
@@ -245,13 +302,8 @@ namespace SDL
 
         public Texture CreateTexture(Renderer renderer)
         {
-            var lines = UsePasswordChar
-                ? Lines.Select(ToPasswordChar).ToArray()
-                : Lines.ToArray();
-
-            var cursorY = Cursor.Y * Font.LineSkip;
-            var cursorX = Font.GetSize(lines[Cursor.Y].Substring(
-                0, Math.Min(Cursor.X, lines[Cursor.Y].Length))).Width;
+            var lines = DisplayLines;
+            var cursor = GetCursorLocation(Cursor, lines);
 
             using (var surface = Font.CreateSurface(lines, ForeColor))
                 using (var fore = new Texture(renderer, surface))
@@ -273,8 +325,16 @@ namespace SDL
                         var oldColor = renderer.Color;
                         renderer.Color = ForeColor;
 
-                        if (Focused) renderer.RenderDrawLine(
-                            cursorX, cursorY, cursorX, cursorY + Font.LineSkip);
+                        if (Focused && EditText.Length == 0)
+                            renderer.RenderDrawLine(
+                                cursor.X, cursor.Y,
+                                cursor.X, cursor.Y + Font.LineSkip);
+
+                        if (EditText.Length > 0)
+                            renderer.RenderDrawLine(
+                                cursor.X, cursor.Y + Font.LineSkip,
+                                cursor.X + Font.GetSize(EditText).Width,
+                                cursor.Y + Font.LineSkip);
 
                         if (BorderColor != Color.Empty)
                         {
