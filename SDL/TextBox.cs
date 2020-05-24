@@ -130,14 +130,20 @@ namespace SDL
             }
         }
 
+        public bool ManageTextInput { get; set; } = true;
+
         private void EnableEvents()
         {
+            if (ManageTextInput) SDLContext.TextInputActive = true;
+
             Event.OnTextInput += TextInput;
             Event.OnKeyDown += KeyDown;
         }
 
         private void DisableEvents()
         {
+            if (ManageTextInput) SDLContext.TextInputActive = false;
+
             Event.OnTextInput -= TextInput;
             Event.OnKeyDown -= KeyDown;
         }
